@@ -18,6 +18,7 @@ import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { NextImage } from "@/components/ui/NextImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ServiceCard } from "@/components/ui/ServiceCard";
 
 export default function DevComponentsPage() {
   if (process.env.NODE_ENV !== "development") {
@@ -435,6 +436,35 @@ export default function DevComponentsPage() {
               <Caption className="mb-4 block">только heading</Caption>
               <SectionHeading heading="Мастера" />
             </div>
+          </div>
+        </section>
+
+        {/* ServiceCard */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            ServiceCard — прайс-лист
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Hover — подсветка разделителя. Форматирование цены и длительности через lib/format.
+          </Body>
+          <div className="max-w-xl">
+            <ServiceCard name="Мужская стрижка" duration={60} price={[1800, 2700]} />
+            <ServiceCard name="Мужская стрижка с бородой" duration={90} price={[3200, 4600]} />
+            <ServiceCard name="Моделирование бороды" duration={30} price={[1400, 1900]} />
+            <ServiceCard
+              name="Премиальное моделирование SOLOMON'S"
+              duration={60}
+              price={3000}
+              category="Премиум"
+            />
+            <ServiceCard
+              name="Окрашивание"
+              duration={60}
+              price={7000}
+              from
+              category="Парикмахерский зал"
+            />
+            <ServiceCard name="Детская стрижка" duration={60} price={[1600, 2400]} />
           </div>
         </section>
 
