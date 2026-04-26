@@ -17,6 +17,7 @@ import { Link } from "@/components/ui/Link";
 import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { NextImage } from "@/components/ui/NextImage";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function DevComponentsPage() {
   if (process.env.NODE_ENV !== "development") {
@@ -404,6 +405,35 @@ export default function DevComponentsPage() {
                   </span>
                 ))}
               </Marquee>
+            </div>
+          </div>
+        </section>
+
+        {/* SectionHeading */}
+        <section className="space-y-8 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            SectionHeading — eyebrow + H2 + subline
+          </Caption>
+          <div className="space-y-12">
+            <div>
+              <Caption className="mb-4 block">align=left (default)</Caption>
+              <SectionHeading
+                eyebrow="Наши услуги"
+                heading="Всё, что нужно настоящему мужчине"
+                subline="27 услуг в трёх залах — от классической стрижки до премиального ухода за лицом."
+              />
+            </div>
+            <div>
+              <Caption className="mb-4 block">align=center · без eyebrow</Caption>
+              <SectionHeading
+                heading="О нас"
+                subline="Один адрес. Десять мастеров. Ежедневно с 10:00 до 21:00."
+                align="center"
+              />
+            </div>
+            <div>
+              <Caption className="mb-4 block">только heading</Caption>
+              <SectionHeading heading="Мастера" />
             </div>
           </div>
         </section>
