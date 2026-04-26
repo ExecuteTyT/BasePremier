@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 
+import { Container } from "@/components/layout/Container";
+import { Grid } from "@/components/layout/Grid";
 import { Body } from "@/components/typography/Body";
 import { Caption } from "@/components/typography/Caption";
 import { H1 } from "@/components/typography/H1";
@@ -213,6 +215,84 @@ export default function DevComponentsPage() {
             <Link href="/services" className="text-fg-muted">
               Услуги (muted)
             </Link>
+          </div>
+        </section>
+
+        {/* Container */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            Container — max-width variants
+          </Caption>
+          <div className="space-y-3">
+            <div>
+              <Caption className="mb-1 block">default · max-w-[1440px]</Caption>
+              <Container className="bg-bg-secondary py-3">
+                <Body size="sm" className="text-fg-muted text-center">
+                  default (1440px)
+                </Body>
+              </Container>
+            </div>
+            <div>
+              <Caption className="mb-1 block">narrow · max-w-[1120px]</Caption>
+              <Container variant="narrow" className="bg-bg-secondary py-3">
+                <Body size="sm" className="text-fg-muted text-center">
+                  narrow (1120px)
+                </Body>
+              </Container>
+            </div>
+            <div>
+              <Caption className="mb-1 block">wide · max-w-[1680px]</Caption>
+              <Container variant="wide" className="bg-bg-secondary py-3">
+                <Body size="sm" className="text-fg-muted text-center">
+                  wide (1680px)
+                </Body>
+              </Container>
+            </div>
+          </div>
+        </section>
+
+        {/* Grid */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            Grid — 12-col responsive
+          </Caption>
+          <div className="space-y-4">
+            <div>
+              <Caption className="mb-2 block">cols=12 · 4 → 6 → 12</Caption>
+              <Grid cols={12}>
+                {Array.from({ length: 12 }, (_, i) => (
+                  <div key={i} className="bg-bg-secondary py-4 text-center">
+                    <Body size="sm" className="text-fg-muted">
+                      {i + 1}
+                    </Body>
+                  </div>
+                ))}
+              </Grid>
+            </div>
+            <div>
+              <Caption className="mb-2 block">cols=6 · 4 → 6</Caption>
+              <Grid cols={6}>
+                {Array.from({ length: 6 }, (_, i) => (
+                  <div key={i} className="bg-bg-secondary py-4 text-center">
+                    <Body size="sm" className="text-fg-muted">
+                      {i + 1}
+                    </Body>
+                  </div>
+                ))}
+              </Grid>
+            </div>
+            <div>
+              <Caption className="mb-2 block">cols=4 · fixed</Caption>
+              <Grid cols={4}>
+                {Array.from({ length: 4 }, (_, i) => (
+                  <div key={i} className="bg-bg-secondary py-4 text-center">
+                    <Body size="sm" className="text-fg-muted">
+                      {i + 1}
+                    </Body>
+                  </div>
+                ))}
+              </Grid>
+            </div>
           </div>
         </section>
       </div>
