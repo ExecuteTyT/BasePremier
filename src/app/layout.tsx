@@ -5,6 +5,8 @@ import { Header } from "@/components/layout/Header";
 import { CustomCursor } from "@/components/motion/CustomCursor";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import { SoundProvider } from "@/components/motion/SoundProvider";
+import { MessengerButton } from "@/components/ui/MessengerButton";
+import { StickyCTA } from "@/components/ui/StickyCTA";
 
 import { fraunces, inter, jetbrains } from "./fonts";
 import "./globals.css";
@@ -32,6 +34,8 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
           </SmoothScrollProvider>
           <Footer />
+          <StickyCTA />
+          <MessengerButton />
         </SoundProvider>
       </body>
     </html>

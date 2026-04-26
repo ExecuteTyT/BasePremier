@@ -636,6 +636,17 @@ export default function DevComponentsPage() {
           </div>
         </section>
 
+        {/* StickyCTA + MessengerButton */}
+        <section className="space-y-4 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            StickyCTA + MessengerButton — floating элементы
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Оба компонента подключены в layout.tsx и видны на этой странице: StickyCTA (mobile,
+            прокрути вниз) · MessengerButton (desktop, правый нижний угол).
+          </Body>
+        </section>
+
         {/* HeroVideo */}
         <section className="space-y-4 border-t border-border-default pt-8">
           <Caption as="h2" className="uppercase tracking-overline">
