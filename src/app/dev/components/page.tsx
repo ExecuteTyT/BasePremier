@@ -11,6 +11,7 @@ import { H4 } from "@/components/typography/H4";
 import { Mono } from "@/components/typography/Mono";
 import { Button } from "@/components/ui/Button";
 import { Link } from "@/components/ui/Link";
+import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export default function DevComponentsPage() {
   if (process.env.NODE_ENV !== "development") {
@@ -293,6 +294,27 @@ export default function DevComponentsPage() {
                 ))}
               </Grid>
             </div>
+          </div>
+        </section>
+
+        {/* MagneticButton */}
+        <section className="space-y-4 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            MagneticButton — GSAP magnetic hover
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Hover медленно — кнопка тянется к курсору. Убери — упруго возвращается.
+          </Body>
+          <div className="flex flex-wrap gap-6 items-center">
+            <MagneticButton variant="primary" size="md">
+              Записаться
+            </MagneticButton>
+            <MagneticButton variant="secondary" size="md">
+              Подробнее
+            </MagneticButton>
+            <MagneticButton variant="ghost" size="md">
+              Узнать больше
+            </MagneticButton>
           </div>
         </section>
       </div>
