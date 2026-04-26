@@ -1,10 +1,10 @@
 "use client";
 
-import gsap from "gsap";
 import { useEffect, useRef } from "react";
 
 import { Button, type ButtonVariant, type ButtonSize } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { gsap } from "@/lib/gsap";
 
 type Props = {
   variant?: ButtonVariant;
