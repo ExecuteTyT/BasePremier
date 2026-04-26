@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
+
 import { fraunces, inter, jetbrains } from "./fonts";
 import "./globals.css";
 
@@ -18,7 +20,9 @@ export default function RootLayout({
       lang="ru"
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} h-full`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </body>
     </html>
   );
 }
