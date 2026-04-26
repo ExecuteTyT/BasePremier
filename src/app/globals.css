@@ -18,6 +18,12 @@
     "WONK" 0;
 }
 
+/* Hide native cursor when custom cursor is active */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
 /* prefers-reduced-motion: disable all transitions and animations */
 @media (prefers-reduced-motion: reduce) {
   *,
