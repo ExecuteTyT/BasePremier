@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { Container } from "@/components/layout/Container";
 import { Grid } from "@/components/layout/Grid";
+import { CharReveal } from "@/components/motion/CharReveal";
 import { Body } from "@/components/typography/Body";
 import { Caption } from "@/components/typography/Caption";
 import { H1 } from "@/components/typography/H1";
@@ -294,6 +295,36 @@ export default function DevComponentsPage() {
                 ))}
               </Grid>
             </div>
+          </div>
+        </section>
+
+        {/* CharReveal */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            CharReveal — посимвольное появление
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Прокрути вниз — каждый символ поднимается из-под overflow:hidden.
+          </Body>
+          <div className="space-y-4">
+            <CharReveal as="h1" className="font-display text-display-xl text-fg-primary">
+              BASE Premier
+            </CharReveal>
+            <CharReveal
+              as="h2"
+              className="font-display text-display-lg text-fg-primary"
+              delay={0.1}
+            >
+              Барбершоп с собственным шармом
+            </CharReveal>
+            <CharReveal
+              as="p"
+              className="font-sans text-body text-fg-muted"
+              stagger={0.015}
+              delay={0.2}
+            >
+              Уникальный интерьер профессиональные барберы высокие стандарты
+            </CharReveal>
           </div>
         </section>
 
