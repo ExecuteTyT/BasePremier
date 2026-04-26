@@ -7,6 +7,8 @@ import { H2 } from "@/components/typography/H2";
 import { H3 } from "@/components/typography/H3";
 import { H4 } from "@/components/typography/H4";
 import { Mono } from "@/components/typography/Mono";
+import { Button } from "@/components/ui/Button";
+import { Link } from "@/components/ui/Link";
 
 export default function DevComponentsPage() {
   if (process.env.NODE_ENV !== "development") {
@@ -135,6 +137,83 @@ export default function DevComponentsPage() {
           <ul className="list-none space-y-1">
             <Body as="li">Пункт списка через Body as=&quot;li&quot;</Body>
           </ul>
+        </section>
+
+        {/* Buttons */}
+        <section className="space-y-8 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            Button
+          </Caption>
+
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <Caption className="block">primary</Caption>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button variant="primary" size="sm">
+                  Записаться · sm
+                </Button>
+                <Button variant="primary" size="md">
+                  Записаться · md
+                </Button>
+                <Button variant="primary" size="lg">
+                  Записаться · lg
+                </Button>
+                <Button variant="primary" size="md" disabled>
+                  Disabled
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Caption className="block">secondary</Caption>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button variant="secondary" size="sm">
+                  Подробнее · sm
+                </Button>
+                <Button variant="secondary" size="md">
+                  Подробнее · md
+                </Button>
+                <Button variant="secondary" size="lg">
+                  Подробнее · lg
+                </Button>
+                <Button variant="secondary" size="md" disabled>
+                  Disabled
+                </Button>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Caption className="block">ghost</Caption>
+              <div className="flex flex-wrap gap-3 items-center">
+                <Button variant="ghost" size="sm">
+                  Узнать больше · sm
+                </Button>
+                <Button variant="ghost" size="md">
+                  Узнать больше · md
+                </Button>
+                <Button variant="ghost" size="lg">
+                  Узнать больше · lg
+                </Button>
+                <Button variant="ghost" size="md" disabled>
+                  Disabled
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Link */}
+        <section className="space-y-4 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            Link — анимированное подчёркивание
+          </Caption>
+          <div className="flex flex-wrap gap-6">
+            <Link href="/dev/components">Галерея компонентов</Link>
+            <Link href="/">Главная страница</Link>
+            <Link href="/services" className="text-fg-muted">
+              Услуги (muted)
+            </Link>
+          </div>
         </section>
       </div>
     </div>
