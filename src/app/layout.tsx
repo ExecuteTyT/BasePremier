@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 
 import { fraunces, inter, jetbrains } from "./fonts";
@@ -20,8 +22,12 @@ export default function RootLayout({
       lang="ru"
       className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} h-full`}
     >
-      <body className="min-h-full">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      <body className="flex min-h-full flex-col bg-bg-primary">
+        <Header />
+        <SmoothScrollProvider>
+          <main className="flex-1">{children}</main>
+        </SmoothScrollProvider>
+        <Footer />
       </body>
     </html>
   );
