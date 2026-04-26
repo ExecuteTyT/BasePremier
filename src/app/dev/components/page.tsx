@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/Container";
 import { Grid } from "@/components/layout/Grid";
 import { CharReveal } from "@/components/motion/CharReveal";
+import { Marquee } from "@/components/motion/Marquee";
 import { Body } from "@/components/typography/Body";
 import { Caption } from "@/components/typography/Caption";
 import { H1 } from "@/components/typography/H1";
@@ -325,6 +326,50 @@ export default function DevComponentsPage() {
             >
               Уникальный интерьер профессиональные барберы высокие стандарты
             </CharReveal>
+          </div>
+        </section>
+
+        {/* Marquee */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            Marquee — бесшовная бегущая строка
+          </Caption>
+          <div className="space-y-4">
+            <div>
+              <Caption className="mb-2 block">normal · left (default)</Caption>
+              <Marquee pauseOnHover className="border-y border-border-default py-4">
+                {[
+                  "Стрижка",
+                  "Борода",
+                  "Маникюр",
+                  "Уход за лицом",
+                  "Камуфляж седины",
+                  "Окантовка",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="mx-8 font-mono text-fg-muted text-body-sm uppercase tracking-overline"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </Marquee>
+            </div>
+            <div>
+              <Caption className="mb-2 block">slow · right</Caption>
+              <Marquee
+                speed="slow"
+                direction="right"
+                pauseOnHover
+                className="border-y border-border-default py-4"
+              >
+                {["Graham Hill", "Davines", "The London Grooming Co", "Solomon's"].map((item) => (
+                  <span key={item} className="mx-8 font-display text-display-sm text-fg-primary">
+                    {item}
+                  </span>
+                ))}
+              </Marquee>
+            </div>
           </div>
         </section>
 

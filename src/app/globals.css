@@ -18,6 +18,13 @@
     "WONK" 0;
 }
 
+/* Marquee animation */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Hide native cursor when custom cursor is active */
 html.custom-cursor,
 html.custom-cursor * {
