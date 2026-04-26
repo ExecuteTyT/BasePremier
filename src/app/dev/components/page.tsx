@@ -14,6 +14,7 @@ import { Mono } from "@/components/typography/Mono";
 import { ArticleCard } from "@/components/ui/ArticleCard";
 import { BarberCard } from "@/components/ui/BarberCard";
 import { Button } from "@/components/ui/Button";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { HeroVideo } from "@/components/ui/HeroVideo";
 import { Link } from "@/components/ui/Link";
 import { Logo } from "@/components/ui/Logo";
@@ -544,6 +545,42 @@ export default function DevComponentsPage() {
               text="Сделал маникюр и стрижку одновременно — в 4 руки, быстро и качественно. Такого раньше не встречал."
               rating={4}
               date="Январь 2025"
+            />
+          </div>
+        </section>
+
+        {/* FaqAccordion */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            FaqAccordion — один открытый элемент
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            CSS grid-rows transition (0fr → 1fr). + вращается в ×. aria-expanded + aria-controls.
+          </Body>
+          <div className="max-w-2xl">
+            <FaqAccordion
+              items={[
+                {
+                  question: "Нужна ли запись заранее?",
+                  answer:
+                    "Рекомендуем записываться через сайт или WhatsApp — особенно в выходные. Принимаем и без записи, если есть свободное время у мастера.",
+                },
+                {
+                  question: "Сколько стоит мужская стрижка?",
+                  answer:
+                    "Мужская стрижка — от 1 800 до 2 700 ₽ в зависимости от мастера. Стрижка с бородой — от 3 200 до 4 600 ₽. Актуальный прайс — на странице услуг.",
+                },
+                {
+                  question: "Есть ли программа лояльности?",
+                  answer:
+                    "Да, действует накопительная программа в YClients. Подробности — у администратора на месте.",
+                },
+                {
+                  question: "Принимаете ли детей?",
+                  answer:
+                    "Да. Детская стрижка доступна для детей от 5 до 10 лет. Длительность — 1 ч, стоимость от 1 600 ₽.",
+                },
+              ]}
             />
           </div>
         </section>
