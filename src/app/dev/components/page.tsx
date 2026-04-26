@@ -11,6 +11,7 @@ import { H2 } from "@/components/typography/H2";
 import { H3 } from "@/components/typography/H3";
 import { H4 } from "@/components/typography/H4";
 import { Mono } from "@/components/typography/Mono";
+import { ArticleCard } from "@/components/ui/ArticleCard";
 import { BarberCard } from "@/components/ui/BarberCard";
 import { Button } from "@/components/ui/Button";
 import { HeroVideo } from "@/components/ui/HeroVideo";
@@ -483,6 +484,39 @@ export default function DevComponentsPage() {
               category="Парикмахерский зал"
             />
             <ServiceCard name="Детская стрижка" duration={60} price={[1600, 2400]} />
+          </div>
+        </section>
+
+        {/* ArticleCard */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            ArticleCard — карточка журнала
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Вся карточка — ссылка с group hover. Фото scale-105, заголовок тускнеет, дата через
+            Intl.
+          </Body>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <ArticleCard
+              title="Как правильно ухаживать за бородой дома"
+              slug="beard-care-at-home"
+              publishedAt="2025-03-15"
+              category="Уход"
+              excerpt="Правильный уход за бородой — это не только триммер. Рассказываем про масла, воск и расчёски, которые используют наши мастера."
+            />
+            <ArticleCard
+              title="Fade или taper: в чём разница и что выбрать"
+              slug="fade-vs-taper"
+              publishedAt="2025-02-08"
+              category="Стрижки"
+              excerpt="Два самых популярных запроса у наших мастеров — и бесконечная путаница в терминах. Объясняем раз и навсегда."
+            />
+            <ArticleCard
+              title="Graham Hill: косметика, которую мы выбрали для детокса кожи головы"
+              slug="graham-hill-review"
+              publishedAt="2025-01-20"
+              category="Косметика"
+            />
           </div>
         </section>
 
