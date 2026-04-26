@@ -11,6 +11,7 @@ import { H2 } from "@/components/typography/H2";
 import { H3 } from "@/components/typography/H3";
 import { H4 } from "@/components/typography/H4";
 import { Mono } from "@/components/typography/Mono";
+import { BarberCard } from "@/components/ui/BarberCard";
 import { Button } from "@/components/ui/Button";
 import { HeroVideo } from "@/components/ui/HeroVideo";
 import { Link } from "@/components/ui/Link";
@@ -436,6 +437,22 @@ export default function DevComponentsPage() {
               <Caption className="mb-4 block">только heading</Caption>
               <SectionHeading heading="Мастера" />
             </div>
+          </div>
+        </section>
+
+        {/* BarberCard */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            BarberCard — карточка мастера
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Hover — тихий zoom-in фото. Без фото — инициал как placeholder.
+          </Body>
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            <BarberCard name="Марат" role="Старший мастер" reviews={300} />
+            <BarberCard name="Сайод" role="Мужской парикмахер" reviews={239} isBestEmployee />
+            <BarberCard name="Арина" role="Мастер ногтевого сервиса" reviews={75} />
+            <BarberCard name="Диана" role="Мужской парикмахер" reviews={9} />
           </div>
         </section>
 
