@@ -1,2 +1,31 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
+
+/* Optical sizing for Fraunces variable axes (BRAND.md §2.6) */
+.text-display-xl,
+.text-display-lg,
+.text-display-md {
+  font-variation-settings:
+    "opsz" 144,
+    "SOFT" 50,
+    "WONK" 1;
+}
+
+.text-display-sm {
+  font-variation-settings:
+    "opsz" 32,
+    "SOFT" 50,
+    "WONK" 0;
+}
+
+/* prefers-reduced-motion: disable all transitions and animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { fraunces, inter, jetbrains } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className="h-full">
+    <html
+      lang="ru"
+      className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} h-full`}
+    >
       <body className="min-h-full">{children}</body>
     </html>
   );

@@ -38,9 +38,9 @@
      ШРИФТЫ (заглушки до BS-04, обновятся через next/font)
      ============================================================ */
 
-  --font-display: Georgia, serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "SF Mono", Consolas, monospace;
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-jetbrains), "SF Mono", Consolas, monospace;
 
   /* ============================================================
      ТИПОГРАФИКА — TYPE SCALE (fluid via clamp)
