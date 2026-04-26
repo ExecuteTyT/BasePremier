@@ -9,7 +9,8 @@ type Props<T extends ElementType = "h2"> = {
 } & Omit<ComponentPropsWithoutRef<T>, "as" | "className" | "children">;
 
 export function H2<T extends ElementType = "h2">({ as, className, children, ...rest }: Props<T>) {
-  const Tag = (as ?? "h2") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "h2") as any;
   return (
     <Tag
       className={cn(

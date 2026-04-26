@@ -8,6 +8,7 @@ type Item = { question: string; answer: string };
 
 type Props = {
   items: Item[];
+  defaultOpen?: number;
   className?: string;
 };
 
@@ -36,8 +37,8 @@ function PlusIcon() {
   );
 }
 
-export function FaqAccordion({ items, className }: Props) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+export function FaqAccordion({ items, defaultOpen, className }: Props) {
+  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpen ?? null);
   const uid = useId();
 
   return (

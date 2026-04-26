@@ -1,7 +1,23 @@
+import { BarbersPreviewSection } from "@/components/sections/BarbersPreviewSection";
+import { CtaFinalSection } from "@/components/sections/CtaFinalSection";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { HeroSection } from "@/components/sections/Hero/HeroSection";
+import { ManifestoSection } from "@/components/sections/ManifestoSection";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { ReviewsSection } from "@/components/sections/ReviewsSection";
+import { ServicesPreviewSection } from "@/components/sections/ServicesPreviewSection";
+
 export default function HomePage() {
   return (
-    <div className="flex min-h-[60vh] items-center justify-center">
-      <p className="font-sans text-fg-primary">BASE Premier — coming soon</p>
-    </div>
+    <>
+      <HeroSection />
+      <ManifestoSection />
+      <ServicesPreviewSection />
+      <BarbersPreviewSection />
+      <ProcessSection />
+      <ReviewsSection />
+      <FaqSection />
+      <CtaFinalSection />
+    </>
   );
 }

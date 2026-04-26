@@ -22,7 +22,8 @@ export function CharReveal<T extends ElementType = "div">({
   ...rest
 }: Props<T>) {
   const containerRef = useRef<HTMLElement>(null);
-  const Tag = (as ?? "div") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "div") as any;
   const words = children.split(" ");
 
   useEffect(() => {

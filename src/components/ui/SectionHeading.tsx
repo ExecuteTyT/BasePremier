@@ -25,7 +25,8 @@ export function SectionHeading({
 }: Props) {
   const reduced = useReducedMotion();
   const centered = align === "center";
-  const Tag = (as ?? "div") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "div") as any;
   const sublineClass = cn("text-body text-fg-muted", centered ? "max-w-2xl" : "max-w-prose");
 
   return (

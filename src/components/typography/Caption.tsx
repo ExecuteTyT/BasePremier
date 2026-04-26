@@ -14,7 +14,8 @@ export function Caption<T extends ElementType = "span">({
   children,
   ...rest
 }: Props<T>) {
-  const Tag = (as ?? "span") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "span") as any;
   return (
     <Tag className={cn("font-sans text-caption leading-normal text-fg-muted", className)} {...rest}>
       {children}

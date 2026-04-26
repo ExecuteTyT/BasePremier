@@ -24,7 +24,8 @@ export function Grid<T extends ElementType = "div">({
   children,
   ...rest
 }: Props<T>) {
-  const Tag = (as ?? "div") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "div") as any;
   return (
     <Tag className={cn("grid gap-4 md:gap-6", colClasses[cols], className)} {...rest}>
       {children}

@@ -24,7 +24,8 @@ export function Mono<T extends ElementType = "span">({
   children,
   ...rest
 }: Props<T>) {
-  const Tag = (as ?? "span") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "span") as any;
   return (
     <Tag
       className={cn("font-mono tabular-nums text-fg-primary", sizeClasses[size], className)}

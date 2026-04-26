@@ -17,9 +17,11 @@ import { Button } from "@/components/ui/Button";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { HeroVideo } from "@/components/ui/HeroVideo";
 import { Link } from "@/components/ui/Link";
+import { LiveOccupancy } from "@/components/ui/LiveOccupancy";
 import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { NextImage } from "@/components/ui/NextImage";
+import { PricingTable } from "@/components/ui/PricingTable";
 import { ReviewCard } from "@/components/ui/ReviewCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
@@ -633,6 +635,34 @@ export default function DevComponentsPage() {
                 className="object-cover grayscale"
               />
             </div>
+          </div>
+        </section>
+
+        {/* PricingTable */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            PricingTable — полный прайс-лист по категориям
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            3 категории, каждая раскрывается / скрывается. CSS grid-rows transition. По умолчанию
+            все открыты.
+          </Body>
+          <PricingTable />
+        </section>
+
+        {/* LiveOccupancy */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            LiveOccupancy — badge занятости (mock)
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Пульсирующая точка. Зелёная = свободно, красная = занято. Данные — mock до
+            YC-интеграции.
+          </Body>
+          <div className="flex flex-wrap gap-4">
+            <LiveOccupancy freeSlots={3} />
+            <LiveOccupancy freeSlots={1} />
+            <LiveOccupancy freeSlots={0} />
           </div>
         </section>
 

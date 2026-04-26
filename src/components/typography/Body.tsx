@@ -24,7 +24,8 @@ export function Body<T extends ElementType = "p">({
   children,
   ...rest
 }: Props<T>) {
-  const Tag = (as ?? "p") as ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = (as ?? "p") as any;
   return (
     <Tag
       className={cn("font-sans leading-normal text-fg-secondary", sizeClasses[size], className)}
