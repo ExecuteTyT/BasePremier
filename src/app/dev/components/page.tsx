@@ -14,6 +14,7 @@ import { Mono } from "@/components/typography/Mono";
 import { Button } from "@/components/ui/Button";
 import { HeroVideo } from "@/components/ui/HeroVideo";
 import { Link } from "@/components/ui/Link";
+import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { NextImage } from "@/components/ui/NextImage";
 
@@ -144,6 +145,38 @@ export default function DevComponentsPage() {
           <ul className="list-none space-y-1">
             <Body as="li">Пункт списка через Body as=&quot;li&quot;</Body>
           </ul>
+        </section>
+
+        {/* Logo */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            Logo — монограмма BP
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Hover — wiggle. 5 кликов подряд — easter egg в консоли.
+          </Body>
+          <div className="flex flex-wrap items-end gap-8">
+            <div className="space-y-1">
+              <Caption className="block">mark · sm</Caption>
+              <Logo size="sm" />
+            </div>
+            <div className="space-y-1">
+              <Caption className="block">mark · md</Caption>
+              <Logo size="md" />
+            </div>
+            <div className="space-y-1">
+              <Caption className="block">mark · lg</Caption>
+              <Logo size="lg" />
+            </div>
+            <div className="space-y-1">
+              <Caption className="block">mark · xl</Caption>
+              <Logo size="xl" />
+            </div>
+          </div>
+          <div className="space-y-1">
+            <Caption className="block">wordmark · lg</Caption>
+            <Logo size="lg" variant="wordmark" href="/" />
+          </div>
         </section>
 
         {/* Buttons */}

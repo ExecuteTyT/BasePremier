@@ -144,4 +144,10 @@
   --duration-slow: 600ms;
   --duration-slower: 900ms;
   --duration-slowest: 1400ms;
+
+  /* ============================================================
+     ANIMATION — NAMED ANIMATIONS
+     ============================================================ */
+
+  --animate-wiggle: wiggle 0.5s ease-in-out;
 }

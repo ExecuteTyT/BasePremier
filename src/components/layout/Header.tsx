@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 import { MuteToggle } from "@/components/ui/MuteToggle";
 
 export function Header() {
@@ -8,7 +9,7 @@ export function Header() {
         className="flex w-full items-center justify-between px-4 md:px-8"
         aria-label="Главная навигация"
       >
-        <span className="font-display text-2xl leading-none text-fg-primary">BP</span>
+        <Logo href="/" size="sm" />
 
         <div className="flex items-center gap-4">
           <MuteToggle />
