@@ -18,6 +18,7 @@ import { Link } from "@/components/ui/Link";
 import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { NextImage } from "@/components/ui/NextImage";
+import { ReviewCard } from "@/components/ui/ReviewCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 
@@ -482,6 +483,34 @@ export default function DevComponentsPage() {
               category="Парикмахерский зал"
             />
             <ServiceCard name="Детская стрижка" duration={60} price={[1600, 2400]} />
+          </div>
+        </section>
+
+        {/* ReviewCard */}
+        <section className="space-y-6 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            ReviewCard — отзыв клиента
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            figure + blockquote + figcaption. Звёзды fg-primary / fg-muted/20. Ёлочки.
+          </Body>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <ReviewCard
+              author="Алексей К."
+              text="Отличный барбершоп. Мастер Марат — профессионал своего дела. Стрижка идеальная, атмосфера располагает."
+              date="Март 2025"
+            />
+            <ReviewCard
+              author="Дмитрий В."
+              text="Был у Сайода — очень доволен. Чисто, стильно, без спешки. Буду приходить регулярно."
+              date="Февраль 2025"
+            />
+            <ReviewCard
+              author="Станислав М."
+              text="Сделал маникюр и стрижку одновременно — в 4 руки, быстро и качественно. Такого раньше не встречал."
+              rating={4}
+              date="Январь 2025"
+            />
           </div>
         </section>
 
