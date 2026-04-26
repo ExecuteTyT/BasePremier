@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { MuteToggle } from "@/components/ui/MuteToggle";
 
 export function Header() {
   return (
@@ -9,9 +10,12 @@ export function Header() {
       >
         <span className="font-display text-2xl leading-none text-fg-primary">BP</span>
 
-        <Button variant="primary" size="md" type="button">
-          Записаться
-        </Button>
+        <div className="flex items-center gap-4">
+          <MuteToggle />
+          <Button variant="primary" size="md" type="button">
+            Записаться
+          </Button>
+        </div>
       </nav>
     </header>
   );
