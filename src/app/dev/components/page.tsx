@@ -12,8 +12,10 @@ import { H3 } from "@/components/typography/H3";
 import { H4 } from "@/components/typography/H4";
 import { Mono } from "@/components/typography/Mono";
 import { Button } from "@/components/ui/Button";
+import { HeroVideo } from "@/components/ui/HeroVideo";
 import { Link } from "@/components/ui/Link";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { NextImage } from "@/components/ui/NextImage";
 
 export default function DevComponentsPage() {
   if (process.env.NODE_ENV !== "development") {
@@ -391,6 +393,56 @@ export default function DevComponentsPage() {
             <MagneticButton variant="ghost" size="md">
               Узнать больше
             </MagneticButton>
+          </div>
+        </section>
+
+        {/* NextImage */}
+        <section className="space-y-4 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            NextImage — blur placeholder
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            Обёртка над next/image. Дефолт: placeholder=blur, priority=false.
+          </Body>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="relative aspect-video overflow-hidden">
+              <NextImage
+                src="/images/placeholder.svg"
+                alt="BASE Premier — placeholder"
+                fill
+                placeholder="empty"
+                className="object-cover"
+              />
+            </div>
+            <div className="relative aspect-video overflow-hidden">
+              <NextImage
+                src="/images/placeholder.svg"
+                alt="BASE Premier — placeholder 2"
+                fill
+                placeholder="empty"
+                className="object-cover grayscale"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* HeroVideo */}
+        <section className="space-y-4 border-t border-border-default pt-8">
+          <Caption as="h2" className="uppercase tracking-overline">
+            HeroVideo — lazy video с poster
+          </Caption>
+          <Body size="sm" className="text-fg-muted">
+            На desktop: src загружается через requestIdleCallback. На touch — только poster.
+          </Body>
+          <div className="relative aspect-video bg-bg-secondary">
+            <HeroVideo
+              src="/videos/hero.mp4"
+              poster="/images/placeholder.svg"
+              className="h-full w-full"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Caption className="text-fg-muted">/videos/hero.mp4 — файл заменит заказчик</Caption>
+            </div>
           </div>
         </section>
       </div>
