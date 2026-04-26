@@ -1,0 +1,74 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/mcp.json",
+  "_comment": "BASE Premier · MCP servers. Контекст для Claude Code: актуальные доки фреймворков (context7), браузер для тестов и скриншотов (playwright), управление контентом (sanity). Чтобы подключить — установить пакеты и перезапустить Claude Code.",
+
+  "mcpServers": {
+    "context7": {
+      "_comment": "Актуальные доки Next.js 15, React 19, Tailwind v4, GSAP, R3F, Framer Motion, Sanity. Решает проблему устаревших знаний модели — особенно важно для Next.js 15 App Router и Tailwind v4 @theme, где много изменений по сравнению с v14/v3.",
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["dlx", "@upstash/context7-mcp@latest"]
+    },
+
+    "playwright": {
+      "_comment": "Браузер для e2e тестов, визуальной регрессии, проверки production-сайта, скриншотов с реальным рендером (для проверки 3D-сцены, анимаций, layout shift).",
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["dlx", "@playwright/mcp@latest", "--headless"]
+    },
+
+    "sanity": {
+      "_comment": "Управление CMS: создание/редактирование контента (статьи блога, биографии мастеров, описания услуг). Требует SANITY_PROJECT_ID, SANITY_DATASET, SANITY_AUTH_TOKEN в окружении.",
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["dlx", "@sanity/mcp-server@latest"],
+      "env": {
+        "SANITY_PROJECT_ID": "${SANITY_PROJECT_ID}",
+        "SANITY_DATASET": "${SANITY_DATASET:-production}",
+        "SANITY_AUTH_TOKEN": "${SANITY_AUTH_TOKEN}"
+      }
+    }
+  },
+
+  "_optional_servers_to_consider": {
+    "_note": "Не подключаю автоматически, но рассмотри если возникнет потребность. Перенеси в mcpServers и настрой env.",
+
+    "filesystem": {
+      "_comment": "Расширенные операции с локальной ФС за пределами проекта. Полезно если нужно копировать большие медиа из Photo album в public/. По умолчанию не нужен — встроенных Read/Write/Edit Claude Code достаточно.",
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["dlx", "@modelcontextprotocol/server-filesystem", "/Users/$USER/Pictures/base-premier-photos"]
+    },
+
+    "github": {
+      "_comment": "Управление issues, PR, релизами. Подключай если будете использовать GitHub Issues для тикетов вместо ROADMAP.md.",
+      "type": "stdio",
+      "command": "pnpm",
+      "args": ["dlx", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PAT}"
+      }
+    },
+
+    "lighthouse": {
+      "_comment": "Performance/A11y/SEO/Best-practices аудит через Lighthouse CI. Можно использовать вместо ручного pnpm dlx lighthouse в /audit-perf команде.",
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "lighthouse-mcp-server"]
+    },
+
+    "figma": {
+      "_comment": "Если позже появятся макеты в Figma. Сейчас не нужен — дизайн делается напрямую в коде.",
+      "type": "sse",
+      "url": "http://127.0.0.1:3845/sse"
+    }
+  },
+
+  "_setup_instructions": {
+    "1_install": "Просто запусти Claude Code в этой папке — MCP-серверы подтянутся автоматически через pnpm dlx.",
+    "2_sanity_setup": "Перед использованием sanity MCP: 1) sanity init, 2) добавь SANITY_PROJECT_ID, SANITY_DATASET, SANITY_AUTH_TOKEN в .env.local 3) экспортируй их перед запуском Claude Code: source .env.local или используй direnv.",
+    "3_playwright_setup": "При первом использовании playwright MCP скачает Chromium (~300MB). Это нормально.",
+    "4_context7_first_use": "Спроси Claude: «Используй context7 для документации Next.js 15 App Router» — и убедись что MCP отвечает. Если нет — проверь что pnpm dlx работает в окружении.",
+    "5_disable_temporarily": "Чтобы временно отключить сервер — переименуй его ключ из mcpServers в _disabled_<name>."
+  }
+}

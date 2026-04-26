@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "BASE Premier · Claude Code config. Solo-founder workflow. Hooks: pre-commit гарантирует чистый TS+lint, post-tool блокирует мусорные паттерны. Permissions — широкие на чтение, осторожные на сеть.",
+
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "Bash(pnpm install)",
+      "Bash(pnpm dev)",
+      "Bash(pnpm build)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm lint:fix)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm dlx *)",
+      "Bash(pnpm tsx *)",
+      "Bash(pnpm exec *)",
+      "Bash(pnpm format)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git branch*)",
+      "Bash(git checkout*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(git pull*)",
+      "Bash(git stash*)",
+      "Bash(git worktree*)",
+      "Bash(curl -s*)",
+      "Bash(curl -sI*)",
+      "Bash(curl -sf*)",
+      "Bash(curl -o*)",
+      "Bash(node *)",
+      "Bash(echo *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(touch *)",
+      "Bash(jq *)",
+      "Bash(xmllint *)",
+      "Bash(rsync *)",
+      "Edit(src/**)",
+      "Edit(public/**)",
+      "Edit(docs/**)",
+      "Edit(scripts/**)",
+      "Edit(.claude/**)",
+      "Edit(*.md)",
+      "Edit(*.json)",
+      "Edit(*.ts)",
+      "Edit(*.js)",
+      "Edit(*.mjs)",
+      "Edit(next.config.*)",
+      "Edit(tsconfig.json)",
+      "Edit(.gitignore)",
+      "Edit(.env.example)",
+      "Write(src/**)",
+      "Write(public/**)",
+      "Write(docs/**)",
+      "Write(scripts/**)",
+      "Write(reports/**)",
+      "Write(.claude/**)",
+      "Write(sanity/**)"
+    ],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~/*)",
+      "Bash(sudo *)",
+      "Bash(curl * | bash)",
+      "Bash(curl * | sh)",
+      "Bash(npm install -g *)",
+      "Bash(pnpm install --global *)",
+      "Edit(.env)",
+      "Edit(.env.local)",
+      "Edit(.env.production)",
+      "Read(.env)",
+      "Read(.env.local)",
+      "Read(.env.production)",
+      "Write(.env)",
+      "Write(.env.local)",
+      "Write(.env.production)",
+      "Edit(node_modules/**)",
+      "Edit(.next/**)",
+      "Edit(.git/**)"
+    ],
+    "ask": [
+      "Bash(git push --force*)",
+      "Bash(git reset --hard*)",
+      "Bash(pnpm publish*)",
+      "Bash(pm2 *)",
+      "Bash(ssh *)",
+      "Bash(scp *)",
+      "Bash(rsync * basepremier@*)"
+    ]
+  },
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/block-bad-patterns.mjs",
+            "_comment": "Блокирует: any в TS, deprecated React API, hardcoded цвета вне tokens.css, console.log в продакшн коде. Скрипт читает stdin (changed file) и выходит с code 2 если pattern найден."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm exec eslint $CLAUDE_FILE_PATHS --fix --quiet --max-warnings 0 || true",
+            "_comment": "Авто-фикс ESLint после каждого Edit/Write. Не валит, если ESLint не установлен (например, на старте проекта)."
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm exec tsc --noEmit --incremental 2>&1 | head -30",
+            "_comment": "Быстрый typecheck после изменений. Не блокирует, но даёт raw vывод в контекст для следующего шага."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/inject-context.mjs",
+            "_comment": "Инжектит в контекст текущую неделю/тикет из docs/ROADMAP.md и список открытых TODO из git diff."
+          }
+        ]
+      }
+    ]
+  },
+
+  "model": "claude-sonnet-4-6",
+  "outputStyle": "default",
+
+  "env": {
+    "FORCE_COLOR": "1",
+    "NODE_ENV": "development"
+  },
+
+  "statusLine": {
+    "type": "command",
+    "command": "node .claude/hooks/statusline.mjs",
+    "_comment": "Показывает: текущая ветка, текущий тикет (BS-XX), прогресс по ROADMAP, счётчик токенов сессии."
+  },
+
+  "_notes": {
+    "hooks_implementation": "Файлы .claude/hooks/*.mjs нужно создать в первой же сессии Claude Code (тикет BS-03 в ROADMAP.md). До этого блокирующие хуки можно временно отключить, закомментировав или удалив соответствующий блок.",
+    "permissions_strategy": "Стратегия — широкий allow для пр работы (Read, pnpm, git), узкий ask для опасного (push --force, ssh), полный deny для секретов (.env*) и системных операций (sudo, rm -rf /).",
+    "model_choice": "Sonnet 4.7 — оптимальный баланс качества/скорости/цены для повседневной работы. Если задача сложная (архитектура, debugging редких багов) — переключайся вручную на Opus через /model.",
+    "post_tool_typecheck_note": "tsc --noEmit --incremental на каждом Edit может быть медленно на больших файлах. Если станет узким местом — замени на pnpm typecheck:fast (только изменённые файлы через tsc --pretty + watch mode)."
+  }
+}
