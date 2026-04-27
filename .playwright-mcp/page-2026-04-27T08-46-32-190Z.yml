@@ -1,0 +1,95 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Главная навигация" [ref=e3]:
+      - link "BASE Premier — на главную" [ref=e4]:
+        - /url: /
+        - img [ref=e5]:
+          - generic [ref=e6]: BP
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "Услуги" [ref=e9]:
+            - /url: /services
+        - listitem [ref=e10]:
+          - link "Мастера" [ref=e11]:
+            - /url: /barbers
+        - listitem [ref=e12]:
+          - link "О нас" [ref=e13]:
+            - /url: /about
+        - listitem [ref=e14]:
+          - link "Журнал" [ref=e15]:
+            - /url: /journal
+        - listitem [ref=e16]:
+          - link "Контакты" [ref=e17]:
+            - /url: /contacts
+      - generic [ref=e18]:
+        - link "+7 (917) 918-38-77" [ref=e19]:
+          - /url: tel:+79179183877
+        - button "Включить звук" [ref=e20]:
+          - img [ref=e21]
+        - button "Записаться" [ref=e27]
+  - main [ref=e28]:
+    - img [ref=e34]
+  - contentinfo [ref=e36]:
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - link "BASE Premier — на главную" [ref=e40]:
+            - /url: /
+            - img [ref=e41]:
+              - generic [ref=e42]: BP
+              - generic [ref=e43]: BASE PREMIER
+          - paragraph [ref=e44]: Стиль, атмосфера, мастерство — больше, чем просто барбершоп
+        - navigation "Навигация по сайту" [ref=e45]:
+          - list [ref=e46]:
+            - listitem [ref=e47]:
+              - link "Услуги" [ref=e48]:
+                - /url: /services
+            - listitem [ref=e49]:
+              - link "Мастера" [ref=e50]:
+                - /url: /barbers
+            - listitem [ref=e51]:
+              - link "О нас" [ref=e52]:
+                - /url: /about
+            - listitem [ref=e53]:
+              - link "Журнал" [ref=e54]:
+                - /url: /journal
+            - listitem [ref=e55]:
+              - link "Контакты" [ref=e56]:
+                - /url: /contacts
+        - generic [ref=e57]:
+          - generic [ref=e58]:
+            - generic [ref=e59]: ул. Шаляпина, 26, 1 этаж
+            - generic [ref=e60]: Казань
+          - paragraph [ref=e61]: Ежедневно 10:00–21:00
+          - link "+7 (917) 918-38-77" [ref=e62]:
+            - /url: tel:+79179183877
+          - generic [ref=e63]:
+            - link "WhatsApp" [ref=e64]:
+              - /url: https://wa.me/79179183877
+              - img [ref=e65]
+            - link "Telegram" [ref=e68]:
+              - /url: https://t.me/+79179183877
+              - img [ref=e69]
+      - generic [ref=e71]:
+        - generic [ref=e72]: © 2022–2026 BASE Premier
+        - generic [ref=e73]: ИП Шайхутдинов Айрат Рафаэлевич · ИНН 163207031442
+  - generic [ref=e74]:
+    - link "Написать в WhatsApp" [ref=e75]:
+      - /url: https://wa.me/79179183877
+      - img [ref=e76]
+    - link "Написать в Telegram" [ref=e79]:
+      - /url: https://t.me/+79179183877
+      - img [ref=e80]
+  - generic [ref=e83]:
+    - paragraph [ref=e84]:
+      - text: Мы используем cookie для аналитики и улучшения сайта. Продолжая пользоваться сайтом, вы соглашаетесь с нашей
+      - link [ref=e85]:
+        - /url: /privacy
+        - text: Политикой конфиденциальности
+      - text: .
+    - generic [ref=e86]:
+      - button [ref=e87]: Отклонить
+      - button [ref=e88]: Принять
+  - button "Open Next.js Dev Tools" [ref=e94] [cursor=pointer]:
+    - img [ref=e95]
+  - alert [ref=e98]
