@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 
 import { BARBERS, Barber, BarberTag } from "@/data/barbers";
 import { cn } from "@/lib/cn";
+import { reviewWord } from "@/lib/format";
 
 const ease = [0.19, 1, 0.22, 1] as const;
 
@@ -29,15 +30,6 @@ const TABS: { id: TabId; label: string; count: number }[] = [
     count: BARBERS.filter((b) => b.tags.includes("nails")).length,
   },
 ];
-
-function reviewWord(n: number): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod100 >= 11 && mod100 <= 19) return "отзывов";
-  if (mod10 === 1) return "отзыв";
-  if (mod10 >= 2 && mod10 <= 4) return "отзыва";
-  return "отзывов";
-}
 
 export function BarbersGridSection() {
   const [activeTab, setActiveTab] = useState<TabId>("all");

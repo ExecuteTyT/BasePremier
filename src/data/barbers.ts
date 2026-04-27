@@ -9,6 +9,9 @@ export type Barber = {
   isBestEmployee?: boolean;
   isSenior?: boolean;
   imageSrc?: string;
+  quote?: string;
+  bio?: string;
+  techniques?: string[];
 };
 
 export const BARBERS: Barber[] = [
@@ -19,6 +22,8 @@ export const BARBERS: Barber[] = [
     reviews: 300,
     tags: ["senior"],
     isSenior: true,
+    quote: "Стрижка — это не работа с волосами, это работа с пропорциями.",
+    techniques: ["Classic taper", "Crew cut", "Текстурная стрижка"],
   },
   {
     slug: "vyacheslav",
@@ -26,6 +31,7 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 276,
     tags: ["barber"],
+    techniques: ["Fade", "Undercut", "Бороды"],
   },
   {
     slug: "sayod",
@@ -34,6 +40,8 @@ export const BARBERS: Barber[] = [
     reviews: 239,
     tags: ["senior", "barber"],
     isBestEmployee: true,
+    quote: "Каждый клиент — новая задача. Шаблонов не существует.",
+    techniques: ["Skin fade", "Drop fade", "Современные стрижки"],
   },
   {
     slug: "aleksey",
@@ -41,6 +49,7 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 213,
     tags: ["barber"],
+    techniques: ["Taper", "Классика", "Контуринг бороды"],
   },
   {
     slug: "timerlan",
@@ -48,6 +57,7 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 177,
     tags: ["barber"],
+    techniques: ["Fade", "Текстура", "Укладка"],
   },
   {
     slug: "nikolay",
@@ -55,6 +65,7 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 153,
     tags: ["barber"],
+    techniques: ["Classic cut", "Taper", "Бритьё"],
   },
   {
     slug: "dzhim",
@@ -62,6 +73,7 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 113,
     tags: ["barber"],
+    techniques: ["Skin fade", "Геометрия", "Бороды"],
   },
   {
     slug: "arina",
@@ -69,6 +81,8 @@ export const BARBERS: Barber[] = [
     role: "Мастер ногтевого сервиса",
     reviews: 75,
     tags: ["nails"],
+    quote: "Ухоженные руки — это знак уважения к себе.",
+    techniques: ["Мужской маникюр", "Педикюр", "Экспресс-уход"],
   },
   {
     slug: "murat",
@@ -76,6 +90,7 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 15,
     tags: ["barber"],
+    techniques: ["Fade", "Стрижка машинкой"],
   },
   {
     slug: "diana",
@@ -83,5 +98,6 @@ export const BARBERS: Barber[] = [
     role: "Мужской парикмахер",
     reviews: 9,
     tags: ["barber"],
+    techniques: ["Taper", "Классика"],
   },
 ];

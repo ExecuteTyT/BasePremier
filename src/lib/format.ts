@@ -24,3 +24,12 @@ export function formatDuration(minutes: number): string {
   if (m === 0) return `${h}${NBSP}ч`;
   return `${h}${NBSP}ч${NBSP}${m}${NBSP}мин`;
 }
+
+export function reviewWord(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod100 >= 11 && mod100 <= 19) return "отзывов";
+  if (mod10 === 1) return "отзыв";
+  if (mod10 >= 2 && mod10 <= 4) return "отзыва";
+  return "отзывов";
+}
