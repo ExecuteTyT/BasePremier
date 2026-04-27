@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import NextLink from "next/link";
@@ -60,7 +60,7 @@ export function BarbersGridSection() {
             aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              "flex items-center gap-1.5 px-4 py-2",
+              "flex items-center gap-1.5 px-4 py-3 md:py-2",
               "font-mono text-[13px] uppercase tracking-[0.12em]",
               "border transition-[background-color,border-color,color] duration-base",
               activeTab === tab.id
@@ -157,7 +157,7 @@ function BarberGridCard({ barber, index }: { barber: Barber; index: number }) {
           <p className="font-mono text-[11px] uppercase tracking-wider text-fg-muted">
             {barber.role}
           </p>
-          <p className="font-mono text-[11px] text-fg-muted/50">
+          <p className="font-mono text-[11px] text-fg-muted">
             {barber.reviews}&nbsp;{reviewWord(barber.reviews)}
           </p>
         </div>

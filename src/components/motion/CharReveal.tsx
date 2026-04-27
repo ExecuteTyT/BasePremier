@@ -38,10 +38,9 @@ export function CharReveal<T extends ElementType = "div">({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         chars,
-        { yPercent: 110, opacity: 0 },
+        { yPercent: 110 },
         {
           yPercent: 0,
-          opacity: 1,
           duration: 0.8,
           ease: "expo.out",
           stagger,

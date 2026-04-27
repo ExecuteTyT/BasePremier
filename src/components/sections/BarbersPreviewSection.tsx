@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import NextLink from "next/link";
@@ -141,7 +141,7 @@ function AvatarCard({ barber, isHovered }: AvatarCardProps) {
         >
           {barber.name}
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-fg-muted/50">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-fg-muted">
           {barber.reviews}+ отзывов
         </span>
       </div>

@@ -10,13 +10,16 @@ export function hairSalonJsonLd() {
     name: "BASE Premier",
     url: SITE_URL,
     telephone: "+79179183877",
+    image: `${SITE_URL}/images/og-default.jpg`,
     address: {
       "@type": "PostalAddress",
       streetAddress: "ул. Шаляпина, 26",
       addressLocality: "Казань",
       addressRegion: "Республика Татарстан",
+      postalCode: "420015",
       addressCountry: "RU",
     },
+    // geo: pending Q1 (GPS coordinates from client)
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -33,6 +36,7 @@ export function hairSalonJsonLd() {
     priceRange: "₽₽",
     currenciesAccepted: "RUB",
     paymentAccepted: "Cash, Credit Card",
+    sameAs: ["https://www.instagram.com/basepremier/", "https://yandex.ru/maps/org/base_premier/"],
   };
 }
 

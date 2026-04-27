@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import NextLink from "next/link";
@@ -298,7 +298,7 @@ export function QuizFlow() {
 
                 <button
                   onClick={handleReset}
-                  className="mt-2 self-center font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted/50 transition-opacity hover:opacity-70"
+                  className="mt-2 self-center font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted transition-opacity hover:opacity-70"
                 >
                   Пройти заново
                 </button>

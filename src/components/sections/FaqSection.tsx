@@ -44,8 +44,8 @@ export function FaqSection() {
           <NextLink
             href="/about"
             className={cn(
-              "font-mono text-caption text-fg-muted/60",
-              "border-b border-fg-muted/20 pb-px",
+              "font-mono text-caption text-fg-muted",
+              "border-b border-fg-muted/30 pb-px",
               "transition-[border-color,color] duration-base",
               "hover:border-fg-muted/50 hover:text-fg-muted",
             )}

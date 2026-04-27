@@ -36,6 +36,7 @@ export function ReviewsSection() {
   const [direction, setDirection] = useState(1);
   const isPaused = useRef(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef(0);
 
   const goTo = useCallback((next: number, dir: number) => {
     setDirection(dir);
@@ -102,10 +103,16 @@ export function ReviewsSection() {
           onMouseLeave={() => {
             isPaused.current = false;
           }}
-          onTouchStart={() => {
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0]?.clientX ?? 0;
             isPaused.current = true;
           }}
-          onTouchEnd={() => {
+          onTouchEnd={(e) => {
+            const delta = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+            if (Math.abs(delta) > 50) {
+              if (delta < 0) next();
+              else prev();
+            }
             isPaused.current = false;
           }}
         >
@@ -190,11 +197,15 @@ export function ReviewsSection() {
                   aria-selected={i === index}
                   aria-label={`Отзыв ${i + 1}`}
                   onClick={() => goTo(i, i > index ? 1 : -1)}
-                  className={cn(
-                    "h-1 rounded-none transition-[width,background-color] duration-base",
-                    i === index ? "w-6 bg-fg-primary" : "w-2 bg-fg-muted/30 hover:bg-fg-muted/60",
-                  )}
-                />
+                  className="flex h-6 w-6 items-center justify-center"
+                >
+                  <span
+                    className={cn(
+                      "block h-1 rounded-none transition-[width,background-color] duration-base",
+                      i === index ? "w-6 bg-fg-primary" : "w-2 bg-fg-muted/30 hover:bg-fg-muted/60",
+                    )}
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -207,11 +218,15 @@ export function ReviewsSection() {
                 aria-label={`Отзыв ${i + 1}`}
                 aria-current={i === index}
                 onClick={() => goTo(i, i > index ? 1 : -1)}
-                className={cn(
-                  "h-1 rounded-none transition-[width,background-color] duration-base",
-                  i === index ? "w-6 bg-fg-primary" : "w-2 bg-fg-muted/30",
-                )}
-              />
+                className="flex h-6 w-6 items-center justify-center"
+              >
+                <span
+                  className={cn(
+                    "block h-1 rounded-none transition-[width,background-color] duration-base",
+                    i === index ? "w-6 bg-fg-primary" : "w-2 bg-fg-muted/30",
+                  )}
+                />
+              </button>
             ))}
           </div>
         </div>

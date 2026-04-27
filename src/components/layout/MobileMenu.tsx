@@ -105,7 +105,7 @@ export function MobileMenu({ navItems, phone }: Props) {
         <div className="mt-auto space-y-4 pb-4">
           <a
             href={phone.href}
-            className="block font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
+            className="block py-1.5 font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
           >
             {phone.display}
           </a>

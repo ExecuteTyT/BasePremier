@@ -1,4 +1,5 @@
 # ROADMAP.md
+
 ## Полный план разработки сайта BASE Premier (16 недель)
 
 > **Назначение документа:** пошаговый план «что делать на этой неделе и каким тикетом начинать» для solo-founder workflow с Claude Code. Каждый тикет описан в формате, который Claude Code понимает «из коробки» — copy-paste в терминал, и работа начинается.
@@ -35,16 +36,16 @@
 
 ### 0.3. Префиксы
 
-| Префикс | Значение |
-|---|---|
-| **BS** | Bootstrap (фаза 0) |
-| **BR** | Brand & Tokens (фаза 1) |
-| **UI** | Atomic UI components (фаза 2) |
-| **HOM** | Home page (фаза 3) |
-| **PG** | Inner pages (фаза 4) |
-| **INT** | Integrations (фаза 5) |
-| **POL** | Polish (фаза 6) |
-| **LAU** | Launch (фаза 7) |
+| Префикс | Значение                      |
+| ------- | ----------------------------- |
+| **BS**  | Bootstrap (фаза 0)            |
+| **BR**  | Brand & Tokens (фаза 1)       |
+| **UI**  | Atomic UI components (фаза 2) |
+| **HOM** | Home page (фаза 3)            |
+| **PG**  | Inner pages (фаза 4)          |
+| **INT** | Integrations (фаза 5)         |
+| **POL** | Polish (фаза 6)               |
+| **LAU** | Launch (фаза 7)               |
 
 ### 0.4. Приоритеты
 
@@ -84,17 +85,17 @@
 
 Эти данные нужны ОТ ЗАКАЗЧИКА (Айрата) к указанным неделям. Без них блокируются соответствующие тикеты:
 
-| Что нужно | Дедлайн | Без чего блокируется |
-|---|---|---|
-| YClients API-ключ + ID компании/филиала | Нед. 11 | Виджет, live occupancy |
-| Полные ФИО + биографии 10 мастеров | Нед. 8 | Страницы мастеров, /barbers |
-| GPS-координаты салона (lat, lng) | Нед. 5 | JSON-LD, Google Maps embed |
-| Точный юр. адрес ИП (улица + дом) | Нед. 5 | JSON-LD, footer |
-| Email домена (`info@basepremier.ru`) | Нед. 12 | Контакты в footer, формы |
+| Что нужно                               | Дедлайн    | Без чего блокируется               |
+| --------------------------------------- | ---------- | ---------------------------------- |
+| YClients API-ключ + ID компании/филиала | Нед. 11    | Виджет, live occupancy             |
+| Полные ФИО + биографии 10 мастеров      | Нед. 8     | Страницы мастеров, /barbers        |
+| GPS-координаты салона (lat, lng)        | Нед. 5     | JSON-LD, Google Maps embed         |
+| Точный юр. адрес ИП (улица + дом)       | Нед. 5     | JSON-LD, footer                    |
+| Email домена (`info@basepremier.ru`)    | Нед. 12    | Контакты в footer, формы           |
 | Профессиональная фотосессия 10 мастеров | **Нед. 8** | Страницы /barbers, /barbers/[slug] |
-| Доступ к VPS (SSH-ключ, IP) | Нед. 1 | Деплой, CI/CD |
-| Доступ к домену reg.ru (DNS) | Нед. 15 | Финальный live |
-| Согласие на 12 тем для блога | Нед. 11 | Sanity заполнение |
+| Доступ к VPS (SSH-ключ, IP)             | Нед. 1     | Деплой, CI/CD                      |
+| Доступ к домену reg.ru (DNS)            | Нед. 15    | Финальный live                     |
+| Согласие на 12 тем для блога            | Нед. 11    | Sanity заполнение                  |
 
 **Тактика:** в начале каждой недели (понедельник) сверяешь чек-лист, если что-то не пришло — пишешь Айрату напоминание. Если блокер не закрывается за 3 дня — переходишь к параллельным тикетам, не теряя времени.
 
@@ -113,6 +114,7 @@
 **Goal:** заскаффолдить чистый Next.js 15 + React 19 + TypeScript strict проект.
 
 **Acceptance:**
+
 - `npx create-next-app@latest base-premier-web` с флагами `--typescript --tailwind --app --no-src-dir`
 - Переименовать структуру под нашу: `mv app src/app`, обновить `tsconfig.json` paths
 - Удалить дефолтный `page.tsx` → пустой компонент с текстом «BASE Premier»
@@ -124,6 +126,7 @@
 **Estimate:** 30 мин
 
 **Claude Code prompt:**
+
 ```
 Initialize a fresh Next.js 15 project for BASE Premier barbershop redesign.
 Read CLAUDE.md and docs/ARCHITECTURE.md sections 1-2 before starting.
@@ -139,6 +142,7 @@ After scaffold, replace default page with placeholder "BASE Premier" text and ve
 **Goal:** code quality gate на каждый commit.
 
 **Acceptance:**
+
 - `eslint.config.mjs` с правилами из ARCHITECTURE.md §1.6 (no-default-export, sort-imports, no-console кроме error/warn)
 - `.prettierrc` (printWidth 100, tabWidth 2, semi true, singleQuote false, trailingComma all)
 - Husky pre-commit hook: `lint-staged` запускает ESLint + Prettier + tsc на staged-файлах
@@ -150,6 +154,7 @@ After scaffold, replace default page with placeholder "BASE Premier" text and ve
 **Estimate:** 1 час
 
 **Claude Code prompt:**
+
 ```
 Set up ESLint, Prettier, Husky, lint-staged per docs/ARCHITECTURE.md §1.6.
 After installation, create one test file with intentional lint error and verify the pre-commit hook blocks the commit.
@@ -162,6 +167,7 @@ After installation, create one test file with intentional lint error and verify 
 **Goal:** перейти на Tailwind v4 CSS-first config, импортировать токены из BRAND.md §1.
 
 **Acceptance:**
+
 - `npm install tailwindcss@4 @tailwindcss/postcss` (или @next-canary)
 - `src/styles/tokens.css` создан целиком из BRAND.md §1.1 (все CSS-переменные `--color-*`, `--space-*`, `--radius-*`, etc.)
 - `src/app/globals.css` имеет `@import "tailwindcss"; @import "../styles/tokens.css";`
@@ -173,6 +179,7 @@ After installation, create one test file with intentional lint error and verify 
 **Estimate:** 2 часа
 
 **Claude Code prompt:**
+
 ```
 Migrate to Tailwind v4 CSS-first config. Copy ALL CSS variables from docs/BRAND.md §1.1 into src/styles/tokens.css under @theme directive. Import in globals.css. Verify with one styled <div> on the home page.
 ```
@@ -184,6 +191,7 @@ Migrate to Tailwind v4 CSS-first config. Copy ALL CSS variables from docs/BRAND.
 **Goal:** все три шрифта работают через `next/font/google`, без CLS.
 
 **Acceptance:**
+
 - `src/app/fonts.ts` содержит экспорты `fraunces`, `inter`, `jetbrainsMono` per BRAND.md §2.2
 - `src/app/layout.tsx` оборачивает `<html>` в `${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`
 - `tokens.css` ссылается на CSS-переменные `--font-display`, `--font-sans`, `--font-mono`
@@ -195,6 +203,7 @@ Migrate to Tailwind v4 CSS-first config. Copy ALL CSS variables from docs/BRAND.
 **Estimate:** 1 час
 
 **Claude Code prompt:**
+
 ```
 Set up Fraunces, Inter, and JetBrains Mono via next/font/google per docs/BRAND.md §2.2.
 Subsets: latin + cyrillic. Display: swap. Preload only display + sans (mono is lazy).
@@ -208,6 +217,7 @@ Verify all three render correctly with the .font-* utility classes.
 **Goal:** глобальный smooth scroll, синхронизированный с GSAP ScrollTrigger.
 
 **Acceptance:**
+
 - `npm install lenis @studio-freight/react-lenis` (или @darkroom.engineering/lenis)
 - `src/components/providers/LenisProvider.tsx` оборачивает `{children}`, инициализирует Lenis с настройками из ARCHITECTURE.md §10
 - `smoothTouch: false`, `duration: 1.2`, `easing: t => Math.min(1, 1.001 - 2^(-10*t))`
@@ -220,6 +230,7 @@ Verify all three render correctly with the .font-* utility classes.
 **Estimate:** 1 час
 
 **Claude Code prompt:**
+
 ```
 Install Lenis and set up smooth scroll per docs/ARCHITECTURE.md §10. Create LenisProvider component, wrap root layout. Verify smooth scrolling on desktop and that mobile uses native scroll.
 ```
@@ -231,6 +242,7 @@ Install Lenis and set up smooth scroll per docs/ARCHITECTURE.md §10. Create Len
 **Goal:** общая обёртка для всех страниц с заголовком и футером (без стилей пока).
 
 **Acceptance:**
+
 - `src/components/layout/Header.tsx` — sticky, у которой только лого `BP` и кнопка «записаться» (без логики)
 - `src/components/layout/Footer.tsx` — пустой `<footer>` с `<span>© 2026 BASE Premier</span>`
 - `layout.tsx` подключает Header и Footer
@@ -242,6 +254,7 @@ Install Lenis and set up smooth scroll per docs/ARCHITECTURE.md §10. Create Len
 **Estimate:** 1 час
 
 **Claude Code prompt:**
+
 ```
 Create placeholder Header (sticky, logo + booking button) and Footer (just copyright).
 Both should use tokens from BRAND.md. No animations yet, just structure.
@@ -254,6 +267,7 @@ Both should use tokens from BRAND.md. No animations yet, just structure.
 **Goal:** все переменные окружения валидируются на старте; ошибки не пропускаются в продакшн.
 
 **Acceptance:**
+
 - `npm install zod @t3-oss/env-nextjs`
 - `src/env.ts` содержит схему: `NEXT_PUBLIC_SITE_URL`, `YCLIENTS_API_TOKEN`, `YCLIENTS_COMPANY_ID`, `SANITY_PROJECT_ID`, etc. (per ARCHITECTURE.md §11)
 - `.env.example` с заглушками
@@ -265,6 +279,7 @@ Both should use tokens from BRAND.md. No animations yet, just structure.
 **Estimate:** 30 мин
 
 **Claude Code prompt:**
+
 ```
 Set up environment variable validation with @t3-oss/env-nextjs and Zod per docs/ARCHITECTURE.md §11.
 Create env.ts and .env.example. Test that missing required vars throw clear errors.
@@ -277,6 +292,7 @@ Create env.ts and .env.example. Test that missing required vars throw clear erro
 **Goal:** видеть https://staging.basepremier.ru, обновляющийся при `git push`.
 
 **Acceptance:**
+
 - На VPS установлен Node 20+, pm2 (или systemd-сервис), nginx, certbot
 - Создан subdomain `staging.basepremier.ru`, A-запись на DNS
 - Let's Encrypt сертификат выдан
@@ -290,6 +306,7 @@ Create env.ts and .env.example. Test that missing required vars throw clear erro
 **Estimate:** 4 часа (большая часть — DevOps на VPS)
 
 **Claude Code prompt:**
+
 ```
 Read docs/ARCHITECTURE.md §12 (CI/CD on VPS).
 1) Generate nginx config for staging.basepremier.ru
@@ -328,6 +345,7 @@ Do NOT run them automatically - print them as a checklist.
 **Goal:** компоненты `<H1>`, `<H2>`, ..., `<Body>`, `<Caption>` с правильными шрифтами и размерами из BRAND.md §2.
 
 **Acceptance:**
+
 - `src/components/typography/` содержит: `H1.tsx`, `H2.tsx`, `H3.tsx`, `H4.tsx`, `Body.tsx`, `Caption.tsx`, `Mono.tsx`
 - Каждый принимает `className`, `as` (polymorphic), children
 - Размеры через clamp() из BRAND.md §2.3
@@ -339,6 +357,7 @@ Do NOT run them automatically - print them as a checklist.
 **Estimate:** 3 часа
 
 **Claude Code prompt:**
+
 ```
 Create polymorphic typography components per docs/BRAND.md §2.3.
 H1 uses Fraunces (display), H2-H6 use Fraunces too but with optical sizing tweaks, Body uses Inter, Mono uses JetBrains Mono.
@@ -352,6 +371,7 @@ Set up /dev/components page (gated to dev-only via process.env.NODE_ENV check) a
 **Goal:** базовые интерактивные элементы с правильными hover/focus/disabled.
 
 **Acceptance:**
+
 - `Button.tsx` — варианты `primary` (Navy fill), `secondary` (transparent + Navy border), `ghost`, размеры `sm` `md` `lg`
 - `Link.tsx` — обёртка над `next/link` с подчёркиванием на hover (animated)
 - Все focus-rings через `:focus-visible` с outline `2px solid var(--color-accent)`, не `outline: none`
@@ -369,6 +389,7 @@ Set up /dev/components page (gated to dev-only via process.env.NODE_ENV check) a
 **Goal:** layout-обёртки, чтобы каждая секция знала свои отступы и max-width.
 
 **Acceptance:**
+
 - `Container.tsx` — `max-w-[1440px] mx-auto px-l-fluid` (px масштабируется через clamp)
 - `Grid.tsx` — 12-колоночный, `gap-l-fluid`
 - Тест: Container с детьми внутри занимает корректные ширины на 360px / 768px / 1280px / 1920px
@@ -384,6 +405,7 @@ Set up /dev/components page (gated to dev-only via process.env.NODE_ENV check) a
 **Goal:** кастомный курсор работает на всём сайте, magnetic-эффект на CTA.
 
 **Acceptance:**
+
 - `src/components/effects/Cursor.tsx` — фиксированный круг 8px (default), 64px на hover ссылок/кнопок, magnetic привязывание к ближайшему `[data-cursor="magnet"]`
 - На touch-устройствах — disabled (`@media (hover: hover)`)
 - При наведении на текст — курсор становится "I-beam" (вертикальная линия)
@@ -396,6 +418,7 @@ Set up /dev/components page (gated to dev-only via process.env.NODE_ENV check) a
 **Estimate:** 4 часа
 
 **Claude Code prompt:**
+
 ```
 Implement a custom cursor per docs/BRAND.md §6.
 Use raw mouseMove + lerp interpolation, not framer-motion (faster).
@@ -410,6 +433,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** при переходе между страницами — видимый loader с анимацией, не белая вспышка.
 
 **Acceptance:**
+
 - `src/components/effects/PageTransition.tsx` — обёртка над App Router children
 - Использует `framer-motion`'s `<AnimatePresence mode="wait">` + `motion.div`
 - Анимация: текущая страница уходит вверх (y: -50, opacity: 0), новая приходит снизу (y: 50 → 0)
@@ -427,6 +451,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** все hover/click/transition звучат тихо. По умолчанию OFF.
 
 **Acceptance:**
+
 - `src/components/providers/SoundProvider.tsx` — context с `isMuted` (default `true`), `toggleMute`, `play(soundId)`
 - LocalStorage синхронизация: `bp-sound-enabled` (default `false`)
 - Sounds в `public/sounds/`: `hover.mp3`, `click.mp3`, `transition.mp3`, `success.mp3` (все < 50KB, MP3 32kbps)
@@ -440,12 +465,14 @@ Disable on touch devices via @media (hover: hover) check.
 **Estimate:** 4 часа (включая поиск и подбор звуков)
 
 **Sounds checklist:**
+
 - `hover.mp3` — лёгкий короткий tick (~0.05s)
 - `click.mp3` — суховатый щелчок (~0.1s)
 - `transition.mp3` — короткий swoosh (~0.3s)
 - `success.mp3` — приятный chime (~0.4s)
 
 **Источники (рекомендации):**
+
 - Freesound.org/people/InspectorJ/ — отличные UI-звуки CC-BY
 - Zapsplat.com → category «User Interface» → отфильтровать «Free»
 
@@ -456,6 +483,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** кнопки CTA «прилипают» к курсору при приближении (только desktop).
 
 **Acceptance:**
+
 - `MagneticButton.tsx` — обёртка над `Button.tsx`, добавляющая поведение
 - При курсоре на расстоянии < 80px — кнопка плавно следует за ним (max смещение ~15px)
 - На mobile — disabled
@@ -473,6 +501,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** GSAP анимации синхронизированы с Lenis smooth scroll (без рывков).
 
 **Acceptance:**
+
 - `npm install gsap @gsap/react`
 - `src/lib/gsap/index.ts` — единственная точка инициализации, регистрирует `ScrollTrigger` + `SplitText` (если будем использовать)
 - В `LenisProvider.tsx` — sync per ARCHITECTURE.md §10:
@@ -494,6 +523,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** заголовки появляются по буквам/словам при скролле в viewport.
 
 **Acceptance:**
+
 - `<CharReveal>` или `<WordReveal>` компонент
 - При viewport visibility — буквы поднимаются y: 100% → 0 со stagger 30ms
 - Использует SplitText (GSAP Premium) или собственный split на spans (если SplitText недоступен — самописный split на массив React-children)
@@ -511,6 +541,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** marquee для бесшовного списка услуг или брендов косметики.
 
 **Acceptance:**
+
 - `<Marquee speed="slow|normal|fast" direction="left|right">{items}</Marquee>`
 - Бесшовный loop через дублирование контента и transform-translate
 - Респектит `prefers-reduced-motion` — статичный список без анимации
@@ -527,6 +558,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** все изображения через `<Image>` с правильными настройками; видео — с poster + lazy.
 
 **Acceptance:**
+
 - `<NextImage>` обёртка над `next/image` с дефолтами `priority={false}`, `placeholder="blur"`, `sizes` авто-рассчитаны
 - `<HeroVideo>` — autoplay, muted, loop, playsInline, poster (AVIF), `preload="none"` + загрузка по `requestIdleCallback`
 - На mobile — выбирается отдельный mobile-poster (вертикальный)
@@ -564,6 +596,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Goal:** vector logo BP, 1:1 ratio, идеальная читаемость от 24px до 600px.
 
 **Acceptance:**
+
 - `public/logo.svg` (статичный, ~2KB)
 - `src/components/ui/Logo.tsx` — компонент с props `size?: 'sm' | 'md' | 'lg' | 'xl'`, `variant?: 'mark' | 'wordmark'`
 - Mark (только BP) — для шапки и favicon
@@ -577,6 +610,7 @@ Disable on touch devices via @media (hover: hover) check.
 **Estimate:** 4 часа (включая дизайн знака)
 
 **Claude Code prompt:**
+
 ```
 Read docs/BRAND.md §4 — Logo specification.
 Generate SVG logo BP based on Fraunces font letterforms (or custom-drawn).
@@ -591,6 +625,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** полноценный sticky header с лого, навигацией, телефоном, тумблером звука, CTA.
 
 **Acceptance:**
+
 - Левая часть: лого BP (mark)
 - Центр: навигация — `Услуги`, `Мастера`, `О нас`, `Журнал`, `Контакты`
 - Правая часть: телефон (mono шрифт, hover underline) → клик: `tel:`, тумблер 🔇, CTA «Записаться» (Magnetic)
@@ -609,6 +644,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** информативный, с контактами, картой проезда, соцсетями, юр. данными.
 
 **Acceptance:**
+
 - Левая колонка: лого BP (wordmark), адрес, часы работы, телефон/Telegram/WhatsApp
 - Средняя колонка: ссылки на все страницы сайта
 - Правая колонка: соцсети (icons), форма подписки на блог (если делаем) или цитата
@@ -626,6 +662,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** унифицированный заголовок секции.
 
 **Acceptance:**
+
 - Eyebrow (Mono, маленький, navy цвет) — например `01 / Услуги`
 - H2 (Fraunces) — главный заголовок
 - Subline (Body Sm) — описание под заголовком
@@ -643,6 +680,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** карточка услуги с названием, длительностью, ценой, кнопкой записи.
 
 **Acceptance:**
+
 - Layout: горизонтальный (на desktop) или вертикальный (на mobile)
 - Название (H4 Fraunces), длительность (Mono caption), цена (Mono, large), описание (Body Sm)
 - На hover (desktop) — карточка слегка приподнимается (translateY -4px), фон осветляется (`bg-bg-secondary`)
@@ -660,6 +698,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** карточка мастера с фото, именем, специализацией, кол-вом отзывов.
 
 **Acceptance:**
+
 - Большое фото (4:5 ratio) — сейчас плейсхолдер, после фотосессии (нед. 8) подменяется
 - Имя (H3 Fraunces), специализация (Body Sm), кол-во отзывов (Mono)
 - Бейдж «Лучший месяца» на Сайоде, «Старший мастер» у Марата
@@ -677,6 +716,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** карточка отзыва клиента с текстом, рейтингом, источником.
 
 **Acceptance:**
+
 - Цитата (Body, italic), 5 звёзд (SVG), имя автора (Body Sm), источник («Яндекс.Карты», «2ГИС»)
 - Если есть фото клиента — круглый аватар 40×40 (если нет — initials в круге)
 - На карточку — Rich Text Schema.org `<Review>` (для SEO)
@@ -693,6 +733,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** карточка статьи журнала.
 
 **Acceptance:**
+
 - Большое cover-фото (16:9), заголовок (H4 Fraunces), excerpt (Body Sm), категория (Mono caption), дата (Mono caption), время чтения
 - На hover — фото делает scale 1.05 (внутри overflow:hidden), заголовок подчёркивается
 - Клик открывает `/journal/{slug}`
@@ -708,6 +749,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** интерактивный accordion для FAQ-секции.
 
 **Acceptance:**
+
 - На основе нативного `<details>` + `<summary>` (для a11y и SEO без JS)
 - Стилизованная стрелка справа, ротация на 180° при open
 - Анимация раскрытия через CSS `interpolate-size: allow-keywords` или JS height transition (если нет поддержки)
@@ -724,6 +766,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** UI-каркас квиза подбора стрижки (логика — позже в PG-08).
 
 **Acceptance:**
+
 - `<QuizStep>` — 1 вопрос, 2-4 visual options (большие плитки с фото)
 - Прогресс-бар сверху (Step 1 of 4)
 - Кнопки `Назад` / `Далее`
@@ -740,6 +783,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** базовый input для форм (если будут где-то нужны — например, форма обратной связи или ваучера).
 
 **Acceptance:**
+
 - Underline-style (без border-box), label плавает вверх при фокусе (как в Material Design)
 - Error state красным
 - Поддержка type=text|tel|email
@@ -756,6 +800,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** галерея с draggable rows (как у Awwwards-сайтов).
 
 **Acceptance:**
+
 - 2-3 ряда фото движутся параллельно при drag
 - На клик по фото — открывается lightbox
 - Inertia-эффект: после отпускания — продолжает двигаться по инерции
@@ -772,6 +817,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** modal для просмотра фото в полном размере.
 
 **Acceptance:**
+
 - Открывается из `<NextImage>` с props `lightbox` или из drag-reveal-gallery
 - Стрелки навигации, swipe на mobile, ESC для закрытия
 - Backdrop blur + fade-in
@@ -788,6 +834,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** таблица всех 27 услуг с категориями, ценами, длительностью, описаниями.
 
 **Acceptance:**
+
 - Аккордеон по категориям: «Парикмахерский зал», «Комплексные услуги», «Ногтевой зал»
 - В развёрнутом виде — таблица с услугами
 - При наведении на услугу — small tooltip с описанием
@@ -807,6 +854,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** маленький индикатор «у мастера осталось N окон сегодня» (логика — INT-04).
 
 **Acceptance:**
+
 - Дизайн готов; данные пока mock (например, `{ name: "Сайод", openSlots: 2 }`)
 - Анимированная зелёная точка (pulse), цифра, имя
 - На hover — раскрывается список доступных слотов
@@ -822,6 +870,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** фиксированная кнопка «Записаться» внизу на mobile.
 
 **Acceptance:**
+
 - Появляется на mobile при скролле > 800px
 - Скрывается на странице с открытым YClients widget
 - При клике — открывает widget
@@ -838,6 +887,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** альтернатива live-чату — фиксированная кнопка для быстрой связи.
 
 **Acceptance:**
+
 - В правом нижнем углу, обходит StickyCTA
 - При hover — раскрывается «Telegram | WhatsApp» с иконками
 - Клик → `https://wa.me/79179183877` или `tg://resolve?domain=...`
@@ -854,6 +904,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** консент-баннер для соответствия 152-ФЗ (для GA4/Метрики).
 
 **Acceptance:**
+
 - Появляется при первом визите снизу
 - Кнопки «Принять все», «Только необходимые», «Настройки»
 - LocalStorage save: `bp-cookie-consent` = `{ analytics: bool, ts: number }`
@@ -886,12 +937,14 @@ Add 5-clicks-easter-egg with toast.
 **Gate:** домашняя страница live на staging, заказчик видит и делает первый круг ревью.
 
 > **Совет по workflow:** в Claude Code можно использовать **git worktrees** для параллельной разработки секций.
+>
 > ```
 > git worktree add ../base-premier-hero feature/hero
 > cd ../base-premier-hero
 > claude
 > # → "Build the hero section per docs/DESIGN-BRIEF.md §3.1"
 > ```
+>
 > Несколько параллельных Claude Code сессий могут работать над разными секциями одновременно.
 
 ---
@@ -901,6 +954,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** wow-первое-впечатление: полноэкранное видео, 3D-монограмма BP, magnetic CTA.
 
 **Acceptance:**
+
 - Полноэкранное hero-видео (loop, muted, autoplay) с poster (AVIF)
 - На фоне видео — semi-transparent dark gradient (для контраста текста)
 - 3D BP в правой части (через Three.js / R3F), реагирует на mouse-move (lazy через `dynamic()` с `ssr: false`)
@@ -922,6 +976,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** второй экран — короткая идея бренда, ссылка на /about.
 
 **Acceptance:**
+
 - 2 колонки: слева — H2 («больше, чем стрижка»), справа — параграф manifesto (3-5 предложений из CONTENT-BRIEF)
 - На скролле — параллакс-эффект: текст медленно поднимается, заголовок — медленнее
 - Нижняя ссылка «читать манифест →» (Link с underline-animation)
@@ -938,6 +993,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** топ-3 категории услуг с CTA «смотреть все услуги».
 
 **Acceptance:**
+
 - SectionHeading: `01 / Услуги`, `что мы делаем`
 - 3 ServiceCard в horizontal row (или vertical stack на mobile): «Стрижка», «Уход за бородой», «Комплекс стрижка+маникюр»
 - При hover — эффект описан в UI-05
@@ -954,6 +1010,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** превью команды (4-5 ключевых мастеров) с CTA на /barbers.
 
 **Acceptance:**
+
 - SectionHeading: `02 / Мастера`, `профессионалы своего дела`
 - Marquee из карточек мастеров (бесшовная прокрутка, pause on hover)
 - Альтернатива (если marquee не понравится): horizontal scroll с drag (как UI-12)
@@ -971,6 +1028,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** атмосфера салона — крупные фото интерьера с editorial-подачей.
 
 **Acceptance:**
+
 - SectionHeading: `03 / Интерьер`, `атмосфера, в которую возвращаются`
 - 3-4 крупных фото в asymmetric layout (как у betonebarber.ru или Aesop)
 - На скролле — лёгкий parallax (фото смещается медленнее текста)
@@ -988,6 +1046,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** превью прайса с CTA на полный прайс на /services.
 
 **Acceptance:**
+
 - SectionHeading: `04 / Прайс`, `прозрачные цены`
 - 5-7 ключевых услуг в виде Mono-таблицы (без интерактивности)
 - CTA «Полный прайс из 27 услуг →»
@@ -1003,6 +1062,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** социальное доказательство — несколько отзывов с агрегатным рейтингом.
 
 **Acceptance:**
+
 - SectionHeading: `05 / Отзывы`, `★ 5,0 · 394 отзыва на Яндекс.Картах`
 - 6-8 ReviewCard в masonry-layout
 - Все отзывы — с указанием источника (Яндекс/2ГИС)
@@ -1021,6 +1081,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** информация о программе лояльности и реферралах.
 
 **Acceptance:**
+
 - SectionHeading: `06 / Бонусы`, `чем мы благодарим постоянных гостей`
 - 3 «карточки»: «Накопительная скидка», «Приведи друга — оба получите», «Подарочные сертификаты»
 - Простые иконки (lucide-react или собственные SVG)
@@ -1037,6 +1098,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** последний экран перед футером — финальный nudge к действию.
 
 **Acceptance:**
+
 - Большой H2 (CharReveal): `время к нам`
 - Под ним — Magnetic Button «Записаться» (XL-размер)
 - Под кнопкой — телефон и адрес дублируются
@@ -1074,6 +1136,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** полная страница услуг с категориями, фильтрацией, ценами, deep-link на запись.
 
 **Acceptance:**
+
 - Hero: H1 «наши услуги», eyebrow «27 процедур · 3 категории»
 - Фильтры по категории: «Все · Парикмахерский зал · Комплексные · Ногтевой зал»
 - Полный PricingTable (UI-14)
@@ -1092,6 +1155,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** галерея команды.
 
 **Acceptance:**
+
 - Hero: H1 «наша команда», eyebrow «10 мастеров»
 - Grid из 10 BarberCard (3 колонки на desktop, 2 на tablet, 1 на mobile)
 - Возможность сортировки: «По кол-ву отзывов» / «По специализации» / «По старшинству» (default = старшинство)
@@ -1109,6 +1173,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** детальная страница каждого мастера.
 
 **Acceptance:**
+
 - Большое фото слева (3:4), биография справа
 - H1 — имя мастера, eyebrow — должность («Старший мастер», «Лучший месяца» и т.д.)
 - Биография (2-3 параграфа): опыт, подход к работе, любимая техника, где обучался
@@ -1129,6 +1194,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** манифест, история, визитка бренда.
 
 **Acceptance:**
+
 - Hero: большое фото интерьера + H1 «больше, чем стрижка»
 - Manifesto секция (4-5 параграфов — Editorial Serif для важных фраз)
 - Timeline: «2022 — основание», ... (если есть данные)
@@ -1147,6 +1213,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** все способы связаться + карта проезда.
 
 **Acceptance:**
+
 - H1 «как нас найти»
 - Большая карта (Yandex.Maps embed) с маркером на Шаляпина 26
 - Адрес, GPS, ориентир «245 м от Концертного зала Филармонии»
@@ -1166,6 +1233,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** интерактивный квиз → рекомендованная услуга + мастер.
 
 **Acceptance:**
+
 - 4 шага:
   1. «Какая длина волос у вас сейчас?» (4 фото-варианта)
   2. «Какой образ ближе?» (4 варианта: классика / спорт / casual / необычное)
@@ -1187,6 +1255,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** список статей блога с фильтрацией по категориям.
 
 **Acceptance:**
+
 - Hero: H1 «журнал», eyebrow «истории, гайды, обзоры»
 - Grid из ArticleCard (UI-08)
 - Фильтры по категории: «Все · Стрижки · Уход · Стиль · Обзоры»
@@ -1205,6 +1274,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** красивое чтение длинной статьи.
 
 **Acceptance:**
+
 - Hero статьи: cover фото, H1, eyebrow (категория · дата · время чтения), автор
 - Контент через Portable Text → React (с custom renderers для headings, blockquotes, images, code)
 - Sticky оглавление справа (на desktop)
@@ -1224,6 +1294,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** не белая страница, а часть бренда.
 
 **Acceptance:**
+
 - Большая анимированная цифра «404» (можно 3D или SVG-морфинг)
 - Текст «потерянная стрижка» или похожее в tone of voice
 - CTA «На главную» и «К услугам»
@@ -1240,6 +1311,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** PR-фишка, секретная страница.
 
 **Acceptance:**
+
 - Полноэкранная сцена R3F с монограммой BP
 - Можно полностью вращать мышью / тапать на mobile
 - Лёгкие световые эффекты (rim light, ambient occlusion)
@@ -1279,6 +1351,7 @@ Add 5-clicks-easter-egg with toast.
 **Goal:** Sanity Studio запущен, схемы созданы, данные мигрированы.
 
 **Acceptance:**
+
 - `npm install @sanity/client @sanity/image-url next-sanity`
 - Schemes per ARCHITECTURE.md §6.2: `barber`, `service`, `article`, `review`, `interior_photo`, `siteSettings`
 - Sanity Studio запущен на `studio.basepremier.ru` или `/studio` (embedded)
@@ -1294,6 +1367,7 @@ Add 5-clicks-easter-egg with toast.
 **Estimate:** 12 часов
 
 **Claude Code prompt:**
+
 ```
 Set up Sanity CMS per docs/ARCHITECTURE.md §6.
 Create all schemas (barber, service, article, review, interior_photo, siteSettings).
@@ -1303,11 +1377,12 @@ Verify the home page reads from Sanity, not from src/data/*.
 
 ---
 
-### [INT-02] Claude генерирует 12 статей блога 🟡
+### [INT-02] Claude генерирует 12 статей блога ✅
 
 **Goal:** 12 готовых статей в Sanity по темам из CONTENT-BRIEF.md.
 
 **Acceptance:**
+
 - 12 тем согласно CONTENT-BRIEF (например: «Как ухаживать за бородой зимой», «Что такое fade», «Премиальная косметика Graham Hill — обзор», ...)
 - Каждая статья: 1500-2500 слов, в tone of voice бренда
 - SEO-оптимизация под локальные ключи (Казань, барбершоп, мужская стрижка)
@@ -1325,6 +1400,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Goal:** виджет записи открывается из всех CTA «Записаться» по сайту.
 
 **Acceptance:**
+
 - Скрипт виджета загружается lazy (только при первом клике на CTA)
 - Виджет открывается в модалке (overlay), не на отдельной странице
 - Pre-selected service ID работает (из URL `?service_id=...` или из ServiceCard)
@@ -1343,6 +1419,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Goal:** на главной и /barbers показывается реальная загрузка мастеров.
 
 **Acceptance:**
+
 - Edge API route `/api/yclients/availability?staff_id=...&date=...` (per ARCHITECTURE.md §5.3)
 - Кеширование результатов на 5 минут (Cloudflare CDN или Redis)
 - LiveOccupancy badge (UI-15) использует этот endpoint
@@ -1360,6 +1437,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Goal:** при новой записи через сайт — уведомление в Telegram-чат заказчика.
 
 **Acceptance:**
+
 - Создать Telegram-бот через @BotFather
 - API route `/api/webhooks/yclients` принимает webhook от YClients
 - Парсит payload, шлёт в Telegram-канал заказчика: «Новая запись: {клиент}, {услуга}, {мастер}, {дата}»
@@ -1376,6 +1454,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Goal:** все события трекаются в Метрике; cookie-banner соблюдён.
 
 **Acceptance:**
+
 - В Метрике созданы цели: `cta_click`, `widget_open`, `widget_booking_success`, `quiz_started`, `quiz_completed`, `phone_click`, `whatsapp_click`, `telegram_click`
 - Webvisor включён
 - Цели срабатывают (проверить через Метрика → Реальное время)
@@ -1393,6 +1472,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Goal:** ошибки в продакшне видны в Sentry.
 
 **Acceptance:**
+
 - `npm install @sentry/nextjs`
 - Sentry-конфиг в `next.config.mjs` через `withSentryConfig`
 - Source maps загружаются на build
@@ -1411,6 +1491,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Goal:** поисковики правильно индексируют сайт.
 
 **Acceptance:**
+
 - `src/app/robots.ts` — `Allow: /`, `Disallow: /studio /api /dev /bp`, link на sitemap
 - `src/app/sitemap.ts` — динамический sitemap, включает все страницы из Sanity (статьи, мастера) + статичные
 - Тест: `curl https://basepremier.ru/sitemap.xml` отдаёт валидный XML
@@ -1443,11 +1524,12 @@ Verify the home page reads from Sanity, not from src/data/*.
 
 ---
 
-### [POL-01] Performance audit + оптимизации 🔴
+### [POL-01] Performance audit + оптимизации 🟡
 
 **Goal:** Lighthouse Performance ≥ 90 на всех ключевых страницах.
 
 **Acceptance:**
+
 - Lighthouse CI добавлен в GitHub Actions: каждый PR проверяется
 - Бюджеты per ARCHITECTURE.md §11:
   - LCP ≤ 2.0s (на хорошем 3G)
@@ -1466,6 +1548,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 **Estimate:** 12 часов
 
 **Claude Code prompt:**
+
 ```
 Audit performance per docs/ARCHITECTURE.md §11.
 Run `npm run build && npm run start`, then Lighthouse on /, /services, /barbers, /journal.
@@ -1475,11 +1558,12 @@ Iterate until all pages green.
 
 ---
 
-### [POL-02] SEO audit 🔴
+### [POL-02] SEO audit ✅
 
 **Goal:** все страницы готовы к индексации, JSON-LD валидно.
 
 **Acceptance:**
+
 - Каждая страница имеет уникальные `<title>` и `<meta description>`
 - OG/Twitter метатеги на каждой странице
 - JSON-LD `<HairSalon>` на главной с реальными данными (адрес, GPS, часы, ИНН)
@@ -1497,11 +1581,12 @@ Iterate until all pages green.
 
 ---
 
-### [POL-03] Accessibility audit 🔴
+### [POL-03] Accessibility audit ✅
 
 **Goal:** уровень WCAG 2.1 AA, axe-core ноль ошибок.
 
 **Acceptance:**
+
 - Все интерактивные элементы доступны клавиатурой
 - Focus rings видимы (никаких `outline: none` без замены)
 - Все изображения имеют alt-текст
@@ -1524,6 +1609,7 @@ Iterate until all pages green.
 **Goal:** работает корректно на ~95% устройств российской аудитории.
 
 **Acceptance:**
+
 - Тестирование на:
   - Chrome (Android/Desktop) — основной
   - Safari (iOS/macOS) — критично для премиум-аудитории
@@ -1546,6 +1632,7 @@ Iterate until all pages green.
 **Goal:** все звуки и анимации финализированы.
 
 **Acceptance:**
+
 - Все звуки имеют единую громкость (-12dB normalize)
 - Все анимации имеют единые easing curves (из BRAND.md)
 - Page transitions гладкие, без jank на средних ноутбуках
@@ -1563,6 +1650,7 @@ Iterate until all pages green.
 **Goal:** mobile-experience безупречен.
 
 **Acceptance:**
+
 - Touch-targets ≥ 44×44 px
 - Sticky CTA не перекрывает важные блоки
 - WhatsApp-кнопка не конфликтует с другими floating-elements
@@ -1596,11 +1684,12 @@ Iterate until all pages green.
 
 ---
 
-### [LAU-01] 301 redirects map 🔴
+### [LAU-01] 301 redirects map ✅
 
 **Goal:** все старые URL ведут на эквивалентные новые.
 
 **Acceptance:**
+
 - Аудит старого сайта — выписать все живые URL (через `screamingfrog` или `wget --spider -r`)
 - Map в `next.config.mjs`: каждый старый URL → новый
 - Sample (примеры):
@@ -1621,6 +1710,7 @@ Iterate until all pages green.
 **Goal:** `basepremier.ru` указывает на новый VPS.
 
 **Acceptance:**
+
 - На VPS поднят production-режим (отдельно от staging)
 - Nginx-конфиг для `basepremier.ru` (apex + www)
 - Let's Encrypt сертификат для `basepremier.ru` и `www.basepremier.ru`
@@ -1640,6 +1730,7 @@ Iterate until all pages green.
 **Goal:** поисковики уведомлены о новом сайте, начинают переиндексацию.
 
 **Acceptance:**
+
 - В Yandex Вебмастер: добавить sitemap.xml, отправить запрос на переиндексацию
 - В Google Search Console: то же
 - В Yandex.Бизнес: проверить актуальность данных профиля (адрес, часы, фото)
@@ -1656,6 +1747,7 @@ Iterate until all pages green.
 **Goal:** деликатное сообщение о редизайне постоянным клиентам.
 
 **Acceptance:**
+
 - Пост в соцсетях бренда (Instagram + VK + Telegram-канал, если есть)
 - Тон — спокойный, не «революция» (мы — Tom Ford-style)
 - Возможно email-рассылка (если у заказчика есть база)
@@ -1672,6 +1764,7 @@ Iterate until all pages green.
 **Goal:** ловим и фиксим проблемы до того, как они станут видимы массе.
 
 **Acceptance:**
+
 - Каждый день в 9:00 — проверка:
   - Sentry на новые errors
   - Метрика на drop позиций / трафика
@@ -1727,6 +1820,7 @@ Iterate until all pages green.
 - [ ] Этот ROADMAP.md лежит рядом, открыт во второй вкладке
 
 **Команда старта:**
+
 ```bash
 mkdir base-premier-web && cd base-premier-web
 git init
@@ -1750,4 +1844,4 @@ claude
 
 ---
 
-*Документ обновляется по мере выполнения тикетов. Последнее обновление — 26.04.2026.*
+_Документ обновляется по мере выполнения тикетов. Последнее обновление — 26.04.2026._

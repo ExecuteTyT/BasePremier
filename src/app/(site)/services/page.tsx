@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
+    images: [{ url: "https://basepremier.ru/images/og-default.jpg", width: 1200, height: 630 }],
   },
 };
 
@@ -38,7 +39,7 @@ export default function ServicesPage() {
 
       <main id="main">
         {/* Hero */}
-        <section className="bg-bg-primary pb-0 pt-40 md:pt-48">
+        <section className="bg-bg-primary pb-0 pt-28 md:pt-40">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
             <p className="mb-6 font-mono text-[13px] uppercase tracking-[0.2em] text-fg-muted">
               27 услуг · 3 категории

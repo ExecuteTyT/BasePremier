@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import NextLink from "next/link";
@@ -41,7 +41,7 @@ export function JournalGridSection() {
           aria-selected={activeTab === "all"}
           onClick={() => setActiveTab("all")}
           className={cn(
-            "flex items-center gap-1.5 px-4 py-2",
+            "flex items-center gap-1.5 px-4 py-3 md:py-2",
             "font-mono text-[13px] uppercase tracking-[0.12em]",
             "border transition-[background-color,border-color,color] duration-base",
             activeTab === "all"
@@ -59,7 +59,7 @@ export function JournalGridSection() {
             aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id as ArticleCategory)}
             className={cn(
-              "flex items-center gap-1.5 px-4 py-2",
+              "flex items-center gap-1.5 px-4 py-3 md:py-2",
               "font-mono text-[13px] uppercase tracking-[0.12em]",
               "border transition-[background-color,border-color,color] duration-base",
               activeTab === tab.id
@@ -140,7 +140,7 @@ function ArticleCardLarge({ article, index }: ArticleCardProps) {
             {article.title}
           </h2>
           <p className="mb-4 line-clamp-2 font-sans text-body text-fg-muted">{article.excerpt}</p>
-          <p className="font-mono text-[11px] text-fg-muted/50">
+          <p className="font-mono text-[11px] text-fg-muted">
             {formatDate(article.date)} · {article.readMinutes} мин
           </p>
         </div>
@@ -181,7 +181,7 @@ function ArticleCardSmall({ article, index }: ArticleCardProps) {
           <h2 className="mb-2 font-display font-normal text-[1rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
             {article.title}
           </h2>
-          <p className="font-mono text-[10px] text-fg-muted/50">
+          <p className="font-mono text-[10px] text-fg-muted">
             {formatDate(article.date)} · {article.readMinutes} мин
           </p>
         </div>
