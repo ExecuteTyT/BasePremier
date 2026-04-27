@@ -4,6 +4,8 @@ import { CharReveal } from "@/components/motion/CharReveal";
 import { ServicesListSection } from "@/components/sections/ServicesListSection";
 import { serviceListJsonLd } from "@/lib/seo/jsonLd";
 
+export const dynamic = "force-dynamic";
+
 export const revalidate = 60;
 
 export const metadata: Metadata = {

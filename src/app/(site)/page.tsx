@@ -7,6 +7,8 @@ import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ServicesPreviewSection } from "@/components/sections/ServicesPreviewSection";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <>

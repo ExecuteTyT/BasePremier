@@ -5,7 +5,7 @@ import NextLink from "next/link";
 import { useMemo, useState } from "react";
 
 import { ARTICLES, ArticleCategory } from "@/data/articles";
-import { ARTICLE_CATEGORY_ALL, ARTICLE_TABS } from "@/data/articleTabs";
+import { ARTICLE_TABS } from "@/data/articleTabs";
 import { cn } from "@/lib/cn";
 
 const ease = [0.19, 1, 0.22, 1] as const;

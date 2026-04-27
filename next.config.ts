@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["gsap", "lenis", "three"],
+  reactCompiler: false,
+  serverExternalPackages: ["three", "@react-three/fiber", "@react-three/drei"],
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",

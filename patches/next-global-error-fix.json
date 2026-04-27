@@ -1,0 +1,15 @@
+{
+  "file": "node_modules/next/dist/build/utils.js",
+  "patches": [
+    {
+      "description": "Prevent /_global-error from being statically generated (Node.js 24 + React 19 compat)",
+      "old": "isStatic: true,\n            isRoutePPREnabled: false,\n            prerenderFallbackMode: undefined,\n            prerenderedRoutes: undefined,\n            rootParamKeys: undefined,\n            hasStaticProps: false,\n            hasServerProps: false,\n            isNextImageImported: false,\n            appConfig: {}",
+      "new": "isStatic: false,\n            isRoutePPREnabled: false,\n            prerenderFallbackMode: undefined,\n            prerenderedRoutes: undefined,\n            rootParamKeys: undefined,\n            hasStaticProps: false,\n            hasServerProps: false,\n            isNextImageImported: false,\n            appConfig: { revalidate: 0 }"
+    },
+    {
+      "description": "Set revalidate:0 for appConfig of _global-error (secondary fix)",
+      "old": "appConfig = originalAppPath === _constants1.UNDERSCORE_GLOBAL_ERROR_ROUTE_ENTRY ? {} : reduceAppConfig(segments);",
+      "new": "appConfig = originalAppPath === _constants1.UNDERSCORE_GLOBAL_ERROR_ROUTE_ENTRY ? { revalidate: 0 } : reduceAppConfig(segments);"
+    }
+  ]
+}

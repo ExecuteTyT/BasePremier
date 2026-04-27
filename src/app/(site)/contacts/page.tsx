@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import { CharReveal } from "@/components/motion/CharReveal";
 import { breadcrumbJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Контакты — BASE Premier | Барбершоп на Шаляпина 26, Казань",
   description:

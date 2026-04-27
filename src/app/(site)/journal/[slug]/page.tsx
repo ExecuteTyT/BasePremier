@@ -5,11 +5,7 @@ import { notFound } from "next/navigation";
 import { ARTICLES } from "@/data/articles";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/jsonLd";
 
-export const revalidate = 3600;
-
-export function generateStaticParams() {
-  return ARTICLES.map((a) => ({ slug: a.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

@@ -7,11 +7,7 @@ import { BARBERS } from "@/data/barbers";
 import { reviewWord } from "@/lib/format";
 import { breadcrumbJsonLd, hairSalonJsonLd, personJsonLd } from "@/lib/seo/jsonLd";
 
-export const revalidate = 3600;
-
-export function generateStaticParams() {
-  return BARBERS.map((b) => ({ slug: b.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
