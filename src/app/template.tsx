@@ -1,22 +1,22 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-
 export default function Template({ children }: { children: React.ReactNode }) {
-  const reduced = useReducedMotion();
-
-  if (reduced) return <>{children}</>;
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.5,
-        ease: [0.19, 1, 0.22, 1],
+    <div
+      style={{
+        animation: "pageEnter 0.5s cubic-bezier(0.19,1,0.22,1) both",
       }}
     >
+      <style>{`
+        @keyframes pageEnter {
+          from { opacity: 0; transform: translateY(16px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes pageEnter { from { opacity: 0; } to { opacity: 1; } }
+        }
+      `}</style>
       {children}
-    </motion.div>
+    </div>
   );
 }

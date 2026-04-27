@@ -26,6 +26,8 @@ import { ReviewCard } from "@/components/ui/ReviewCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 
+export const dynamic = "force-dynamic";
+
 export default function DevComponentsPage() {
   if (process.env.NODE_ENV !== "development") {
     notFound();
