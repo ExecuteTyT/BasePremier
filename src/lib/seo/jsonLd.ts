@@ -76,6 +76,31 @@ export function serviceListJsonLd(categories: ServiceCategory[] = SERVICE_CATEGO
   };
 }
 
+export function personJsonLd(barber: {
+  slug: string;
+  name: string;
+  role: string;
+  reviews: number;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: barber.name,
+    jobTitle: barber.role,
+    worksFor: {
+      "@type": "HairSalon",
+      name: "BASE Premier",
+      url: SITE_URL,
+    },
+    url: `${SITE_URL}/barbers/${barber.slug}`,
+    interactionStatistic: {
+      "@type": "InteractionCounter",
+      interactionType: "https://schema.org/ReviewAction",
+      userInteractionCount: barber.reviews,
+    },
+  };
+}
+
 export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
   return {
     "@context": "https://schema.org",
