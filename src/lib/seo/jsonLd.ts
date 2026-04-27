@@ -116,6 +116,33 @@ export function faqPageJsonLd(items: Array<{ question: string; answer: string }>
   };
 }
 
+export function articleJsonLd(article: {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readMinutes: number;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.date,
+    author: {
+      "@type": "Organization",
+      name: "BASE Premier",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "BASE Premier",
+      url: SITE_URL,
+    },
+    url: `${SITE_URL}/journal/${article.slug}`,
+    timeRequired: `PT${article.readMinutes}M`,
+  };
+}
+
 export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
   return {
     "@context": "https://schema.org",
