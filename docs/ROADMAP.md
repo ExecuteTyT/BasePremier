@@ -1057,7 +1057,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [HOM-07] Reviews section 🔴
+### [HOM-07] Reviews section ✅
 
 **Goal:** социальное доказательство — несколько отзывов с агрегатным рейтингом.
 
@@ -1076,7 +1076,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [HOM-08] Loyalty / Referral section 🟡
+### [HOM-08] Loyalty / Referral section ✅
 
 **Goal:** информация о программе лояльности и реферралах.
 
@@ -1093,7 +1093,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [HOM-09] Footer-CTA section 🟡
+### [HOM-09] Footer-CTA section ✅
 
 **Goal:** последний экран перед футером — финальный nudge к действию.
 
@@ -1131,7 +1131,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-01] /services — каталог всех 27 услуг 🔴
+### [PG-01] /services — каталог всех 27 услуг ✅
 
 **Goal:** полная страница услуг с категориями, фильтрацией, ценами, deep-link на запись.
 
@@ -1150,7 +1150,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-02] /barbers — список всех 10 мастеров 🔴
+### [PG-02] /barbers — список всех 10 мастеров ✅
 
 **Goal:** галерея команды.
 
@@ -1168,7 +1168,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-03] /barbers/[slug] — страница мастера 🔴
+### [PG-03] /barbers/[slug] — страница мастера ✅
 
 **Goal:** детальная страница каждого мастера.
 
@@ -1189,7 +1189,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-04] /about — страница «о нас» 🔴
+### [PG-04] /about — страница «о нас» ✅
 
 **Goal:** манифест, история, визитка бренда.
 
@@ -1208,7 +1208,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-05] /contacts — страница контактов 🔴
+### [PG-05] /contacts — страница контактов ✅
 
 **Goal:** все способы связаться + карта проезда.
 
@@ -1228,7 +1228,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-06] /quiz — подбор стрижки 🟡
+### [PG-06] /quiz — подбор стрижки ✅
 
 **Goal:** интерактивный квиз → рекомендованная услуга + мастер.
 
@@ -1250,7 +1250,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-07] /journal — блог журнала 🟡
+### [PG-07] /journal — блог журнала ✅
 
 **Goal:** список статей блога с фильтрацией по категориям.
 
@@ -1269,7 +1269,7 @@ Add 5-clicks-easter-egg with toast.
 
 ---
 
-### [PG-08] /journal/[slug] — статья блога 🟡
+### [PG-08] /journal/[slug] — статья блога ✅
 
 **Goal:** красивое чтение длинной статьи.
 
@@ -1467,7 +1467,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 
 ---
 
-### [INT-07] Sentry — error tracking 🟡
+### [INT-07] Sentry — error tracking ✅
 
 **Goal:** ошибки в продакшне видны в Sentry.
 
@@ -1486,7 +1486,7 @@ Verify the home page reads from Sanity, not from src/data/*.
 
 ---
 
-### [INT-08] Robots.txt + sitemap.xml 🔴
+### [INT-08] Robots.txt + sitemap.xml ✅
 
 **Goal:** поисковики правильно индексируют сайт.
 
