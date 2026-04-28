@@ -45,8 +45,8 @@ export function SoundProvider({ children }: { children: React.ReactNode }) {
   return <SoundContext.Provider value={{ muted, toggle, play }}>{children}</SoundContext.Provider>;
 }
 
+const NOOP_CONTEXT: SoundContextValue = { muted: true, toggle: () => {}, play: () => {} };
+
 export function useSoundContext(): SoundContextValue {
-  const ctx = useContext(SoundContext);
-  if (!ctx) throw new Error("useSoundContext must be used within SoundProvider");
-  return ctx;
+  return useContext(SoundContext) ?? NOOP_CONTEXT;
 }

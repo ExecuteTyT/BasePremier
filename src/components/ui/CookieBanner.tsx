@@ -3,12 +3,14 @@
 import NextLink from "next/link";
 import { startTransition, useEffect, useState } from "react";
 
+import { useSoundContext } from "@/components/motion/SoundProvider";
 import { cn } from "@/lib/cn";
 
 const STORAGE_KEY = "bp:cookies";
 
 export function CookieBanner({ className }: { className?: string }) {
   const [shown, setShown] = useState(false);
+  const { play } = useSoundContext();
 
   useEffect(() => {
     if (localStorage.getItem(STORAGE_KEY)) return;
@@ -19,6 +21,8 @@ export function CookieBanner({ className }: { className?: string }) {
   }, []);
 
   const dismiss = (analytics: boolean) => {
+    if (analytics) play("success");
+    else play("click");
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ analytics, ts: Date.now() }));
     setShown(false);
   };

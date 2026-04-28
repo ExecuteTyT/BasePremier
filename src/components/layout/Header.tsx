@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 import { MobileMenu } from "@/components/layout/MobileMenu";
+import { useSoundContext } from "@/components/motion/SoundProvider";
 import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { MuteToggle } from "@/components/ui/MuteToggle";
@@ -23,6 +24,7 @@ const PHONE = { display: "+7 (917) 918-38-77", href: "tel:+79179183877" };
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+  const { play } = useSoundContext();
 
   useEffect(() => {
     const header = headerRef.current;
@@ -70,6 +72,7 @@ export function Header() {
                 <NextLink
                   href={href}
                   aria-current={active ? "page" : undefined}
+                  onMouseEnter={() => play("hover")}
                   className={cn(
                     "font-sans text-body-sm transition-colors duration-base",
                     active ? "text-fg-primary" : "text-fg-muted hover:text-fg-primary",

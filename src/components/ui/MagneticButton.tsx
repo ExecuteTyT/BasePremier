@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
+import { useSoundContext } from "@/components/motion/SoundProvider";
 import { Button, type ButtonVariant, type ButtonSize } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { gsap } from "@/lib/gsap";
@@ -18,6 +19,7 @@ type Props = {
 
 export function MagneticButton({ className, children, ...buttonProps }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const { play } = useSoundContext();
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -44,17 +46,29 @@ export function MagneticButton({ className, children, ...buttonProps }: Props) {
       gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
     };
 
+    const onEnter = () => play("hover");
+
+    el.addEventListener("mouseenter", onEnter);
     el.addEventListener("mousemove", onMove);
     el.addEventListener("mouseleave", onLeave);
     return () => {
+      el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mousemove", onMove);
       el.removeEventListener("mouseleave", onLeave);
     };
-  }, []);
+  }, [play]);
 
   return (
     <div ref={wrapRef} data-cursor="magnet" className={cn("inline-block", className)}>
-      <Button {...buttonProps}>{children}</Button>
+      <Button
+        {...buttonProps}
+        onClick={(e) => {
+          play("click");
+          buttonProps.onClick?.(e);
+        }}
+      >
+        {children}
+      </Button>
     </div>
   );
 }
