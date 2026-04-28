@@ -2,10 +2,17 @@ import { Metadata } from "next";
 import NextLink from "next/link";
 import { notFound } from "next/navigation";
 
-import { ARTICLES } from "@/data/articles";
+import { PortableTextContent } from "@/components/journal/PortableTextContent";
+import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/sanity/queries";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/jsonLd";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const articles = await getAllArticles();
+  return articles.map((a) => ({ slug: a.slug.current }));
+}
 
 export async function generateMetadata({
   params,
@@ -13,23 +20,23 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = ARTICLES.find((a) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
   if (!article) return {};
 
   return {
     title: `${article.title} | BASE Premier`,
     description: article.excerpt,
     alternates: {
-      canonical: `https://basepremier.ru/journal/${article.slug}`,
+      canonical: `https://basepremier.ru/journal/${article.slug.current}`,
     },
     openGraph: {
       title: `${article.title} | BASE Premier`,
       description: article.excerpt,
-      url: `https://basepremier.ru/journal/${article.slug}`,
+      url: `https://basepremier.ru/journal/${article.slug.current}`,
       siteName: "BASE Premier",
       locale: "ru_RU",
       type: "article",
-      publishedTime: article.date,
+      publishedTime: article.publishedAt,
     },
   };
 }
@@ -39,54 +46,34 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
 }
 
-function renderContent(text: string) {
-  return text.split("\n\n").map((paragraph, i) => {
-    if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-      const inner = paragraph.slice(2, -2);
-      return (
-        <h2
-          key={i}
-          className="mt-10 font-display font-normal text-[1.375rem] leading-tight text-fg-primary"
-        >
-          {inner}
-        </h2>
-      );
-    }
-
-    const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
-    return (
-      <p key={i} className="font-sans text-[1.125rem] leading-[1.7] text-fg-muted">
-        {parts.map((part, j) => {
-          if (part.startsWith("**") && part.endsWith("**")) {
-            return (
-              <strong key={j} className="font-normal text-fg-primary">
-                {part.slice(2, -2)}
-              </strong>
-            );
-          }
-          return part;
-        })}
-      </p>
-    );
-  });
-}
+const CATEGORY_LABELS: Record<string, string> = {
+  guide: "Гид",
+  care: "Уход",
+  price: "Цена",
+  lifestyle: "Лайфстайл",
+};
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = ARTICLES.find((a) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
-  const relatedArticles = ARTICLES.filter(
-    (a) => a.slug !== article.slug && a.category === article.category,
-  ).slice(0, 2);
+  const related = await getRelatedArticles(slug, article.category);
+  const categoryLabel = CATEGORY_LABELS[article.category] ?? article.category;
 
   const jsonLd = [
-    articleJsonLd(article),
+    articleJsonLd({
+      slug: article.slug.current,
+      title: article.title,
+      excerpt: article.excerpt,
+      date: article.publishedAt,
+      readMinutes: article.readMinutes,
+    }),
     breadcrumbJsonLd([
       { name: "Главная", url: "/" },
       { name: "Журнал", url: "/journal" },
-      { name: article.categoryLabel, url: `/journal` },
-      { name: article.title, url: `/journal/${article.slug}` },
+      { name: categoryLabel, url: `/journal` },
+      { name: article.title, url: `/journal/${article.slug.current}` },
     ]),
   ];
 
@@ -105,7 +92,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Hero */}
           <header className="bg-bg-primary pt-32 md:pt-40">
             <div className="mx-auto max-w-screen-xl px-6 md:px-8">
-              {/* Breadcrumb */}
               <nav aria-label="Breadcrumb" className="mb-10">
                 <ol className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.15em] text-fg-muted">
                   <li>
@@ -124,13 +110,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   <li aria-hidden="true" className="opacity-30">
                     /
                   </li>
-                  <li className="text-fg-primary">{article.categoryLabel}</li>
+                  <li className="text-fg-primary">{categoryLabel}</li>
                 </ol>
               </nav>
 
               <div className="mx-auto max-w-[720px]">
                 <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
-                  {article.categoryLabel}
+                  {categoryLabel}
                 </p>
                 <h1
                   className="font-display font-normal text-fg-primary"
@@ -143,7 +129,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   {article.title}
                 </h1>
                 <p className="mt-4 font-mono text-[12px] text-fg-muted">
-                  {formatDate(article.date)} · {article.readMinutes} мин читать
+                  {formatDate(article.publishedAt)} · {article.readMinutes} мин читать
                 </p>
               </div>
             </div>
@@ -158,7 +144,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     className="select-none font-display font-normal leading-none text-fg-muted/10"
                     style={{ fontSize: "clamp(5rem, 15vw, 10rem)" }}
                   >
-                    {article.categoryLabel[0]}
+                    {categoryLabel[0]}
                   </span>
                 </div>
               </div>
@@ -168,38 +154,47 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Article body */}
           <div className="bg-bg-primary pb-20 md:pb-28">
             <div className="mx-auto max-w-screen-xl px-6 md:px-8">
-              <div className="mx-auto max-w-[720px] space-y-6">
-                {renderContent(article.content)}
+              <div className="mx-auto max-w-[720px]">
+                {article.content && article.content.length > 0 ? (
+                  <PortableTextContent content={article.content} />
+                ) : (
+                  <p className="font-sans text-[1.125rem] leading-[1.7] text-fg-muted">
+                    Содержимое статьи скоро будет добавлено.
+                  </p>
+                )}
               </div>
             </div>
           </div>
         </article>
 
         {/* Related articles */}
-        {relatedArticles.length > 0 && (
+        {related.length > 0 && (
           <section className="border-t border-border-default bg-bg-secondary py-16 md:py-20">
             <div className="mx-auto max-w-screen-xl px-6 md:px-8">
               <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted">
                 Читайте также
               </p>
               <div className="grid gap-6 md:grid-cols-2">
-                {relatedArticles.map((related) => (
-                  <NextLink
-                    key={related.slug}
-                    href={`/journal/${related.slug}`}
-                    className="group block border border-border-strong p-6 transition-[border-color] duration-base hover:border-accent"
-                  >
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-muted">
-                      {related.categoryLabel}
-                    </p>
-                    <h2 className="mb-2 font-display font-normal text-[1.125rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
-                      {related.title}
-                    </h2>
-                    <p className="font-mono text-[11px] text-fg-muted">
-                      {formatDate(related.date)} · {related.readMinutes} мин
-                    </p>
-                  </NextLink>
-                ))}
+                {related.map((r) => {
+                  const rLabel = CATEGORY_LABELS[r.category] ?? r.category;
+                  return (
+                    <NextLink
+                      key={r._id}
+                      href={`/journal/${r.slug.current}`}
+                      className="group block border border-border-strong p-6 transition-[border-color] duration-base hover:border-accent"
+                    >
+                      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-muted">
+                        {rLabel}
+                      </p>
+                      <h2 className="mb-2 font-display font-normal text-[1.125rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
+                        {r.title}
+                      </h2>
+                      <p className="font-mono text-[11px] text-fg-muted">
+                        {formatDate(r.publishedAt)} · {r.readMinutes} мин
+                      </p>
+                    </NextLink>
+                  );
+                })}
               </div>
             </div>
           </section>

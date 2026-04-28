@@ -1,11 +1,11 @@
 import { MetadataRoute } from "next";
 
-import { ARTICLES } from "@/data/articles";
 import { BARBERS } from "@/data/barbers";
+import { getAllArticles } from "@/lib/sanity/queries";
 
 const BASE = "https://basepremier.ru";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
     {
@@ -49,10 +49,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const articleRoutes: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
-    url: `${BASE}/journal/${a.slug}`,
-    lastModified: new Date(a.date),
-    changeFrequency: "yearly",
+  const sanityArticles = await getAllArticles();
+  const articleRoutes: MetadataRoute.Sitemap = sanityArticles.map((a) => ({
+    url: `${BASE}/journal/${a.slug.current}`,
+    lastModified: new Date(a.publishedAt),
+    changeFrequency: "yearly" as const,
     priority: 0.7,
   }));
 
