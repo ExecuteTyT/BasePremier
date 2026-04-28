@@ -13,7 +13,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { useReducedMotion } from "framer-motion";
 import { BlendFunction, KernelSize } from "postprocessing";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 // ─── Monogram "bp" lowercase ──────────────────────────────────────────────────
@@ -183,6 +183,59 @@ function CameraIntro({ onComplete }: { onComplete: () => void }) {
   return null;
 }
 
+// ─── Atmospheric particles (80 tiny metallic spheres orbiting the monogram) ───
+
+// Pre-generate random orbit data at module level so it is stable and pure.
+const PARTICLE_COUNT = 80;
+const PARTICLE_ORBITS = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
+  theta0: (i / PARTICLE_COUNT) * Math.PI * 2 + Math.random() * 0.5,
+  phi: Math.acos(2 * Math.random() - 1),
+  speed: (0.06 + Math.random() * 0.12) * (Math.random() > 0.5 ? 1 : -1),
+  radius: 3.2 + Math.random() * 2.0,
+  yBias: (Math.random() - 0.5) * 0.6,
+}));
+
+function Particles({
+  count = PARTICLE_COUNT,
+  reduced,
+}: {
+  count?: number;
+  reduced: boolean | null;
+}) {
+  const mesh = useRef<THREE.InstancedMesh>(null!);
+  const orbits = PARTICLE_ORBITS.slice(0, count);
+
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    for (let i = 0; i < count; i++) {
+      const o = orbits[i]!;
+      const theta = o.theta0 + (reduced ? 0 : t * o.speed);
+      const x = o.radius * Math.sin(o.phi) * Math.cos(theta);
+      const y =
+        o.radius * Math.cos(o.phi) * 0.45 + o.yBias + (reduced ? 0 : Math.sin(t * 0.3 + i) * 0.08);
+      const z = o.radius * Math.sin(o.phi) * Math.sin(theta);
+      dummy.position.set(x, y, z);
+      dummy.updateMatrix();
+      mesh.current.setMatrixAt(i, dummy.matrix);
+    }
+    mesh.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
+      <sphereGeometry args={[0.022, 5, 5]} />
+      <meshStandardMaterial
+        color="#3A5280"
+        metalness={0.95}
+        roughness={0.05}
+        envMapIntensity={3.0}
+      />
+    </instancedMesh>
+  );
+}
+
 // ─── Canvas wrapper ───────────────────────────────────────────────────────────
 
 export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => void }) {
@@ -213,6 +266,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
       <Lights />
       <Floor />
       <Monogram reduced={reduced} />
+      <Particles reduced={reduced} />
       {!reduced && <CameraIntro onComplete={handleIntroComplete} />}
       <MouseParallax reduced={reduced} />
       <OrbitControls
