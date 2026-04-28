@@ -1,12 +1,13 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import NextLink from "next/link";
 import { useMemo, useState } from "react";
 
-import { ARTICLES, ArticleCategory } from "@/data/articles";
-import { ARTICLE_TABS } from "@/data/articleTabs";
+import type { ArticleCategory } from "@/data/articles";
+import { ARTICLE_CATEGORY_ALL, ARTICLE_TAB_DEFS } from "@/data/articleTabs";
 import { cn } from "@/lib/cn";
+import type { SanityArticle } from "@/lib/sanity/queries";
 
 const ease = [0.19, 1, 0.22, 1] as const;
 
@@ -17,12 +18,31 @@ function formatDate(iso: string): string {
   return d.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
 }
 
-export function JournalGridSection() {
-  const [activeTab, setActiveTab] = useState<TabId>("all");
+const CATEGORY_LABELS: Record<string, string> = {
+  guide: "Гид",
+  care: "Уход",
+  price: "Цена",
+  lifestyle: "Лайфстайл",
+};
+
+export function JournalGridSection({ articles }: { articles: SanityArticle[] }) {
+  const [activeTab, setActiveTab] = useState<TabId>(ARTICLE_CATEGORY_ALL);
 
   const filtered = useMemo(
-    () => (activeTab === "all" ? ARTICLES : ARTICLES.filter((a) => a.category === activeTab)),
-    [activeTab],
+    () =>
+      activeTab === ARTICLE_CATEGORY_ALL
+        ? articles
+        : articles.filter((a) => a.category === activeTab),
+    [activeTab, articles],
+  );
+
+  const counts = useMemo(
+    () =>
+      ARTICLE_TAB_DEFS.reduce<Record<string, number>>((acc, tab) => {
+        acc[tab.id] = articles.filter((a) => a.category === tab.id).length;
+        return acc;
+      }, {}),
+    [articles],
   );
 
   return (
@@ -38,24 +58,24 @@ export function JournalGridSection() {
       >
         <button
           role="tab"
-          aria-selected={activeTab === "all"}
-          onClick={() => setActiveTab("all")}
+          aria-selected={activeTab === ARTICLE_CATEGORY_ALL}
+          onClick={() => setActiveTab(ARTICLE_CATEGORY_ALL)}
           className={cn(
             "flex items-center gap-1.5 px-4 py-3 md:py-2",
             "font-mono text-[13px] uppercase tracking-[0.12em]",
             "border transition-[background-color,border-color,color] duration-base",
-            activeTab === "all"
+            activeTab === ARTICLE_CATEGORY_ALL
               ? "border-accent bg-accent text-accent-fg"
               : "border-border-strong bg-transparent text-fg-muted hover:border-fg-muted/40 hover:text-fg-primary",
           )}
         >
           Все{" "}
           <span aria-hidden="true" className="opacity-70">
-            {ARTICLES.length}
+            {articles.length}
           </span>
         </button>
 
-        {ARTICLE_TABS.map((tab) => (
+        {ARTICLE_TAB_DEFS.map((tab) => (
           <button
             key={tab.id}
             role="tab"
@@ -72,7 +92,7 @@ export function JournalGridSection() {
           >
             {tab.label}{" "}
             <span aria-hidden="true" className="opacity-70">
-              {tab.count}
+              {counts[tab.id] ?? 0}
             </span>
           </button>
         ))}
@@ -80,20 +100,18 @@ export function JournalGridSection() {
 
       {/* Featured first two + grid of rest */}
       <div>
-        {/* Top row — 2 featured cards */}
         {filtered.length > 0 && (
           <div className="mb-8 grid gap-6 md:grid-cols-2">
             {filtered.slice(0, 2).map((article, i) => (
-              <ArticleCardLarge key={article.slug} article={article} index={i} />
+              <ArticleCardLarge key={article._id} article={article} index={i} />
             ))}
           </div>
         )}
 
-        {/* Remaining — 4-col grid */}
         {filtered.length > 2 && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {filtered.slice(2).map((article, i) => (
-              <ArticleCardSmall key={article.slug} article={article} index={i + 2} />
+              <ArticleCardSmall key={article._id} article={article} index={i + 2} />
             ))}
           </div>
         )}
@@ -109,11 +127,12 @@ export function JournalGridSection() {
 }
 
 type ArticleCardProps = {
-  article: (typeof ARTICLES)[number];
+  article: SanityArticle;
   index: number;
 };
 
 function ArticleCardLarge({ article, index }: ArticleCardProps) {
+  const categoryLabel = CATEGORY_LABELS[article.category] ?? article.category;
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -122,32 +141,30 @@ function ArticleCardLarge({ article, index }: ArticleCardProps) {
       transition={{ duration: 0.6, ease, delay: index * 0.05 }}
     >
       <NextLink
-        href={`/journal/${article.slug}`}
+        href={`/journal/${article.slug.current}`}
         className="group block border border-border-strong transition-[border-color] duration-base hover:border-accent"
       >
-        {/* Cover placeholder */}
         <div className="aspect-[16/9] overflow-hidden bg-bg-secondary">
           <div className="flex h-full items-center justify-center transition-transform duration-500 group-hover:scale-[1.03]">
             <span
               className="select-none font-display font-normal leading-none text-fg-muted/10"
               style={{ fontSize: "clamp(3rem, 8vw, 6rem)" }}
             >
-              {article.categoryLabel[0]}
+              {categoryLabel[0]}
             </span>
           </div>
         </div>
 
-        {/* Info */}
         <div className="p-6">
           <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
-            {article.categoryLabel}
+            {categoryLabel}
           </p>
           <h2 className="mb-3 font-display font-normal text-[1.25rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
             {article.title}
           </h2>
           <p className="mb-4 line-clamp-2 font-sans text-body text-fg-muted">{article.excerpt}</p>
           <p className="font-mono text-[11px] text-fg-muted">
-            {formatDate(article.date)} · {article.readMinutes} мин
+            {formatDate(article.publishedAt)} · {article.readMinutes} мин
           </p>
         </div>
       </NextLink>
@@ -156,6 +173,7 @@ function ArticleCardLarge({ article, index }: ArticleCardProps) {
 }
 
 function ArticleCardSmall({ article, index }: ArticleCardProps) {
+  const categoryLabel = CATEGORY_LABELS[article.category] ?? article.category;
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -164,31 +182,29 @@ function ArticleCardSmall({ article, index }: ArticleCardProps) {
       transition={{ duration: 0.5, ease, delay: (index % 4) * 0.05 }}
     >
       <NextLink
-        href={`/journal/${article.slug}`}
+        href={`/journal/${article.slug.current}`}
         className="group block border border-border-strong transition-[border-color] duration-base hover:border-accent"
       >
-        {/* Cover placeholder */}
         <div className="aspect-[16/9] overflow-hidden bg-bg-secondary">
           <div className="flex h-full items-center justify-center transition-transform duration-500 group-hover:scale-[1.03]">
             <span
               className="select-none font-display font-normal leading-none text-fg-muted/10"
               style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}
             >
-              {article.categoryLabel[0]}
+              {categoryLabel[0]}
             </span>
           </div>
         </div>
 
-        {/* Info */}
         <div className="p-4">
           <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-muted">
-            {article.categoryLabel}
+            {categoryLabel}
           </p>
           <h2 className="mb-2 font-display font-normal text-[1rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
             {article.title}
           </h2>
           <p className="font-mono text-[10px] text-fg-muted">
-            {formatDate(article.date)} · {article.readMinutes} мин
+            {formatDate(article.publishedAt)} · {article.readMinutes} мин
           </p>
         </div>
       </NextLink>

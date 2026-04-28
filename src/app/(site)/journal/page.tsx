@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { CharReveal } from "@/components/motion/CharReveal";
 import { JournalGridSection } from "@/components/sections/JournalGridSection";
 import { ARTICLES } from "@/data/articles";
+import type { SanityArticle } from "@/lib/sanity/queries";
 import { breadcrumbJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +26,17 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
+
+// TODO(Task 4): replace with getAllArticles() from Sanity
+const staticArticles: SanityArticle[] = ARTICLES.map((a) => ({
+  _id: a.slug,
+  title: a.title,
+  slug: { current: a.slug },
+  excerpt: a.excerpt,
+  category: a.category,
+  publishedAt: a.date,
+  readMinutes: a.readMinutes,
+}));
 
 export default function JournalPage() {
   const jsonLd = [
@@ -69,7 +81,7 @@ export default function JournalPage() {
         {/* Grid */}
         <section className="bg-bg-primary py-16 md:py-24">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
-            <JournalGridSection />
+            <JournalGridSection articles={staticArticles} />
           </div>
         </section>
       </main>
