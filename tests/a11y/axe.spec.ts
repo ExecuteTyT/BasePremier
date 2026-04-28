@@ -54,7 +54,7 @@ test("/contacts — zero axe violations (excluding Yandex Maps iframe)", async (
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
     // Yandex Maps widget iframe contains inaccessible map tile images and
     // icon-only links that we cannot fix. Exclude the iframe subtree.
-    .exclude("iframe")
+    .exclude('iframe[src*="yandex"], iframe[src*="maps.yandex"]')
     .analyze();
 
   if (results.violations.length > 0) {
@@ -74,7 +74,9 @@ test("homepage — no critical or serious violations at minimum", async ({ page 
   await page.goto("/");
   await page.waitForLoadState("networkidle");
 
-  const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+    .analyze();
 
   const criticalOrSerious = results.violations.filter((v) =>
     ["critical", "serious"].includes(v.impact ?? ""),
