@@ -48,7 +48,7 @@ export function PricingTeaserSection() {
               className={cn(
                 "inline-flex items-center justify-center",
                 "border border-border-strong bg-transparent",
-                "px-5 py-2 font-sans text-sm font-medium tracking-tight text-fg-primary",
+                "px-5 py-3 font-sans text-sm font-medium tracking-tight text-fg-primary",
                 "transition-[background-color,border-color,color] duration-base",
                 "hover:border-accent hover:bg-accent hover:text-accent-fg",
                 "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary",

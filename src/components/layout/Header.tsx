@@ -59,7 +59,7 @@ export function Header() {
         className="flex w-full items-center justify-between px-4 md:px-8"
         aria-label="Главная навигация"
       >
-        <Logo href="/" size="sm" />
+        <Logo href="/" size="sm" className="py-2.5" />
 
         {/* Desktop nav — hidden on mobile */}
         <ul className="hidden items-center gap-6 md:flex" role="list">

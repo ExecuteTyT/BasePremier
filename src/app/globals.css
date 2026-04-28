@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
 
+/* Prevent off-screen mobile menu drawer from creating horizontal scroll */
+body {
+  overflow-x: clip;
+}
+
 /* Optical sizing for Fraunces variable axes (BRAND.md §2.6) */
 .text-display-xl,
 .text-display-lg,

@@ -95,7 +95,7 @@ export function Logo({ size = "md", variant = "mark", href, className }: Props) 
         onClick={handleClick}
         aria-label={`${label} — на главную`}
         className={cn(
-          "inline-block text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary",
+          "inline-flex items-center text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary",
           className,
         )}
       >

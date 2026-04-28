@@ -197,7 +197,7 @@ export function ReviewsSection() {
                   aria-selected={i === index}
                   aria-label={`Отзыв ${i + 1}`}
                   onClick={() => goTo(i, i > index ? 1 : -1)}
-                  className="flex h-6 w-6 items-center justify-center"
+                  className="flex h-11 w-11 items-center justify-center"
                 >
                   <span
                     className={cn(
@@ -218,7 +218,7 @@ export function ReviewsSection() {
                 aria-label={`Отзыв ${i + 1}`}
                 aria-current={i === index}
                 onClick={() => goTo(i, i > index ? 1 : -1)}
-                className="flex h-6 w-6 items-center justify-center"
+                className="flex h-11 w-11 items-center justify-center"
               >
                 <span
                   className={cn(

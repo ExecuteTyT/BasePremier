@@ -3,44 +3,34 @@
 import NextLink from "next/link";
 import { startTransition, useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 
+const STORAGE_KEY = "bp:cookies";
+
 export function CookieBanner({ className }: { className?: string }) {
-  const [accepted, setAccepted] = useState(true);
-  const [visible, setVisible] = useState(false);
+  const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("bp:cookies");
-    if (stored === "true") return;
-
-    startTransition(() => setAccepted(false));
-
+    if (localStorage.getItem(STORAGE_KEY)) return;
     const timer = setTimeout(() => {
-      setVisible(true);
+      startTransition(() => setShown(true));
     }, 1500);
-
     return () => clearTimeout(timer);
   }, []);
 
-  const handleAccept = () => {
-    localStorage.setItem("bp:cookies", "true");
-    setAccepted(true);
+  const dismiss = (analytics: boolean) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ analytics, ts: Date.now() }));
+    setShown(false);
   };
-
-  const handleDecline = () => {
-    setAccepted(true);
-  };
-
-  const shown = !accepted && visible;
 
   return (
     <div
-      aria-hidden={!shown}
+      role="dialog"
       aria-label="Уведомление о cookie"
+      aria-hidden={!shown}
       className={cn(
         "fixed inset-x-0 bottom-0 z-50",
-        "border-t border-border-default bg-bg-primary",
+        "border-t border-border-default bg-bg-secondary",
         "px-4 py-4 md:px-8 md:py-5",
         "transition-transform duration-slow ease-[var(--ease-out-expo)]",
         shown ? "translate-y-0" : "translate-y-full",
@@ -48,24 +38,43 @@ export function CookieBanner({ className }: { className?: string }) {
       )}
     >
       <div className="mx-auto flex max-w-screen-xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <p className="text-body-sm text-fg-muted">
-          Мы используем cookie для аналитики и улучшения сайта. Продолжая пользоваться сайтом, вы
-          соглашаетесь с нашей{" "}
+        <p className="font-sans text-body-sm text-fg-muted">
+          Мы используем cookie для аналитики и улучшения сервиса. Подробнее —{" "}
           <NextLink
             href="/privacy"
-            className="text-fg-primary underline underline-offset-2 transition-colors duration-base hover:text-fg-muted"
+            className="text-fg-primary underline underline-offset-2 transition-opacity duration-base hover:opacity-70"
           >
-            Политикой конфиденциальности
+            Политика конфиденциальности
           </NextLink>
           .
         </p>
+
         <div className="flex flex-shrink-0 items-center gap-3">
-          <Button variant="ghost" size="sm" tabIndex={shown ? 0 : -1} onClick={handleDecline}>
-            Отклонить
-          </Button>
-          <Button variant="primary" size="sm" tabIndex={shown ? 0 : -1} onClick={handleAccept}>
-            Принять
-          </Button>
+          <button
+            tabIndex={shown ? 0 : -1}
+            onClick={() => dismiss(false)}
+            className={cn(
+              "min-h-[44px] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.12em]",
+              "border border-border-strong text-fg-muted",
+              "transition-[border-color,color] duration-base",
+              "hover:border-fg-muted/50 hover:text-fg-primary",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-primary",
+            )}
+          >
+            Только необходимые
+          </button>
+          <button
+            tabIndex={shown ? 0 : -1}
+            onClick={() => dismiss(true)}
+            className={cn(
+              "min-h-[44px] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.12em]",
+              "bg-accent text-accent-fg",
+              "transition-opacity duration-base hover:opacity-90",
+              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-primary",
+            )}
+          >
+            Принять все
+          </button>
         </div>
       </div>
     </div>

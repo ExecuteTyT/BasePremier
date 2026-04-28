@@ -19,7 +19,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Brand */}
           <div>
-            <Logo variant="wordmark" size="sm" href="/" />
+            <Logo variant="wordmark" size="sm" href="/" className="py-2.5" />
             <p className="mt-4 max-w-xs text-body-sm text-fg-muted">
               Стиль, атмосфера, мастерство — больше, чем просто барбершоп
             </p>
@@ -27,12 +27,12 @@ export function Footer() {
 
           {/* Navigation */}
           <nav aria-label="Навигация по сайту">
-            <ul className="flex flex-col gap-3" role="list">
+            <ul className="flex flex-col gap-1" role="list">
               {NAV_ITEMS.map(({ href, label }) => (
                 <li key={href}>
                   <NextLink
                     href={href}
-                    className="text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                    className="inline-block py-3 text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
                   >
                     {label}
                   </NextLink>
@@ -50,7 +50,7 @@ export function Footer() {
             <p className="text-body-sm text-fg-muted">Ежедневно 10:00–21:00</p>
             <a
               href="tel:+79179183877"
-              className="font-mono text-body-sm text-fg-primary transition-colors duration-base hover:text-fg-muted"
+              className="inline-flex min-h-[44px] items-center font-mono text-body-sm text-fg-primary transition-colors duration-base hover:text-fg-muted"
             >
               +7 (917) 918-38-77
             </a>
@@ -60,7 +60,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                className="-m-2.5 inline-flex h-11 w-11 items-center justify-center text-fg-muted transition-colors duration-base hover:text-fg-primary"
               >
                 <IconWhatsApp />
               </a>
@@ -69,7 +69,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Telegram"
-                className="text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                className="-m-2.5 inline-flex h-11 w-11 items-center justify-center text-fg-muted transition-colors duration-base hover:text-fg-primary"
               >
                 <IconTelegram />
               </a>
@@ -78,9 +78,17 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col gap-2 border-t border-border-default pt-6 text-body-sm text-fg-muted md:flex-row md:items-center md:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-border-default pt-6 text-body-sm text-fg-muted md:flex-row md:items-center md:justify-between">
           <span className="font-mono">© 2022–{YEAR} BASE Premier</span>
-          <span>ИП Шайхутдинов Айрат Рафаэлевич · ИНН 163207031442</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>ИП Шайхутдинов Айрат Рафаэлевич · ИНН 163207031442</span>
+            <NextLink
+              href="/privacy"
+              className="transition-colors duration-base hover:text-fg-primary"
+            >
+              Политика конфиденциальности
+            </NextLink>
+          </div>
         </div>
       </div>
     </footer>

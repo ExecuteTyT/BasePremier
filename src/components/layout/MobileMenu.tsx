@@ -68,50 +68,59 @@ export function MobileMenu({ navItems, phone }: Props) {
         />
       </button>
 
-      {/* Backdrop */}
+      {/* Fixed overlay — clips off-screen drawer so it doesn't add to document scrollWidth */}
       <div
-        aria-hidden="true"
-        onClick={() => setOpen(false)}
+        aria-hidden={!open}
         className={cn(
-          "fixed inset-0 z-40 bg-bg-primary/70 backdrop-blur-sm",
-          "transition-opacity duration-slow",
-          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-        )}
-      />
-
-      {/* Drawer */}
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Мобильное меню"
-        className={cn(
-          "fixed inset-y-0 right-0 z-50 flex w-72 flex-col bg-bg-secondary px-6 py-6",
-          "transition-transform duration-slow ease-[var(--ease-out-expo)]",
-          open ? "translate-x-0" : "translate-x-full",
+          "fixed inset-0 z-40 overflow-hidden",
+          open ? "pointer-events-auto" : "pointer-events-none",
         )}
       >
-        <nav aria-label="Мобильная навигация" className="mt-12 flex flex-col">
-          {navItems.map(({ href, label }) => (
-            <NextLink
-              key={href}
-              href={href}
-              className="border-b border-border-default py-4 font-sans text-h4 text-fg-primary transition-colors duration-base hover:text-fg-muted"
-            >
-              {label}
-            </NextLink>
-          ))}
-        </nav>
+        {/* Backdrop */}
+        <div
+          aria-hidden="true"
+          onClick={() => setOpen(false)}
+          className={cn(
+            "absolute inset-0 bg-bg-primary/70 backdrop-blur-sm",
+            "transition-opacity duration-slow",
+            open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+          )}
+        />
 
-        <div className="mt-auto space-y-4 pb-4">
-          <a
-            href={phone.href}
-            className="block py-1.5 font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
-          >
-            {phone.display}
-          </a>
-          <Button variant="primary" size="md" className="w-full">
-            Записаться
-          </Button>
+        {/* Drawer */}
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Мобильное меню"
+          className={cn(
+            "absolute inset-y-0 right-0 z-10 flex w-72 flex-col bg-bg-secondary px-6 py-6",
+            "transition-transform duration-slow ease-[var(--ease-out-expo)]",
+            open ? "translate-x-0" : "translate-x-full",
+          )}
+        >
+          <nav aria-label="Мобильная навигация" className="mt-12 flex flex-col">
+            {navItems.map(({ href, label }) => (
+              <NextLink
+                key={href}
+                href={href}
+                className="border-b border-border-default py-4 font-sans text-h4 text-fg-primary transition-colors duration-base hover:text-fg-muted"
+              >
+                {label}
+              </NextLink>
+            ))}
+          </nav>
+
+          <div className="mt-auto space-y-4 pb-4">
+            <a
+              href={phone.href}
+              className="flex min-h-[44px] items-center font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
+            >
+              {phone.display}
+            </a>
+            <Button variant="primary" size="md" className="w-full">
+              Записаться
+            </Button>
+          </div>
         </div>
       </div>
     </>
