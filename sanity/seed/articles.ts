@@ -22,58 +22,95 @@ type PTBlock = {
   markDefs: never[];
 };
 
-function uid(): string {
-  return Math.random().toString(36).slice(2, 14);
+/**
+ * Parses inline **bold** and *italic* markers in a text string.
+ * Matches ** before * to avoid partial matches on bold spans.
+ * Keys are deterministic: `${keyPrefix}-s0`, `${keyPrefix}-s1`, …
+ */
+function parseInlineMarks(text: string, keyPrefix: string): PTSpan[] {
+  const children: PTSpan[] = [];
+  const regex = /(\*\*([^*]+)\*\*|\*([^*]+)\*)/g;
+  let lastIndex = 0;
+  let spanIdx = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      children.push({
+        _type: "span",
+        _key: `${keyPrefix}-s${spanIdx++}`,
+        text: text.slice(lastIndex, match.index),
+        marks: [],
+      });
+    }
+    if (match[2] !== undefined) {
+      // **bold**
+      children.push({
+        _type: "span",
+        _key: `${keyPrefix}-s${spanIdx++}`,
+        text: match[2],
+        marks: ["strong"],
+      });
+    } else if (match[3] !== undefined) {
+      // *italic*
+      children.push({
+        _type: "span",
+        _key: `${keyPrefix}-s${spanIdx++}`,
+        text: match[3],
+        marks: ["em"],
+      });
+    }
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    children.push({
+      _type: "span",
+      _key: `${keyPrefix}-s${spanIdx++}`,
+      text: text.slice(lastIndex),
+      marks: [],
+    });
+  }
+
+  if (children.length === 0) {
+    children.push({ _type: "span", _key: `${keyPrefix}-s0`, text, marks: [] });
+  }
+
+  return children;
 }
 
 /**
  * Converts the static markdown-ish article content to Sanity Portable Text.
- * Format: paragraphs separated by \n\n, inline **bold** markers.
+ * Format: paragraphs separated by \n\n, inline **bold** and *italic* markers.
+ * Standalone **heading** paragraphs are promoted to h3 blocks.
+ * All _key values are deterministic (slug + position).
  */
-function mdToPortableText(markdown: string): PTBlock[] {
+function mdToPortableText(markdown: string, articleSlug: string): PTBlock[] {
   return markdown
     .split("\n\n")
     .filter((p) => p.trim().length > 0)
-    .map((para) => {
-      const children: PTSpan[] = [];
-      const regex = /\*\*([^*]+)\*\*/g;
-      let lastIndex = 0;
-      let match: RegExpExecArray | null;
+    .map((para, pIdx) => {
+      const blockKey = `${articleSlug}-b${pIdx}`;
 
-      while ((match = regex.exec(para)) !== null) {
-        if (match.index > lastIndex) {
-          children.push({
-            _type: "span",
-            _key: uid(),
-            text: para.slice(lastIndex, match.index),
-            marks: [],
-          });
-        }
-        children.push({
-          _type: "span",
-          _key: uid(),
-          text: match[1],
-          marks: ["strong"],
-        });
-        lastIndex = match.index + match[0].length;
+      // Detect standalone **heading** paragraph → h3 block
+      const headingMatch = para.trim().match(/^\*\*([^*]+)\*\*$/);
+      if (headingMatch) {
+        const headingText: string = headingMatch[1] ?? "";
+        return {
+          _type: "block" as const,
+          _key: blockKey,
+          style: "h3",
+          children: [
+            { _type: "span", _key: `${blockKey}-s0`, text: headingText, marks: [] as string[] },
+          ],
+          markDefs: [] as never[],
+        };
       }
 
-      if (lastIndex < para.length) {
-        children.push({
-          _type: "span",
-          _key: uid(),
-          text: para.slice(lastIndex),
-          marks: [],
-        });
-      }
-
-      if (children.length === 0) {
-        children.push({ _type: "span", _key: uid(), text: para, marks: [] });
-      }
-
+      const children = parseInlineMarks(para, blockKey);
       return {
         _type: "block" as const,
-        _key: uid(),
+        _key: blockKey,
         style: "normal",
         children,
         markDefs: [] as never[],
@@ -107,7 +144,7 @@ async function main() {
       slug: { _type: "slug", current: article.slug },
       excerpt: article.excerpt,
       category: article.category,
-      content: mdToPortableText(article.content),
+      content: mdToPortableText(article.content, article.slug),
       publishedAt: new Date(article.date).toISOString(),
       readMinutes: article.readMinutes,
     };
