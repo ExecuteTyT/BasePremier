@@ -4,20 +4,24 @@ import { motion, useReducedMotion } from "framer-motion";
 import NextLink from "next/link";
 import { ComponentType, Suspense, useEffect, useState } from "react";
 
-import { CharReveal } from "@/components/motion/CharReveal";
 import { ScrollIndicator } from "@/components/sections/Hero/ScrollIndicator";
 import { HeroVideo } from "@/components/ui/HeroVideo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { cn } from "@/lib/cn";
 
-const ease = [0.19, 1, 0.22, 1] as const;
+const EASE = "cubic-bezier(0.19,1,0.22,1)";
+
+function slideUp(duration: number, delay: number) {
+  return `hero-slide-up ${duration}s ${EASE} ${delay}s both`;
+}
 
 export function HeroSection() {
   const reduced = useReducedMotion();
   const [MonogramBP, setMonogramBP] = useState<ComponentType<{ className?: string }> | null>(null);
 
-  // Import Three.js chunk only after LCP — prevents preload of 575KB bundle
+  // Import Three.js only on desktop (md+) — monogram is hidden on mobile anyway
   useEffect(() => {
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
     const t = setTimeout(() => {
       import("@/components/three/MonogramBP").then((m) => setMonogramBP(() => m.MonogramBP));
     }, 800);
@@ -66,59 +70,51 @@ export function HeroSection() {
           {/* Left: text */}
           <div className="flex max-w-2xl flex-col gap-6">
             {/* Eyebrow */}
-            <motion.p
+            <p
               className="font-mono text-caption uppercase tracking-overline text-fg-muted"
-              initial={{ y: 8 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.6, ease, delay: 0.1 }}
+              style={{ animation: slideUp(0.6, 0.1) }}
             >
               Казань · Шаляпина 26
-            </motion.p>
+            </p>
 
-            {/* H1 */}
-            <CharReveal
-              as="h1"
+            {/* H1 — plain element so LCP fires at SSR paint, not after GSAP reveal */}
+            <h1
               className="font-display text-display-xl leading-none text-fg-primary"
+              style={{ animation: slideUp(1.0, 0) }}
             >
               Барбершоп BASE Premier
-            </CharReveal>
+            </h1>
 
             {/* Divider line */}
-            <motion.div
+            <div
               className="h-px bg-fg-muted/30"
-              initial={{ scaleX: 0, originX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, ease, delay: 0.35 }}
-              style={{ transformOrigin: "left" }}
+              style={{
+                transformOrigin: "left",
+                animation: `hero-scale-x 0.8s ${EASE} 0.35s both`,
+              }}
             />
 
             {/* Epithet */}
-            <motion.p
+            <p
               className="font-mono text-overline uppercase tracking-overline text-fg-muted"
-              initial={{ y: 8 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.7, ease, delay: 0.5 }}
+              style={{ animation: slideUp(0.7, 0.5) }}
             >
               Дорого&nbsp;·&nbsp;Премиально&nbsp;·&nbsp;С&nbsp;собственным&nbsp;шармом
-            </motion.p>
+            </p>
 
-            {/* Body */}
-            <motion.p
+            {/* Body — LCP element, no animation delay on opacity */}
+            <p
               className="max-w-lg font-sans text-body text-fg-muted"
-              initial={{ y: 8 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.7, ease, delay: 0.65 }}
+              style={{ animation: slideUp(0.7, 0.65) }}
             >
               Уникальный интерьер, профессиональные барберы, высокие стандарты — всё для того, чтобы
               вы чувствовали себя на высоте.
-            </motion.p>
+            </p>
 
             {/* CTA row */}
-            <motion.div
+            <div
               className="flex flex-wrap items-center gap-4"
-              initial={{ y: 8 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.7, ease, delay: 0.8 }}
+              style={{ animation: slideUp(0.7, 0.8) }}
             >
               <MagneticButton variant="primary" size="md">
                 Записаться
@@ -134,17 +130,15 @@ export function HeroSection() {
               >
                 Услуги
               </NextLink>
-            </motion.div>
+            </div>
 
             {/* Caption stats */}
-            <motion.p
+            <p
               className="font-mono text-caption text-fg-muted"
-              initial={{ y: 4 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.6, ease, delay: 1.0 }}
+              style={{ animation: slideUp(0.6, 1.0) }}
             >
               от&nbsp;1&nbsp;800&nbsp;₽&nbsp;·&nbsp;★&nbsp;5,0&nbsp;·&nbsp;394&nbsp;отзыва
-            </motion.p>
+            </p>
           </div>
 
           {/* Right: 3D Monogram (desktop only) — delayed to unblock LCP */}
@@ -154,7 +148,7 @@ export function HeroSection() {
             animate={
               reduced ? {} : MonogramBP ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }
             }
-            transition={{ duration: 0.9, ease, delay: 0 }}
+            transition={{ duration: 0.9, ease: [0.19, 1, 0.22, 1], delay: 0 }}
           >
             {MonogramBP ? (
               <Suspense fallback={<MonogramFallback />}>

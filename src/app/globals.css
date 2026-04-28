@@ -39,10 +39,39 @@
   }
 }
 
+/* Hero entrance animations */
+@keyframes hero-slide-up {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-scale-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 /* Hide native cursor when custom cursor is active */
 html.custom-cursor,
 html.custom-cursor * {
   cursor: none !important;
+}
+
+/* Page entry transition (used by template.tsx) */
+@keyframes pageEnter {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 /* prefers-reduced-motion: disable all transitions and animations */

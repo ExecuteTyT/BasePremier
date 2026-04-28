@@ -38,8 +38,15 @@ export function HeroVideo({ src, poster, mobilePoster, className }: Props) {
   return (
     <div className={cn("relative overflow-hidden", className)} aria-hidden="true">
       {/* Poster shown immediately and on mobile (video src never set on coarse pointer) */}
-      <Image src={mobilePoster ?? poster} alt="" fill priority className="object-cover" />
-      {/* Video element — src injected lazily on desktop via requestIdleCallback */}
+      <Image
+        src={mobilePoster ?? poster}
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        className="object-cover"
+      />
+      {/* Video element — hidden on touch/mobile, src injected lazily on desktop */}
       <video
         ref={videoRef}
         autoPlay
@@ -48,7 +55,7 @@ export function HeroVideo({ src, poster, mobilePoster, className }: Props) {
         playsInline
         poster={poster}
         preload="none"
-        className="absolute inset-0 h-full w-full object-cover"
+        className="hidden md:block absolute inset-0 h-full w-full object-cover"
       />
     </div>
   );
