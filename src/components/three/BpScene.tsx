@@ -203,7 +203,7 @@ function Particles({
   reduced: boolean | null;
 }) {
   const mesh = useRef<THREE.InstancedMesh>(null!);
-  const orbits = PARTICLE_ORBITS.slice(0, count);
+  const orbits = useMemo(() => PARTICLE_ORBITS.slice(0, Math.min(count, PARTICLE_COUNT)), [count]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -220,7 +220,7 @@ function Particles({
       dummy.updateMatrix();
       mesh.current.setMatrixAt(i, dummy.matrix);
     }
-    mesh.current.instanceMatrix.needsUpdate = true;
+    mesh.current.instanceMatrix.needsUpdate = !reduced;
   });
 
   return (
