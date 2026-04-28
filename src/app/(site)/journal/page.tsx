@@ -47,7 +47,7 @@ export default function JournalPage() {
 
       <main id="main">
         {/* Hero */}
-        <section className="bg-bg-primary pb-0 pt-40 md:pt-48">
+        <section className="bg-bg-primary pb-0 pt-28 md:pt-40">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
             <p className="mb-6 font-mono text-[13px] uppercase tracking-[0.2em] text-fg-muted">
               {ARTICLES.length} статей · Гайды, разборы, мнения

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <!-- Base gradient: slightly lighter at top-left -->
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#131316"/>
+      <stop offset="100%" stop-color="#0A0A0B"/>
+    </linearGradient>
+
+    <!-- Navy accent glow — right half, where 3D monogram lives on desktop -->
+    <radialGradient id="navy" cx="72%" cy="38%" r="52%">
+      <stop offset="0%" stop-color="#1B2A4E" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#1B2A4E" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Subtle warm glow top-center (depth) -->
+    <radialGradient id="warm" cx="30%" cy="0%" r="55%">
+      <stop offset="0%" stop-color="#2a2420" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0A0A0B" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Bottom vignette -->
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="60%" stop-color="#0A0A0B" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0A0A0B" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#base)"/>
+
+  <!-- Navy glow (right side — desktop 3D zone) -->
+  <rect width="1920" height="1080" fill="url(#navy)"/>
+
+  <!-- Warm top-left glow (depth behind text zone) -->
+  <rect width="1920" height="1080" fill="url(#warm)"/>
+
+  <!-- Bottom vignette -->
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+
+  <!-- Faint BP letterform (bottom-right, decorative) -->
+  <text
+    x="1060" y="1100"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="760"
+    font-weight="bold"
+    fill="#F5F5F2"
+    fill-opacity="0.025"
+    letter-spacing="-24"
+  >BP</text>
+
+  <!-- Thin horizontal accent line (left margin, mid-height) -->
+  <line x1="80" y1="542" x2="220" y2="542" stroke="#F5F5F2" stroke-opacity="0.07" stroke-width="1"/>
+</svg>

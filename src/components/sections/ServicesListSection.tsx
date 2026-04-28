@@ -151,7 +151,7 @@ export function ServicesListSection() {
             aria-selected={activeTab === tab.id && !query}
             onClick={() => handleTabChange(tab.id)}
             className={cn(
-              "px-4 py-2 font-mono text-[13px] uppercase tracking-[0.12em]",
+              "px-4 py-3 font-mono text-[13px] uppercase tracking-[0.12em] md:py-2",
               "border transition-[background-color,border-color,color] duration-base",
               activeTab === tab.id && !query
                 ? "border-accent bg-accent text-accent-fg"

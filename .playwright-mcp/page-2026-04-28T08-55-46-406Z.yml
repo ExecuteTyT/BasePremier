@@ -1,0 +1,459 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation "Главная навигация" [ref=e3]:
+      - link "BASE Premier — на главную" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]:
+          - generic [ref=e6]: BP
+      - list [ref=e7]:
+        - listitem [ref=e8]:
+          - link "Услуги" [ref=e9] [cursor=pointer]:
+            - /url: /services
+        - listitem [ref=e10]:
+          - link "Мастера" [ref=e11] [cursor=pointer]:
+            - /url: /barbers
+        - listitem [ref=e12]:
+          - link "О нас" [ref=e13] [cursor=pointer]:
+            - /url: /about
+        - listitem [ref=e14]:
+          - link "Журнал" [ref=e15] [cursor=pointer]:
+            - /url: /journal
+        - listitem [ref=e16]:
+          - link "Контакты" [ref=e17] [cursor=pointer]:
+            - /url: /contacts
+      - generic [ref=e18]:
+        - link "+7 (917) 918-38-77" [ref=e19] [cursor=pointer]:
+          - /url: tel:+79179183877
+        - button "Включить звук" [ref=e20]:
+          - img [ref=e21]
+        - button "Записаться" [ref=e27]
+        - generic [ref=e28]:
+          - button "Открыть меню" [ref=e29]
+          - dialog "Мобильное меню" [ref=e30]:
+            - navigation "Мобильная навигация" [ref=e31]:
+              - link "Услуги" [ref=e32] [cursor=pointer]:
+                - /url: /services
+              - link "Мастера" [ref=e33] [cursor=pointer]:
+                - /url: /barbers
+              - link "О нас" [ref=e34] [cursor=pointer]:
+                - /url: /about
+              - link "Журнал" [ref=e35] [cursor=pointer]:
+                - /url: /journal
+              - link "Контакты" [ref=e36] [cursor=pointer]:
+                - /url: /contacts
+            - generic [ref=e37]:
+              - link "+7 (917) 918-38-77" [ref=e38] [cursor=pointer]:
+                - /url: tel:+79179183877
+              - button "Записаться" [ref=e39]
+  - main [ref=e40]:
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e45]: BP
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - paragraph [ref=e49]: Казань · Шаляпина 26
+            - heading "Барбершоп BASE Premier" [level=1] [ref=e50]
+            - paragraph [ref=e51]: Дорого · Премиально · С собственным шармом
+            - paragraph [ref=e52]: Уникальный интерьер, профессиональные барберы, высокие стандарты — всё для того, чтобы вы чувствовали себя на высоте.
+            - generic [ref=e53]:
+              - button "Записаться" [ref=e55]
+              - link "Услуги" [ref=e56] [cursor=pointer]:
+                - /url: /services
+            - paragraph [ref=e57]: от 1 800 ₽ · ★ 5,0 · 394 отзыва
+          - generic:
+            - generic: BP
+        - generic [ref=e59]: scroll
+      - generic [ref=e61]:
+        - paragraph [ref=e62]: МЫ ДЕЛАЕМ ТРИ ВЕЩИ
+        - generic [ref=e63]:
+          - paragraph [ref=e64]:
+            - generic [ref=e65]:
+              - generic [ref=e66]: С
+              - generic [ref=e67]: т
+              - generic [ref=e68]: р
+              - generic [ref=e69]: и
+              - generic [ref=e70]: ж
+              - generic [ref=e71]: ё
+              - generic [ref=e72]: м
+              - generic [ref=e73]: .
+          - paragraph [ref=e74]:
+            - generic [ref=e75]:
+              - generic [ref=e76]: У
+              - generic [ref=e77]: х
+              - generic [ref=e78]: а
+              - generic [ref=e79]: ж
+              - generic [ref=e80]: и
+              - generic [ref=e81]: в
+              - generic [ref=e82]: а
+              - generic [ref=e83]: е
+              - generic [ref=e84]: м
+              - generic [ref=e85]: .
+          - paragraph [ref=e86]:
+            - generic [ref=e87]:
+              - generic [ref=e88]: З
+              - generic [ref=e89]: а
+              - generic [ref=e90]: б
+              - generic [ref=e91]: о
+              - generic [ref=e92]: т
+              - generic [ref=e93]: и
+              - generic [ref=e94]: м
+              - generic [ref=e95]: с
+              - generic [ref=e96]: я
+              - generic [ref=e97]: .
+        - paragraph [ref=e98]: И ничего больше.
+        - link "Манифест и история →" [ref=e100] [cursor=pointer]:
+          - /url: /about
+      - generic [ref=e102]:
+        - generic [ref=e103]:
+          - heading "Услуги" [level=2] [ref=e104]:
+            - generic [ref=e105]:
+              - generic [ref=e106]: У
+              - generic [ref=e107]: с
+              - generic [ref=e108]: л
+              - generic [ref=e109]: у
+              - generic [ref=e110]: г
+              - generic [ref=e111]: и
+          - link "Все услуги →" [ref=e113] [cursor=pointer]:
+            - /url: /services
+        - generic [ref=e114]:
+          - link "01 Парикмахерский зал Стрижки, моделирование бороды, окантовка и детокс кожи головы — 18 услуг от 600 ₽" [ref=e116] [cursor=pointer]:
+            - /url: /services
+            - generic [ref=e117]:
+              - text: "01"
+              - generic [ref=e118]:
+                - heading "Парикмахерский зал" [level=3] [ref=e119]
+                - paragraph [ref=e120]: Стрижки, моделирование бороды, окантовка и детокс кожи головы — 18 услуг
+            - generic [ref=e121]: от 600 ₽→
+          - link "02 Бритьё Гладкое бритьё лица или бритьё головы опасной бритвой с горячим компрессом от 1 800 ₽" [ref=e123] [cursor=pointer]:
+            - /url: /services
+            - generic [ref=e124]:
+              - text: "02"
+              - generic [ref=e125]:
+                - heading "Бритьё" [level=3] [ref=e126]
+                - paragraph [ref=e127]: Гладкое бритьё лица или бритьё головы опасной бритвой с горячим компрессом
+            - generic [ref=e128]: от 1 800 ₽→
+          - link "03 Уход за лицом Премиальный уход London Grooming, детокс Graham Hill, скраб и чёрная маска от 600 ₽" [ref=e130] [cursor=pointer]:
+            - /url: /services
+            - generic [ref=e131]:
+              - text: "03"
+              - generic [ref=e132]:
+                - heading "Уход за лицом" [level=3] [ref=e133]
+                - paragraph [ref=e134]: Премиальный уход London Grooming, детокс Graham Hill, скраб и чёрная маска
+            - generic [ref=e135]: от 600 ₽→
+          - link "04 Ногтевой сервис Мужской маникюр, педикюр гигиенический, массаж рук и стоп от 500 ₽" [ref=e137] [cursor=pointer]:
+            - /url: /services
+            - generic [ref=e138]:
+              - text: "04"
+              - generic [ref=e139]:
+                - heading "Ногтевой сервис" [level=3] [ref=e140]
+                - paragraph [ref=e141]: Мужской маникюр, педикюр гигиенический, массаж рук и стоп
+            - generic [ref=e142]: от 500 ₽→
+      - generic [ref=e144]:
+        - generic [ref=e145]:
+          - heading "10 мастеров" [level=2] [ref=e146]:
+            - generic [ref=e147]:
+              - generic [ref=e148]: "1"
+              - generic [ref=e149]: "0"
+            - generic [ref=e150]:
+              - generic [ref=e151]: м
+              - generic [ref=e152]: а
+              - generic [ref=e153]: с
+              - generic [ref=e154]: т
+              - generic [ref=e155]: е
+              - generic [ref=e156]: р
+              - generic [ref=e157]: о
+              - generic [ref=e158]: в
+          - link "Все мастера →" [ref=e160] [cursor=pointer]:
+            - /url: /barbers
+        - generic [ref=e161]:
+          - link "М Марат300+ отзывов" [ref=e164] [cursor=pointer]:
+            - /url: /barbers/marat
+            - generic [ref=e166]: М
+            - generic [ref=e167]:
+              - text: Марат
+              - generic [ref=e168]: 300+ отзывов
+          - link "В Вячеслав276+ отзывов" [ref=e171] [cursor=pointer]:
+            - /url: /barbers/vyacheslav
+            - generic [ref=e173]: В
+            - generic [ref=e174]:
+              - text: Вячеслав
+              - generic [ref=e175]: 276+ отзывов
+          - link "С Сайод239+ отзывов" [ref=e178] [cursor=pointer]:
+            - /url: /barbers/sayod
+            - generic [ref=e180]: С
+            - generic [ref=e181]:
+              - text: Сайод
+              - generic [ref=e182]: 239+ отзывов
+          - link "А Алексей213+ отзывов" [ref=e185] [cursor=pointer]:
+            - /url: /barbers/aleksey
+            - generic [ref=e187]: А
+            - generic [ref=e188]:
+              - text: Алексей
+              - generic [ref=e189]: 213+ отзывов
+          - link "Т Тимерлан177+ отзывов" [ref=e192] [cursor=pointer]:
+            - /url: /barbers/timerlan
+            - generic [ref=e194]: Т
+            - generic [ref=e195]:
+              - text: Тимерлан
+              - generic [ref=e196]: 177+ отзывов
+          - link "Н Николай153+ отзывов" [ref=e199] [cursor=pointer]:
+            - /url: /barbers/nikolay
+            - generic [ref=e201]: Н
+            - generic [ref=e202]:
+              - text: Николай
+              - generic [ref=e203]: 153+ отзывов
+        - paragraph [ref=e204]: «Десять мастеров — каждый со своим почерком.»
+      - generic [ref=e206]:
+        - generic [ref=e207]:
+          - heading "Интерьер" [level=2] [ref=e208]
+          - paragraph [ref=e209]: Шаляпина, 26 · Казань
+        - generic [ref=e210]:
+          - generic [ref=e211]:
+            - generic [ref=e213]: BPФото скоро
+            - generic [ref=e215]: BPФото скоро
+            - generic [ref=e216]:
+              - generic [ref=e218]: BPФото скоро
+              - paragraph [ref=e219]: 245 м от Концертного зала Филармонии
+          - generic [ref=e220]:
+            - generic [ref=e222]: BPФото скоро
+            - generic [ref=e223]:
+              - generic [ref=e225]: BPФото скоро
+              - generic [ref=e227]: BPФото скоро
+            - paragraph [ref=e228]: Шаляпина, 26 · 245 м от Концертного зала Филармонии
+      - generic [ref=e229]:
+        - generic [ref=e230]:
+          - heading "Процесс" [level=2] [ref=e231]
+          - generic [ref=e232]:
+            - generic [ref=e234]:
+              - text: "01"
+              - generic [ref=e235]:
+                - heading "Час, а не 30 минут" [level=3] [ref=e236]
+                - paragraph [ref=e237]: Большинство барбершопов выделяют 30 минут на стрижку. Мы — час. В этот час входит детокс кожи головы, мытьё, стрижка по структуре волос, моделирование, укладка и завершающее парфюмирование. В среднем — в два раза больше работы.
+            - generic [ref=e239]:
+              - text: "02"
+              - generic [ref=e240]:
+                - heading "Профессиональная косметика, а не один шампунь" [level=3] [ref=e241]
+                - paragraph [ref=e242]: В нашем зале на полках — Graham Hill, Davines, The London Grooming Co и Solomon's. Шампунь для тонких волос, шампунь для жирной кожи головы, тоник с никотиновой кислотой, восемь видов укладочных средств. Под вашу структуру волос мы подбираем средство, а не используем универсальное.
+            - generic [ref=e244]:
+              - text: "03"
+              - generic [ref=e245]:
+                - heading "Десять мастеров, не один универсал" [level=3] [ref=e246]
+                - paragraph [ref=e247]: В нашем зале десять мастеров. Каждый — со своим почерком и любимыми техниками. Если ваша задача — fade с короткими висками и длинной макушкой, к Сайоду вы попадёте быстрее, чем к универсальному мастеру в массмаркете. Мы не назначаем мастера автоматически — вы выбираете.
+            - generic [ref=e249]:
+              - text: "04"
+              - generic [ref=e250]:
+                - heading "Тишина, а не open space" [level=3] [ref=e251]
+                - paragraph [ref=e252]: В нашем зале — пять рабочих мест и десять минут между визитами. Вы не сидите рядом с другим клиентом «локоть в локоть», вас не отвлекает разговор соседа, и мастер не торопится — он работает с вашими волосами, а не «успевает до следующего».
+        - generic [ref=e253]:
+          - heading "Процесс" [level=2] [ref=e255]:
+            - generic [ref=e256]:
+              - generic [ref=e257]: П
+              - generic [ref=e258]: р
+              - generic [ref=e259]: о
+              - generic [ref=e260]: ц
+              - generic [ref=e261]: е
+              - generic [ref=e262]: с
+              - generic [ref=e263]: с
+          - generic [ref=e264]:
+            - generic [ref=e266]:
+              - text: "01"
+              - generic [ref=e267]:
+                - heading "Час, а не 30 минут" [level=3] [ref=e268]
+                - paragraph [ref=e269]: Большинство барбершопов выделяют 30 минут на стрижку. Мы — час. В этот час входит детокс кожи головы, мытьё, стрижка по структуре волос, моделирование, укладка и завершающее парфюмирование. В среднем — в два раза больше работы.
+            - generic [ref=e271]:
+              - text: "02"
+              - generic [ref=e272]:
+                - heading "Профессиональная косметика, а не один шампунь" [level=3] [ref=e273]
+                - paragraph [ref=e274]: В нашем зале на полках — Graham Hill, Davines, The London Grooming Co и Solomon's. Шампунь для тонких волос, шампунь для жирной кожи головы, тоник с никотиновой кислотой, восемь видов укладочных средств. Под вашу структуру волос мы подбираем средство, а не используем универсальное.
+            - generic [ref=e276]:
+              - text: "03"
+              - generic [ref=e277]:
+                - heading "Десять мастеров, не один универсал" [level=3] [ref=e278]
+                - paragraph [ref=e279]: В нашем зале десять мастеров. Каждый — со своим почерком и любимыми техниками. Если ваша задача — fade с короткими висками и длинной макушкой, к Сайоду вы попадёте быстрее, чем к универсальному мастеру в массмаркете. Мы не назначаем мастера автоматически — вы выбираете.
+            - generic [ref=e281]:
+              - text: "04"
+              - generic [ref=e282]:
+                - heading "Тишина, а не open space" [level=3] [ref=e283]
+                - paragraph [ref=e284]: В нашем зале — пять рабочих мест и десять минут между визитами. Вы не сидите рядом с другим клиентом «локоть в локоть», вас не отвлекает разговор соседа, и мастер не торопится — он работает с вашими волосами, а не «успевает до следующего».
+      - generic [ref=e286]:
+        - generic [ref=e287]:
+          - heading "Отзывы" [level=2] [ref=e288]
+          - generic [ref=e289]:
+            - text: ★★★★★
+            - link "5.0 на Яндекс.Картах · 394 отзыва" [ref=e290] [cursor=pointer]:
+              - /url: https://yandex.ru/maps/org/base_premier
+        - generic [ref=e291]:
+          - generic [ref=e293]:
+            - blockquote [ref=e294]:
+              - paragraph [ref=e295]: "«Долго не мог найти барбера под себя — обошёл несколько заведений в Казани. В BASE Premier с первого визита понял: это то, что нужно. Марат работает методично, без спешки. Результат — именно то, что хотел.»"
+            - generic [ref=e296]: Клиент BASE Premier · Сентябрь 2025
+          - generic [ref=e297]:
+            - generic [ref=e298]:
+              - button "Предыдущий отзыв" [ref=e299]: ←
+              - button "Следующий отзыв" [ref=e300]: →
+            - tablist "Переключение отзывов" [ref=e301]:
+              - tab "Отзыв 1" [selected] [ref=e302]
+              - tab "Отзыв 2" [ref=e303]
+              - tab "Отзыв 3" [ref=e304]
+              - tab "Отзыв 4" [ref=e305]
+              - tab "Отзыв 5" [ref=e306]
+          - generic [ref=e307]:
+            - button "Отзыв 1" [ref=e308]
+            - button "Отзыв 2" [ref=e309]
+            - button "Отзыв 3" [ref=e310]
+            - button "Отзыв 4" [ref=e311]
+            - button "Отзыв 5" [ref=e312]
+      - generic [ref=e314]:
+        - generic [ref=e315]:
+          - heading "Прайс" [level=2] [ref=e316]
+          - link "Все 27 услуг →" [ref=e318] [cursor=pointer]:
+            - /url: /services
+        - list [ref=e319]:
+          - listitem [ref=e320]:
+            - text: Мужская стрижка
+            - generic [ref=e321]: 1 ч1 800 – 2 700 ₽
+          - listitem [ref=e322]:
+            - text: Стрижка с бородой
+            - generic [ref=e323]: 1 ч 30 мин3 200 – 4 600 ₽
+          - listitem [ref=e324]:
+            - text: Моделирование бороды
+            - generic [ref=e325]: 30 мин1 400 – 1 900 ₽
+          - listitem [ref=e326]:
+            - text: Детская стрижка
+            - generic [ref=e327]: 1 ч1 600 – 2 400 ₽
+          - listitem [ref=e328]:
+            - text: Мужской маникюр
+            - generic [ref=e329]: 1 чот 1 900 ₽
+          - listitem [ref=e330]:
+            - text: Стрижка + маникюр
+            - generic [ref=e331]: 2 ч3 100 – 4 000 ₽
+        - paragraph [ref=e332]: Средний чек — 2 400 ₽ · Ежедневно 10:00–21:00
+      - generic [ref=e334]:
+        - heading "Для постоянных гостей" [level=2] [ref=e335]
+        - generic [ref=e336]:
+          - generic [ref=e337]:
+            - text: "01"
+            - generic [ref=e338]:
+              - heading "Накопительная скидка" [level=3] [ref=e339]
+              - paragraph [ref=e340]: Программа лояльности работает через YClients. Каждый визит — баллы, баллы — скидка. Детали узнайте у мастера при первом визите.
+          - generic [ref=e341]:
+            - text: "02"
+            - generic [ref=e342]:
+              - heading "Приведи друга" [level=3] [ref=e343]
+              - paragraph [ref=e344]: Порекомендуйте BASE Premier — оба получите бонус на следующий визит. Условия уточняйте на стойке администратора.
+          - generic [ref=e345]:
+            - text: "03"
+            - generic [ref=e346]:
+              - heading "Подарочные сертификаты" [level=3] [ref=e347]
+              - paragraph [ref=e348]: Физические сертификаты на любую сумму. Отличный подарок для тех, кто ценит качество. Приобрести можно в салоне на Шаляпина 26.
+      - generic [ref=e350]:
+        - generic [ref=e351]:
+          - heading "Вопросы и ответы" [level=2] [ref=e352]
+          - link "Все вопросы →" [ref=e353] [cursor=pointer]:
+            - /url: /about
+        - generic [ref=e355]:
+          - generic [ref=e356]:
+            - button "Сколько длится стрижка?" [expanded] [ref=e357]:
+              - text: Сколько длится стрижка?
+              - img [ref=e359]
+            - region "Сколько длится стрижка?" [ref=e360]:
+              - paragraph [ref=e362]: Час. Это базовая длительность для большинства услуг. Если у вас борода — добавляется 30 минут. Точная длительность каждой услуги указана на странице услуги.
+          - generic [ref=e363]:
+            - button "Что значат разные цены на одну услугу — 1 800 и 2 700 ₽?" [ref=e364]:
+              - text: Что значат разные цены на одну услугу — 1 800 и 2 700 ₽?
+              - img [ref=e366]
+            - region "Что значат разные цены на одну услугу — 1 800 и 2 700 ₽?" [ref=e367]:
+              - paragraph [ref=e369]: Это категории мастеров. У младших мастеров — стартовая цена. У старших — финальная. Все мастера прошли одинаковое обучение внутри BASE Premier; разница в опыте, скорости и количестве отработанных случаев. Выбор — за вами.
+          - generic [ref=e370]:
+            - button "Какие средства используются на полках?" [ref=e371]:
+              - text: Какие средства используются на полках?
+              - img [ref=e373]
+            - region "Какие средства используются на полках?" [ref=e374]:
+              - paragraph [ref=e376]: Graham Hill (Германия), Davines (Италия), The London Grooming Co (Великобритания), Solomon's (Великобритания). Это профессиональная косметика, а не «парикмахерский ширпотреб». Подбор делает мастер по типу ваших волос и кожи головы.
+          - generic [ref=e377]:
+            - button "Можно ли совместить стрижку и маникюр?" [ref=e378]:
+              - text: Можно ли совместить стрижку и маникюр?
+              - img [ref=e380]
+            - region "Можно ли совместить стрижку и маникюр?" [ref=e381]:
+              - paragraph [ref=e383]: "Да, и это выгодно. Есть два варианта: одновременно (мастера работают в 4 руки, час, 2 800–3 700 ₽) или последовательно (два часа, 3 100–4 000 ₽, скидка до 15 %). При записи на комплекс выбирайте «Комплекс» в виджете записи."
+          - generic [ref=e384]:
+            - button "Сколько у вас филиалов в Казани?" [ref=e385]:
+              - text: Сколько у вас филиалов в Казани?
+              - img [ref=e387]
+            - region "Сколько у вас филиалов в Казани?" [ref=e388]:
+              - paragraph [ref=e390]: Один. Шаляпина, 26, в самом центре, в трёхстах метрах от Концертного зала Филармонии. Парковка — по периметру здания и на соседних улицах.
+      - generic [ref=e391]:
+        - generic [ref=e392]: BP
+        - generic [ref=e394]:
+          - generic [ref=e395]:
+            - heading "Записаться?" [level=2] [ref=e396]
+            - paragraph [ref=e397]: Шаляпина, 26 · Казань · ежедневно с 10 до 21
+          - button "Записаться онлайн" [ref=e399]
+          - paragraph [ref=e400]:
+            - text: или позвонить
+            - link "+7 (917) 918-38-77" [ref=e401] [cursor=pointer]:
+              - /url: tel:+79179183877
+  - contentinfo [ref=e402]:
+    - generic [ref=e403]:
+      - generic [ref=e404]:
+        - generic [ref=e405]:
+          - link "BASE Premier — на главную" [ref=e406] [cursor=pointer]:
+            - /url: /
+            - img [ref=e407]:
+              - generic [ref=e408]: BP
+              - generic [ref=e409]: BASE PREMIER
+          - paragraph [ref=e410]: Стиль, атмосфера, мастерство — больше, чем просто барбершоп
+        - navigation "Навигация по сайту" [ref=e411]:
+          - list [ref=e412]:
+            - listitem [ref=e413]:
+              - link "Услуги" [ref=e414] [cursor=pointer]:
+                - /url: /services
+            - listitem [ref=e415]:
+              - link "Мастера" [ref=e416] [cursor=pointer]:
+                - /url: /barbers
+            - listitem [ref=e417]:
+              - link "О нас" [ref=e418] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e419]:
+              - link "Журнал" [ref=e420] [cursor=pointer]:
+                - /url: /journal
+            - listitem [ref=e421]:
+              - link "Контакты" [ref=e422] [cursor=pointer]:
+                - /url: /contacts
+        - generic [ref=e423]:
+          - generic [ref=e424]: ул. Шаляпина, 26, 1 этажКазань
+          - paragraph [ref=e425]: Ежедневно 10:00–21:00
+          - link "+7 (917) 918-38-77" [ref=e426] [cursor=pointer]:
+            - /url: tel:+79179183877
+          - generic [ref=e427]:
+            - link "WhatsApp" [ref=e428] [cursor=pointer]:
+              - /url: https://wa.me/79179183877
+              - img [ref=e429]
+            - link "Telegram" [ref=e432] [cursor=pointer]:
+              - /url: https://t.me/+79179183877
+              - img [ref=e433]
+      - generic [ref=e435]:
+        - generic [ref=e436]: © 2022–2026 BASE Premier
+        - generic [ref=e437]:
+          - text: ИП Шайхутдинов Айрат Рафаэлевич · ИНН 163207031442
+          - link "Политика конфиденциальности" [ref=e438] [cursor=pointer]:
+            - /url: /privacy
+  - button [ref=e441]: Записаться
+  - generic [ref=e442]:
+    - link "Написать в WhatsApp" [ref=e443] [cursor=pointer]:
+      - /url: https://wa.me/79179183877
+      - img [ref=e444]
+    - link "Написать в Telegram" [ref=e447] [cursor=pointer]:
+      - /url: https://t.me/+79179183877
+      - img [ref=e448]
+  - dialog [ref=e450]:
+    - generic [ref=e451]:
+      - paragraph [ref=e452]:
+        - text: Мы используем cookie для аналитики и улучшения сервиса. Подробнее —
+        - link [ref=e453] [cursor=pointer]:
+          - /url: /privacy
+          - text: Политика конфиденциальности
+        - text: .
+      - generic [ref=e454]:
+        - button [ref=e455]: Только необходимые
+        - button [ref=e456]: Принять все

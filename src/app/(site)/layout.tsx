@@ -1,3 +1,4 @@
+import { BookingHandler } from "@/components/booking/BookingHandler";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CustomCursor } from "@/components/motion/CustomCursor";
@@ -10,6 +11,7 @@ import { StickyCTA } from "@/components/ui/StickyCTA";
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <SoundProvider>
+      <BookingHandler />
       <CustomCursor />
       <Header />
       <SmoothScrollProvider>
