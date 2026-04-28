@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/immutability */
 "use client";
 
 import {
@@ -53,7 +52,7 @@ function Monogram({ reduced }: { reduced: boolean | null }) {
         >
           bp
           <meshPhysicalMaterial
-            color={hovered ? "#FFFFFF" : "#F0EFE8"}
+            color={hovered ? "#F5F5F2" : "#F0EFE8"}
             metalness={0.75}
             roughness={0.08}
             clearcoat={0.8}
@@ -93,7 +92,13 @@ function Lights() {
 
 // ─── Mouse parallax controller ────────────────────────────────────────────────
 
-function MouseParallax({ reduced }: { reduced: boolean | null }) {
+function MouseParallax({
+  reduced,
+  introComplete,
+}: {
+  reduced: boolean | null;
+  introComplete: boolean;
+}) {
   const { camera } = useThree();
   const mouse = useRef({ x: 0, y: 0 });
   const target = useRef({ x: 0, y: 0 });
@@ -108,11 +113,13 @@ function MouseParallax({ reduced }: { reduced: boolean | null }) {
     return () => window.removeEventListener("mousemove", handleMove);
   }, [reduced]);
 
+  // eslint-disable-next-line react-hooks/immutability
   useFrame(() => {
-    if (reduced) return;
+    if (reduced || !introComplete) return;
     target.current.x += (mouse.current.x * 0.8 - target.current.x) * 0.05;
     target.current.y += (mouse.current.y * 0.4 - target.current.y) * 0.05;
-    camera.position.x = target.current.x;
+    // r3f useFrame is the correct place to mutate camera — not a React render
+    camera.position.x = target.current.x; // eslint-disable-line react-hooks/immutability
     camera.position.y = target.current.y;
     camera.lookAt(0, 0, 0);
   });
@@ -168,12 +175,13 @@ function CameraIntro({ onComplete }: { onComplete: () => void }) {
     camera.position.set(0, 0, 18);
   }, [camera]);
 
+  // eslint-disable-next-line react-hooks/immutability
   useFrame((_, delta) => {
     if (done.current) return;
     progress.current = Math.min(progress.current + delta * 0.38, 1);
     // ease-out-quart: 1 - (1-t)^4
     const t = 1 - Math.pow(1 - progress.current, 4);
-    camera.position.z = 18 - (18 - 9) * t;
+    camera.position.z = 18 - (18 - 9) * t; // eslint-disable-line react-hooks/immutability
     if (progress.current >= 1) {
       done.current = true;
       onComplete();
@@ -206,6 +214,22 @@ function Particles({
   const orbits = useMemo(() => PARTICLE_ORBITS.slice(0, Math.min(count, PARTICLE_COUNT)), [count]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
+
+  // Upload initial matrix once so particles are visible in reduced-motion mode
+  // (useFrame guards with !reduced, so without this the matrix is never sent to GPU)
+  useEffect(() => {
+    if (!mesh.current) return;
+    for (let i = 0; i < orbits.length; i++) {
+      const o = orbits[i]!;
+      const x = o.radius * Math.sin(o.phi) * Math.cos(o.theta0);
+      const y = o.radius * Math.cos(o.phi) * 0.45 + o.yBias;
+      const z = o.radius * Math.sin(o.phi) * Math.sin(o.theta0);
+      dummy.position.set(x, y, z);
+      dummy.updateMatrix();
+      mesh.current.setMatrixAt(i, dummy.matrix);
+    }
+    mesh.current.instanceMatrix.needsUpdate = true;
+  }, [orbits, dummy]);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
@@ -268,7 +292,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
       <Monogram reduced={reduced} />
       <Particles reduced={reduced} />
       {!reduced && <CameraIntro onComplete={handleIntroComplete} />}
-      <MouseParallax reduced={reduced} />
+      <MouseParallax reduced={reduced} introComplete={introComplete} />
       <OrbitControls
         enabled={introComplete || !!reduced}
         enableZoom={false}

@@ -1,15 +1,17 @@
 "use client";
 
+import { useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 
 const BpScene = dynamic(() => import("@/components/three/BpScene"), {
   ssr: false,
-  loading: () => <div className="h-screen w-full bg-[#0A0A0B]" />,
+  loading: () => <div className="h-screen w-full bg-bg-primary" />,
 });
 
 export function BpClient() {
+  const reduced = useReducedMotion();
   const [introComplete, setIntroComplete] = useState(false);
   const [showHint, setShowHint] = useState(false);
 
@@ -21,7 +23,7 @@ export function BpClient() {
   }, [introComplete]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#0A0A0B]">
+    <div className="relative h-screen w-full overflow-hidden bg-bg-primary">
       {/* 3D Canvas */}
       <BpScene onIntroComplete={() => setIntroComplete(true)} />
 
@@ -39,8 +41,8 @@ export function BpClient() {
         className="pointer-events-none absolute bottom-8 left-6 md:left-8"
         style={{
           opacity: introComplete ? 1 : 0,
-          transition: "opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1)",
-          transitionDelay: introComplete ? "0.2s" : "0s",
+          transition: reduced ? "none" : "opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1)",
+          transitionDelay: !reduced && introComplete ? "0.2s" : "0s",
         }}
       >
         <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-fg-muted/25">
@@ -56,7 +58,7 @@ export function BpClient() {
         className="pointer-events-none absolute bottom-8 right-6 md:right-8"
         style={{
           opacity: showHint ? 1 : 0,
-          transition: "opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1)",
+          transition: reduced ? "none" : "opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1)",
         }}
         aria-hidden="true"
       >
@@ -74,8 +76,8 @@ export function BpClient() {
           className="h-px bg-fg-muted/5"
           style={{
             width: introComplete ? "40vw" : "0vw",
-            transition: "width 2s cubic-bezier(0.19, 1, 0.22, 1)",
-            transitionDelay: "0.4s",
+            transition: reduced ? "none" : "width 2s cubic-bezier(0.19, 1, 0.22, 1)",
+            transitionDelay: !reduced && introComplete ? "0.4s" : "0s",
           }}
         />
       </div>
