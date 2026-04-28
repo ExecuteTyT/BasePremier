@@ -6,6 +6,16 @@ import { expect, test } from "@playwright/test";
  * and produce zero console errors.
  */
 
+function filterConsoleErrors(errors: string[]): string[] {
+  return errors.filter(
+    (e) =>
+      !e.toLowerCase().includes("favicon") &&
+      !e.toLowerCase().includes("sentry") &&
+      !e.toLowerCase().includes("net::err") &&
+      !e.toLowerCase().includes("failed to load resource"),
+  );
+}
+
 const PAGES = [
   { path: "/", h1: "Барбершоп BASE Premier" },
   { path: "/services", h1: "Услуги" },
@@ -40,14 +50,7 @@ for (const { path, h1 } of PAGES) {
     // Ignore browser-injected favicon 404s, Sentry errors, dev-server chunk
     // reload noise (Next.js HMR 404/500 on _next/static/chunks), and
     // network-level failures that aren't our application code.
-    const realErrors = consoleErrors.filter(
-      (e) =>
-        !e.toLowerCase().includes("favicon") &&
-        !e.toLowerCase().includes("sentry") &&
-        !e.toLowerCase().includes("net::err") &&
-        // Next.js dev-server chunk hot-reload failures
-        !e.toLowerCase().includes("failed to load resource"),
-    );
+    const realErrors = filterConsoleErrors(consoleErrors);
     expect(realErrors, `Console errors on ${path}`).toHaveLength(0);
   });
 }
@@ -66,14 +69,7 @@ test("/quiz — loads (no traditional h1)", async ({ page }) => {
   // Ignore browser-injected favicon 404s, Sentry errors, dev-server chunk
   // reload noise (Next.js HMR 404/500 on _next/static/chunks), and
   // network-level failures that aren't our application code.
-  const realErrors = consoleErrors.filter(
-    (e) =>
-      !e.toLowerCase().includes("favicon") &&
-      !e.toLowerCase().includes("sentry") &&
-      !e.toLowerCase().includes("net::err") &&
-      // Next.js dev-server chunk hot-reload failures
-      !e.toLowerCase().includes("failed to load resource"),
-  );
+  const realErrors = filterConsoleErrors(consoleErrors);
   expect(realErrors, "Console errors on /quiz").toHaveLength(0);
 });
 
@@ -90,13 +86,6 @@ test("404 — custom not-found page", async ({ page }) => {
   // Ignore browser-injected favicon 404s, Sentry errors, dev-server chunk
   // reload noise (Next.js HMR 404/500 on _next/static/chunks), and
   // network-level failures that aren't our application code.
-  const realErrors = consoleErrors.filter(
-    (e) =>
-      !e.toLowerCase().includes("favicon") &&
-      !e.toLowerCase().includes("sentry") &&
-      !e.toLowerCase().includes("net::err") &&
-      // Next.js dev-server chunk hot-reload failures
-      !e.toLowerCase().includes("failed to load resource"),
-  );
+  const realErrors = filterConsoleErrors(consoleErrors);
   expect(realErrors, "Console errors on 404 page").toHaveLength(0);
 });
