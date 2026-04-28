@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/immutability */
 "use client";
 
-import { Center, Float, OrbitControls, Text3D } from "@react-three/drei";
+import { Center, Environment, Float, OrbitControls, Text3D } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { useReducedMotion } from "framer-motion";
+import { BlendFunction, KernelSize } from "postprocessing";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -44,11 +46,11 @@ function Monogram({ reduced }: { reduced: boolean | null }) {
           bp
           <meshPhysicalMaterial
             color={hovered ? "#FFFFFF" : "#F0EFE8"}
-            metalness={0.7}
-            roughness={0.12}
-            clearcoat={0.6}
-            clearcoatRoughness={0.1}
-            envMapIntensity={1.0}
+            metalness={0.75}
+            roughness={0.08}
+            clearcoat={0.8}
+            clearcoatRoughness={0.05}
+            envMapIntensity={2.5}
           />
         </Text3D>
       </Center>
@@ -144,6 +146,19 @@ export default function BpScene() {
       style={{ background: "#0A0A0B" }}
     >
       <FpsLimiter fps={isMobile ? 30 : 60} />
+      {/* HDR environment for realistic metal reflections */}
+      <Environment preset="city" />
+      {/* Post-processing: bloom glow + edge vignette */}
+      <EffectComposer multisampling={0}>
+        <Bloom
+          luminanceThreshold={0.45}
+          luminanceSmoothing={0.025}
+          intensity={0.5}
+          kernelSize={KernelSize.LARGE}
+          blendFunction={BlendFunction.ADD}
+        />
+        <Vignette eskil={false} offset={0.15} darkness={0.65} />
+      </EffectComposer>
       <Lights />
       <Monogram reduced={reduced} />
       <MouseParallax reduced={reduced} />
