@@ -17,14 +17,12 @@ export function BpClient() {
 
   useEffect(() => {
     if (!introComplete) return;
-    // Show drag hint 0.8s after intro ends
     const t = setTimeout(() => setShowHint(true), 800);
     return () => clearTimeout(t);
   }, [introComplete]);
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-bg-primary">
-      {/* 3D Canvas */}
       <BpScene onIntroComplete={() => setIntroComplete(true)} />
 
       {/* Back link — top left */}
