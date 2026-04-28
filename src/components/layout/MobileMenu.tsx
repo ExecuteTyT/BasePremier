@@ -78,6 +78,7 @@ export function MobileMenu({ navItems, phone }: Props) {
       >
         {/* Backdrop */}
         <div
+          data-testid="mobile-menu-backdrop"
           aria-hidden="true"
           onClick={() => setOpen(false)}
           className={cn(
