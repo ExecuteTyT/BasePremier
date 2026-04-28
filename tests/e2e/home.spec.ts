@@ -5,10 +5,28 @@ import { expect, test } from "@playwright/test";
  * Tests: hero elements visible, CTA clickable, all major sections rendered.
  */
 
+function filterConsoleErrors(errors: string[]): string[] {
+  return errors.filter(
+    (e) =>
+      !e.toLowerCase().includes("favicon") &&
+      !e.toLowerCase().includes("sentry") &&
+      !e.toLowerCase().includes("net::err") &&
+      !e.toLowerCase().includes("failed to load resource"),
+  );
+}
+
 test.describe("Hero section", () => {
   test("h1 is visible and correct", async ({ page }) => {
+    const consoleErrors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") consoleErrors.push(msg.text());
+    });
+
     await page.goto("/");
     await expect(page.locator("h1").first()).toContainText("Барбершоп BASE Premier");
+
+    const realErrors = filterConsoleErrors(consoleErrors);
+    expect(realErrors, "Console errors on /").toHaveLength(0);
   });
 
   test("CTA «Записаться» button is visible", async ({ page }) => {
@@ -16,8 +34,7 @@ test.describe("Hero section", () => {
     const cta = page
       .locator("section")
       .first()
-      .getByRole("button", { name: /записаться/i })
-      .first();
+      .getByRole("button", { name: /записаться/i });
     await expect(cta).toBeVisible();
   });
 
@@ -28,9 +45,10 @@ test.describe("Hero section", () => {
 
   test("scroll indicator is rendered", async ({ page }) => {
     await page.goto("/");
-    // ScrollIndicator renders an SVG arrow or animated div
-    const hero = page.locator("section").first();
-    await expect(hero).toBeVisible();
+    // ScrollIndicator has aria-hidden="true" so we check DOM attachment.
+    // It contains a .scroll-line animated div and a "scroll" caption.
+    const scrollLine = page.locator(".scroll-line");
+    await expect(scrollLine).toBeAttached();
   });
 });
 
@@ -49,23 +67,17 @@ test.describe("Home page sections", () => {
 
   test("footer CTA section has «Записаться» button", async ({ page }) => {
     await page.goto("/");
-    // Scroll to bottom to ensure footer CTA is rendered
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await expect(page.getByRole("button", { name: /записаться/i }).last()).toBeVisible();
+    // CtaFinalSection is a RSC-rendered section; button has aria-label="Записаться онлайн"
+    await expect(page.getByRole("button", { name: "Записаться онлайн" })).toBeVisible();
   });
 });
 
 test.describe("Header behaviour on home page", () => {
-  test("header becomes opaque after scrolling", async ({ page }) => {
+  test("header is present with correct initial state", async ({ page }) => {
     await page.goto("/");
     const header = page.locator("header");
-
-    // Initially transparent (has a class or style indicating transparent state)
-    // Scroll down 200px
-    await page.evaluate(() => window.scrollBy(0, 200));
-    await page.waitForTimeout(300);
-
-    // Header should still be in the DOM and visible
     await expect(header).toBeVisible();
+    // Initially not scrolled — data-scrolled starts as "false"
+    await expect(header).toHaveAttribute("data-scrolled", "false");
   });
 });
