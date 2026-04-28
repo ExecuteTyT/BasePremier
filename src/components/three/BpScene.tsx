@@ -1,7 +1,14 @@
 /* eslint-disable react-hooks/immutability */
 "use client";
 
-import { Center, Environment, Float, OrbitControls, Text3D } from "@react-three/drei";
+import {
+  Center,
+  Environment,
+  Float,
+  MeshReflectorMaterial,
+  OrbitControls,
+  Text3D,
+} from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { useReducedMotion } from "framer-motion";
@@ -30,6 +37,7 @@ function Monogram({ reduced }: { reduced: boolean | null }) {
       <Center>
         <Text3D
           ref={meshRef}
+          castShadow
           font="/fonts/helvetiker_bold.typeface.json"
           size={2.8}
           height={0.6}
@@ -127,15 +135,69 @@ function FpsLimiter({ fps }: { fps: number }) {
   return null;
 }
 
+// ─── Reflective floor plane ───────────────────────────────────────────────────
+
+function Floor() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.8, 0]} receiveShadow>
+      <planeGeometry args={[24, 24]} />
+      <MeshReflectorMaterial
+        blur={[400, 100]}
+        resolution={512}
+        mixBlur={1}
+        mixStrength={15}
+        roughness={1}
+        depthScale={1.2}
+        minDepthThreshold={0.4}
+        maxDepthThreshold={1.4}
+        color="#050508"
+        metalness={0.6}
+      />
+    </mesh>
+  );
+}
+
+// ─── Cinematic camera intro ───────────────────────────────────────────────────
+
+function CameraIntro({ onComplete }: { onComplete: () => void }) {
+  const { camera } = useThree();
+  const progress = useRef(0);
+  const done = useRef(false);
+
+  useEffect(() => {
+    camera.position.set(0, 0, 18);
+  }, [camera]);
+
+  useFrame((_, delta) => {
+    if (done.current) return;
+    progress.current = Math.min(progress.current + delta * 0.38, 1);
+    // ease-out-quart: 1 - (1-t)^4
+    const t = 1 - Math.pow(1 - progress.current, 4);
+    camera.position.z = 18 - (18 - 9) * t;
+    if (progress.current >= 1) {
+      done.current = true;
+      onComplete();
+    }
+  });
+
+  return null;
+}
+
 // ─── Canvas wrapper ───────────────────────────────────────────────────────────
 
-export default function BpScene() {
+export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => void }) {
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const reduced = useReducedMotion();
+  const [introComplete, setIntroComplete] = useState(false);
+
+  function handleIntroComplete() {
+    setIntroComplete(true);
+    onIntroComplete?.();
+  }
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 9], fov: 42 }}
+      camera={{ position: [0, 0, 18], fov: 42 }}
       dpr={[1, isMobile ? 1.5 : 2]}
       gl={{
         antialias: true,
@@ -143,12 +205,26 @@ export default function BpScene() {
         toneMappingExposure: 1.15,
         alpha: false,
       }}
+      shadows
       style={{ background: "#0A0A0B" }}
     >
       <FpsLimiter fps={isMobile ? 30 : 60} />
-      {/* HDR environment for realistic metal reflections */}
       <Environment preset="city" />
-      {/* Post-processing: bloom glow + edge vignette */}
+      <Lights />
+      <Floor />
+      <Monogram reduced={reduced} />
+      {!reduced && <CameraIntro onComplete={handleIntroComplete} />}
+      <MouseParallax reduced={reduced} />
+      <OrbitControls
+        enabled={introComplete || !!reduced}
+        enableZoom={false}
+        enablePan={false}
+        rotateSpeed={0.4}
+        dampingFactor={0.06}
+        enableDamping
+        minPolarAngle={Math.PI * 0.3}
+        maxPolarAngle={Math.PI * 0.7}
+      />
       <EffectComposer multisampling={0}>
         <Bloom
           luminanceThreshold={0.45}
@@ -159,18 +235,6 @@ export default function BpScene() {
         />
         <Vignette eskil={false} offset={0.15} darkness={0.65} />
       </EffectComposer>
-      <Lights />
-      <Monogram reduced={reduced} />
-      <MouseParallax reduced={reduced} />
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        rotateSpeed={0.4}
-        dampingFactor={0.06}
-        enableDamping
-        minPolarAngle={Math.PI * 0.3}
-        maxPolarAngle={Math.PI * 0.7}
-      />
     </Canvas>
   );
 }
