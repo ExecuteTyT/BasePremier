@@ -1,3 +1,5 @@
+import type { PortableTextBlock } from "@portabletext/react";
+
 import { sanityClient } from "./client";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -25,7 +27,7 @@ export type SanityArticle = {
   excerpt: string;
   category: "guide" | "care" | "price" | "lifestyle";
   cover?: { asset: { _ref: string }; hotspot?: object };
-  content?: unknown[];
+  content?: PortableTextBlock[];
   publishedAt: string;
   readMinutes: number;
 };
