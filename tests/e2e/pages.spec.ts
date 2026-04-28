@@ -6,6 +6,16 @@ import { expect, test } from "@playwright/test";
  *        quiz 4-step flow, journal article grid + filter.
  */
 
+function filterConsoleErrors(errors: string[]): string[] {
+  return errors.filter(
+    (e) =>
+      !e.toLowerCase().includes("favicon") &&
+      !e.toLowerCase().includes("sentry") &&
+      !e.toLowerCase().includes("net::err") &&
+      !e.toLowerCase().includes("failed to load resource"),
+  );
+}
+
 // ─── /services ────────────────────────────────────────────────────────────────
 
 test.describe("/services — category filter", () => {
@@ -141,6 +151,11 @@ test.describe("/quiz — 4-step flow", () => {
   });
 
   test("completing all 4 steps shows result with booking CTA", async ({ page }) => {
+    const consoleErrors: string[] = [];
+    page.on("console", (msg) => {
+      if (msg.type() === "error") consoleErrors.push(msg.text());
+    });
+
     await page.goto("/quiz");
 
     // Step 1 — hair length
@@ -164,6 +179,8 @@ test.describe("/quiz — 4-step flow", () => {
     // Result screen
     await expect(page.getByText("Ваша рекомендация")).toBeVisible();
     await expect(page.getByRole("button", { name: /Записаться/i }).first()).toBeVisible();
+
+    expect(filterConsoleErrors(consoleErrors), "Console errors during quiz flow").toHaveLength(0);
   });
 
   test("«Пройти заново» resets quiz to step 1", async ({ page }) => {
@@ -220,18 +237,17 @@ test.describe("/journal — article grid + filter", () => {
   test("category filter tab hides non-matching articles", async ({ page }) => {
     await page.goto("/journal");
     const tablist = page.getByRole("tablist", { name: "Фильтр по категории" });
-    // Get the second tab (first non-"Все") and click it
-    const secondTab = tablist.getByRole("tab").nth(1);
-    const tabName = await secondTab.textContent();
-    await secondTab.click();
+    const guidTab = tablist.getByRole("tab", { name: "Гид" });
+    await guidTab.click();
     // Tab should become selected
-    await expect(secondTab).toHaveAttribute("aria-selected", "true");
+    await expect(guidTab).toHaveAttribute("aria-selected", "true");
     // "Все" tab should no longer be selected
-    const allTab = tablist.getByRole("tab", { name: /Все/i });
-    await expect(allTab).toHaveAttribute("aria-selected", "false");
+    await expect(tablist.getByRole("tab", { name: "Все" })).toHaveAttribute(
+      "aria-selected",
+      "false",
+    );
     // Articles grid should still have at least one card (unless category is empty)
     // We just ensure the page doesn't crash — content may vary
     await expect(page.locator("#main")).toBeVisible();
-    void tabName; // used for type-checking
   });
 });
