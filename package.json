@@ -13,7 +13,8 @@
     "test:e2e": "playwright test tests/e2e",
     "test:e2e:ui": "playwright test tests/e2e --ui",
     "test:a11y": "playwright test tests/a11y",
-    "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts"
+    "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts",
+    "seed:articles": "tsx sanity/seed/articles.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -25,6 +26,7 @@
     ]
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.3",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.0",
     "@sanity/client": "^7.22.0",
@@ -55,6 +57,7 @@
     "@types/three": "^0.184.0",
     "@typescript-eslint/eslint-plugin": "^8.59.0",
     "@typescript-eslint/parser": "^8.59.0",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "eslint-plugin-import": "^2.32.0",
@@ -62,6 +65,7 @@
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
