@@ -15,10 +15,7 @@ export function ScrollIndicator({ className }: { className?: string }) {
       <div className="relative h-10 w-px overflow-hidden bg-fg-muted/20">
         <div className="scroll-line absolute inset-x-0 top-0 bg-fg-muted" />
       </div>
-      <span
-        className="origin-center rotate-90 font-mono text-[10px] uppercase tracking-widest text-fg-muted/60"
-        style={{ writingMode: "vertical-rl" }}
-      >
+      <span className="origin-center rotate-90 font-mono text-[10px] uppercase tracking-widest text-fg-muted/60">
         scroll
       </span>
 

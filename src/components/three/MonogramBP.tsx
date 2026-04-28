@@ -65,6 +65,7 @@ export function MonogramBP({ className }: { className?: string }) {
         camera={{ fov: 35, position: [0, 0, 18] }}
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 1.5]}
+        style={{ background: "transparent" }}
       >
         <ambientLight intensity={0.35} />
         <directionalLight position={[6, 8, 10]} intensity={1.8} />
