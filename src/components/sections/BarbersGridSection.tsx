@@ -69,7 +69,9 @@ export function BarbersGridSection() {
             )}
           >
             {tab.label}
-            <span className="opacity-50">{tab.count}</span>
+            <span aria-hidden="true" className="opacity-70">
+              {tab.count}
+            </span>
           </button>
         ))}
       </motion.div>

@@ -100,12 +100,13 @@ export default async function BarberPage({ params }: { params: Promise<{ slug: s
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center gap-4">
                     <span
+                      aria-hidden="true"
                       className="select-none font-display font-normal leading-none text-fg-muted/20"
                       style={{ fontSize: "clamp(6rem, 18vw, 10rem)" }}
                     >
                       {barber.name[0]}
                     </span>
-                    <p className="font-mono text-[11px] uppercase tracking-widest text-fg-muted/40">
+                    <p className="font-mono text-[11px] uppercase tracking-widest text-fg-muted">
                       Фотография скоро
                     </p>
                   </div>
@@ -147,7 +148,7 @@ export default async function BarberPage({ params }: { params: Promise<{ slug: s
                 <p className="mt-3 font-mono text-[13px] uppercase tracking-[0.15em] text-fg-muted">
                   {barber.role}
                 </p>
-                <p className="mt-1 font-mono text-[13px] text-fg-muted/60">
+                <p className="mt-1 font-mono text-[13px] text-fg-muted">
                   {barber.reviews}&nbsp;{reviewWord(barber.reviews)} на Яндекс.Картах
                 </p>
 

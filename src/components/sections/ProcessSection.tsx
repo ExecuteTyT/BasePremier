@@ -43,29 +43,37 @@ export function ProcessSection() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (window.matchMedia("(max-width: 767px)").matches) return;
 
+    // Set section height so the sticky inner div has enough room to scroll
+    const setHeight = () => {
+      const scrollDist = cards.scrollWidth - window.innerWidth;
+      section.style.height = `calc(100vh + ${scrollDist}px)`;
+    };
+    setHeight();
+
     const ctx = gsap.context(() => {
+      // No pin: true — CSS sticky handles the "stuck" visual, GSAP just drives x
       gsap.to(cards, {
-        x: () => -(cards.scrollWidth - section.clientWidth),
+        x: () => -(cards.scrollWidth - window.innerWidth),
         ease: "none",
         scrollTrigger: {
           trigger: section,
-          pin: true,
-          scrub: 1,
           start: "top top",
-          end: () => `+=${cards.scrollWidth - section.clientWidth}`,
+          end: () => `+=${cards.scrollWidth - window.innerWidth}`,
+          scrub: 1,
           invalidateOnRefresh: true,
+          onRefresh: setHeight,
         },
       });
     }, section);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      section.style.height = "";
+    };
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="overflow-hidden bg-bg-primary py-24 md:overflow-visible md:py-0"
-    >
+    <section ref={sectionRef} className="bg-bg-primary py-24 md:py-0">
       {/* Mobile: vertical list */}
       <div className="mx-auto max-w-screen-xl px-6 md:hidden">
         <h2 className="mb-12 font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted">
@@ -86,9 +94,9 @@ export function ProcessSection() {
         </div>
       </div>
 
-      {/* Desktop: horizontal scroll */}
-      <div className="hidden h-screen md:flex md:flex-col md:justify-center">
-        {/* Eyebrow — fixed above the scrolling cards */}
+      {/* Desktop: sticky wrapper + GSAP horizontal scroll */}
+      <div className="sticky top-0 hidden h-screen overflow-hidden md:flex md:flex-col md:justify-center">
+        {/* Eyebrow */}
         <div className="px-12 pb-10">
           <CharReveal
             as="h2"
@@ -126,10 +134,11 @@ function StepCard({ step, desktop = false }: StepCardProps) {
         desktop ? "h-[min(600px,55vh)] p-16 justify-between" : "p-8",
       )}
     >
-      {/* Index */}
+      {/* Index — decorative only, hidden from assistive technology */}
       <span
+        aria-hidden="true"
         className={cn(
-          "font-display italic font-normal leading-none select-none text-fg-primary/15",
+          "font-display italic font-normal leading-none select-none text-fg-primary/35",
           desktop ? "text-[9rem]" : "text-[5rem]",
         )}
       >

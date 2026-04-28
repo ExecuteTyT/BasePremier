@@ -132,7 +132,7 @@ export default function AboutPage() {
 
       <main id="main">
         {/* Hero */}
-        <section className="bg-bg-primary pb-0 pt-40 md:pt-48">
+        <section className="bg-bg-primary pb-0 pt-28 md:pt-40">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
             <p className="mb-6 font-mono text-[13px] uppercase tracking-[0.2em] text-fg-muted">
               С 2022 · Казань
@@ -216,7 +216,10 @@ export default function AboutPage() {
             <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
               {VALUES.map((v) => (
                 <div key={v.num}>
-                  <p className="mb-4 font-mono text-[2rem] font-normal leading-none text-fg-muted/20">
+                  <p
+                    aria-hidden="true"
+                    className="mb-4 font-mono text-[2rem] font-normal leading-none text-fg-muted/60"
+                  >
                     {v.num}
                   </p>
                   <h2 className="mb-3 font-display font-normal text-[1.25rem] leading-tight text-fg-primary">

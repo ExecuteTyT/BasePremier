@@ -49,7 +49,10 @@ export function JournalGridSection() {
               : "border-border-strong bg-transparent text-fg-muted hover:border-fg-muted/40 hover:text-fg-primary",
           )}
         >
-          Все <span className="opacity-50">{ARTICLES.length}</span>
+          Все{" "}
+          <span aria-hidden="true" className="opacity-70">
+            {ARTICLES.length}
+          </span>
         </button>
 
         {ARTICLE_TABS.map((tab) => (
@@ -67,7 +70,10 @@ export function JournalGridSection() {
                 : "border-border-strong bg-transparent text-fg-muted hover:border-fg-muted/40 hover:text-fg-primary",
             )}
           >
-            {tab.label} <span className="opacity-50">{tab.count}</span>
+            {tab.label}{" "}
+            <span aria-hidden="true" className="opacity-70">
+              {tab.count}
+            </span>
           </button>
         ))}
       </motion.div>
@@ -133,7 +139,7 @@ function ArticleCardLarge({ article, index }: ArticleCardProps) {
 
         {/* Info */}
         <div className="p-6">
-          <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.15em] text-accent">
+          <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
             {article.categoryLabel}
           </p>
           <h2 className="mb-3 font-display font-normal text-[1.25rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
@@ -175,7 +181,7 @@ function ArticleCardSmall({ article, index }: ArticleCardProps) {
 
         {/* Info */}
         <div className="p-4">
-          <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-accent">
+          <p className="mb-1.5 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-muted">
             {article.categoryLabel}
           </p>
           <h2 className="mb-2 font-display font-normal text-[1rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">

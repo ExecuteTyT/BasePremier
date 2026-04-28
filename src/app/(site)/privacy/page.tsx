@@ -97,7 +97,7 @@ export default function PrivacyPage() {
               </p>
             </section>
 
-            <p className="pt-4 font-mono text-[11px] uppercase tracking-[0.1em] text-fg-muted/40">
+            <p className="pt-4 font-mono text-[11px] uppercase tracking-[0.1em] text-fg-muted">
               Последнее обновление: апрель 2026
             </p>
           </div>

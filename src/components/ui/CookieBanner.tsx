@@ -46,6 +46,7 @@ export function CookieBanner({ className }: { className?: string }) {
           Мы используем cookie для аналитики и улучшения сервиса. Подробнее —{" "}
           <NextLink
             href="/privacy"
+            tabIndex={shown ? 0 : -1}
             className="text-fg-primary underline underline-offset-2 transition-opacity duration-base hover:opacity-70"
           >
             Политика конфиденциальности

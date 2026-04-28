@@ -129,7 +129,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               </nav>
 
               <div className="mx-auto max-w-[720px]">
-                <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.15em] text-accent">
+                <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
                   {article.categoryLabel}
                 </p>
                 <h1
@@ -142,7 +142,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 >
                   {article.title}
                 </h1>
-                <p className="mt-4 font-mono text-[12px] text-fg-muted/60">
+                <p className="mt-4 font-mono text-[12px] text-fg-muted">
                   {formatDate(article.date)} · {article.readMinutes} мин читать
                 </p>
               </div>
@@ -189,13 +189,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                     href={`/journal/${related.slug}`}
                     className="group block border border-border-strong p-6 transition-[border-color] duration-base hover:border-accent"
                   >
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-accent">
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-fg-muted">
                       {related.categoryLabel}
                     </p>
                     <h2 className="mb-2 font-display font-normal text-[1.125rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-80">
                       {related.title}
                     </h2>
-                    <p className="font-mono text-[11px] text-fg-muted/50">
+                    <p className="font-mono text-[11px] text-fg-muted">
                       {formatDate(related.date)} · {related.readMinutes} мин
                     </p>
                   </NextLink>
