@@ -36,7 +36,6 @@ function Monogram({ reduced }: { reduced: boolean | null }) {
       <Center>
         <Text3D
           ref={meshRef}
-          castShadow
           font="/fonts/helvetiker_bold.typeface.json"
           size={2.8}
           height={0.6}
@@ -79,7 +78,7 @@ function Lights() {
     <>
       <ambientLight color="#0D1728" intensity={0.6} />
       {/* Key — cool white upper-left */}
-      <directionalLight position={[-5, 7, 5]} color="#E8EFF8" intensity={4.0} castShadow />
+      <directionalLight position={[-5, 7, 5]} color="#E8EFF8" intensity={4.0} />
       {/* Fill — warm right */}
       <directionalLight position={[5, 2, 3]} color="#D0DCF0" intensity={1.4} />
       {/* Rim — navy from behind, pulsing */}
@@ -146,19 +145,19 @@ function FpsLimiter({ fps }: { fps: number }) {
 
 function Floor() {
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.8, 0]} receiveShadow>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.8, 0]}>
       <planeGeometry args={[24, 24]} />
       <MeshReflectorMaterial
-        blur={[400, 100]}
-        resolution={512}
+        blur={[200, 50]}
+        resolution={256}
         mixBlur={1}
-        mixStrength={15}
+        mixStrength={10}
         roughness={1}
-        depthScale={1.2}
+        depthScale={1.0}
         minDepthThreshold={0.4}
         maxDepthThreshold={1.4}
         color="#050508"
-        metalness={0.6}
+        metalness={0.5}
       />
     </mesh>
   );
@@ -266,10 +265,21 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const reduced = useReducedMotion();
   const [introComplete, setIntroComplete] = useState(false);
+  const [contextLost, setContextLost] = useState(false);
 
   function handleIntroComplete() {
     setIntroComplete(true);
     onIntroComplete?.();
+  }
+
+  if (contextLost) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-[#0A0A0B]">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted/30">
+          перезагрузите страницу
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -281,9 +291,13 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
         toneMapping: THREE.ACESFilmicToneMapping,
         toneMappingExposure: 1.15,
         alpha: false,
+        powerPreference: "high-performance",
+        failIfMajorPerformanceCaveat: false,
       }}
-      shadows
       style={{ background: "#0A0A0B" }}
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener("webglcontextlost", () => setContextLost(true));
+      }}
     >
       <FpsLimiter fps={isMobile ? 30 : 60} />
       <Environment preset="city" />
@@ -308,7 +322,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
           luminanceThreshold={0.45}
           luminanceSmoothing={0.025}
           intensity={0.5}
-          kernelSize={KernelSize.LARGE}
+          kernelSize={KernelSize.MEDIUM}
           blendFunction={BlendFunction.ADD}
         />
         <Vignette eskil={false} offset={0.15} darkness={0.65} />
