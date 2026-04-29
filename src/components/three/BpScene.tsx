@@ -2,9 +2,7 @@
 
 import { Center, Environment, Float, OrbitControls, Text3D } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { useReducedMotion } from "framer-motion";
-import { BlendFunction, KernelSize } from "postprocessing";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
@@ -269,7 +267,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
       gl={{
         antialias: true,
         toneMapping: THREE.ACESFilmicToneMapping,
-        toneMappingExposure: 1.15,
+        toneMappingExposure: 1.3,
         alpha: false,
         powerPreference: "high-performance",
         failIfMajorPerformanceCaveat: false,
@@ -297,16 +295,6 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
         minPolarAngle={Math.PI * 0.3}
         maxPolarAngle={Math.PI * 0.7}
       />
-      <EffectComposer multisampling={0}>
-        <Bloom
-          luminanceThreshold={0.45}
-          luminanceSmoothing={0.025}
-          intensity={0.5}
-          kernelSize={KernelSize.SMALL}
-          blendFunction={BlendFunction.ADD}
-        />
-        <Vignette eskil={false} offset={0.15} darkness={0.65} />
-      </EffectComposer>
     </Canvas>
   );
 }
