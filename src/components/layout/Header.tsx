@@ -5,10 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 import { MobileMenu } from "@/components/layout/MobileMenu";
-import { useSoundContext } from "@/components/motion/SoundProvider";
 import { Logo } from "@/components/ui/Logo";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { MuteToggle } from "@/components/ui/MuteToggle";
 import { cn } from "@/lib/cn";
 
 const NAV_ITEMS = [
@@ -24,8 +22,6 @@ const PHONE = { display: "+7 (917) 918-38-77", href: "tel:+79179183877" };
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
-  const { play } = useSoundContext();
-
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -54,7 +50,7 @@ export function Header() {
         "h-14 md:h-16",
         "bg-bg-primary/80 backdrop-blur-sm",
         "transition-[height,background-color] duration-slow",
-        "data-[scrolled=true]:h-12 data-[scrolled=true]:bg-bg-primary",
+        "data-[scrolled=true]:h-7 data-[scrolled=true]:bg-bg-primary",
       )}
     >
       <nav
@@ -72,7 +68,6 @@ export function Header() {
                 <NextLink
                   href={href}
                   aria-current={active ? "page" : undefined}
-                  onMouseEnter={() => play("hover")}
                   className={cn(
                     "font-sans text-body-sm transition-colors duration-base",
                     active ? "text-fg-primary" : "text-fg-muted hover:text-fg-primary",
@@ -93,7 +88,6 @@ export function Header() {
           >
             {PHONE.display}
           </a>
-          <MuteToggle />
           <div className="hidden md:block">
             <MagneticButton variant="primary" size="md">
               Записаться
