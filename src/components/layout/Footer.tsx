@@ -15,8 +15,8 @@ const YEAR = new Date().getFullYear();
 export function Footer() {
   return (
     <footer className="border-t border-border-default bg-bg-secondary">
-      <div className="mx-auto max-w-screen-xl px-4 py-12 md:px-8 md:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+      <div className="mx-auto max-w-screen-xl px-4 py-7 md:px-8 md:py-16">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {/* Brand */}
           <div>
             <Logo variant="wordmark" size="sm" href="/" className="py-2.5" />
@@ -60,7 +60,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="-m-2.5 inline-flex h-11 w-11 items-center justify-center text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                className="-m-2.5 inline-flex h-7 w-7 items-center justify-center text-fg-muted transition-colors duration-base hover:text-fg-primary"
               >
                 <IconWhatsApp />
               </a>
@@ -69,7 +69,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Telegram"
-                className="-m-2.5 inline-flex h-11 w-11 items-center justify-center text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                className="-m-2.5 inline-flex h-7 w-7 items-center justify-center text-fg-muted transition-colors duration-base hover:text-fg-primary"
               >
                 <IconTelegram />
               </a>
@@ -78,7 +78,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col gap-3 border-t border-border-default pt-6 text-body-sm text-fg-muted md:flex-row md:items-center md:justify-between">
+        <div className="mt-7 flex flex-col gap-3 border-t border-border-default pt-6 text-body-sm text-fg-muted md:flex-row md:items-center md:justify-between">
           <span className="font-mono">© 2022–{YEAR} BASE Premier</span>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>ИП Шайхутдинов Айрат Рафаэлевич · ИНН 163207031442</span>

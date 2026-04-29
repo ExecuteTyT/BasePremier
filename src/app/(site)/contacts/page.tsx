@@ -66,9 +66,9 @@ export default function ContactsPage() {
         {/* Main content */}
         <section className="bg-bg-primary py-16 md:py-24">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
-            <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+            <div className="grid gap-7 md:grid-cols-2 md:gap-16">
               {/* Info column */}
-              <div className="flex flex-col gap-10">
+              <div className="flex flex-col gap-7">
                 {/* Address */}
                 <div>
                   <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted">

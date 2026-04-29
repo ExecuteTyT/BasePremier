@@ -25,7 +25,7 @@ export function CtaFinalSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-bg-primary py-48 md:py-64">
+    <section className="relative overflow-hidden bg-bg-primary py-24 md:py-48">
       {/* Background BP monogram — faint depth layer */}
       <div
         aria-hidden="true"
@@ -34,13 +34,13 @@ export function CtaFinalSection() {
           "select-none overflow-hidden",
         )}
       >
-        <span className="font-display text-[40vw] font-bold leading-none text-fg-primary opacity-[0.03]">
+        <span className="font-display text-[55vw] font-bold leading-none text-fg-primary opacity-[0.03] md:text-[40vw]">
           BP
         </span>
       </div>
 
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 md:px-8">
-        <div className="flex flex-col items-center gap-10 text-center">
+        <div className="flex flex-col items-center gap-6 text-center">
           {/* Heading */}
           <motion.div
             className="flex flex-col gap-3"
@@ -113,6 +113,7 @@ export function CtaFinalSection() {
             <a
               href="tel:+79179183877"
               className={cn(
+                "inline-flex min-h-[44px] items-center",
                 "text-fg-muted",
                 "border-b border-fg-muted/30 pb-px",
                 "transition-[border-color,color] duration-base",

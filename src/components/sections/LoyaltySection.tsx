@@ -30,7 +30,7 @@ export function LoyaltySection() {
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header */}
         <motion.h2
-          className="mb-12 font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted md:mb-16"
+          className="mb-7 font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted md:mb-16"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-10% 0px" }}
@@ -49,14 +49,15 @@ export function LoyaltySection() {
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 0.7, ease, delay: i * 0.1 }}
               className={cn(
-                "flex flex-col gap-6 bg-bg-secondary p-8",
+                "flex flex-col gap-6 bg-bg-secondary p-5 md:p-8",
                 "border border-border-default",
-                "transition-[border-color] duration-slow hover:border-border-strong",
+                "transition-[border-color,background-color] duration-slow",
+                "hover:border-border-strong active:bg-bg-elevated",
               )}
             >
               <span
                 aria-hidden="true"
-                className="font-display italic font-normal leading-none select-none text-[3rem] text-fg-primary/35"
+                className="font-display italic font-normal leading-none select-none text-[2rem] text-fg-primary/35 md:text-[3rem]"
               >
                 {item.index}
               </span>

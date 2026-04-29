@@ -1,10 +1,10 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 
 type NavItem = { href: string; label: string };
@@ -14,6 +14,8 @@ type Props = {
   navItems: NavItem[];
   phone: Phone;
 };
+
+const ease = [0.19, 1, 0.22, 1] as const;
 
 export function MobileMenu({ navItems, phone }: Props) {
   const [open, setOpen] = useState(false);
@@ -41,89 +43,108 @@ export function MobileMenu({ navItems, phone }: Props) {
 
   return (
     <>
+      {/* Hamburger — 44×44px touch target */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={open ? "Закрыть меню" : "Открыть меню"}
-        className="flex h-8 w-8 flex-col items-center justify-center gap-[6px] text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary"
-      >
-        <span
-          className={cn(
-            "block h-px w-6 bg-current transition-transform duration-300",
-            open && "translate-y-[9px] rotate-45",
-          )}
-        />
-        <span
-          className={cn(
-            "block h-px w-6 bg-current transition-opacity duration-300",
-            open && "opacity-0",
-          )}
-        />
-        <span
-          className={cn(
-            "block h-px w-6 bg-current transition-transform duration-300",
-            open && "-translate-y-[9px] -rotate-45",
-          )}
-        />
-      </button>
-
-      {/* Fixed overlay — clips off-screen drawer so it doesn't add to document scrollWidth */}
-      <div
-        aria-hidden={!open}
         className={cn(
-          "fixed inset-0 z-40 overflow-hidden",
-          open ? "pointer-events-auto" : "pointer-events-none",
+          "relative flex min-h-[44px] min-w-[44px] items-center justify-center",
+          "text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary",
         )}
       >
-        {/* Backdrop */}
-        <div
-          data-testid="mobile-menu-backdrop"
-          aria-hidden="true"
-          onClick={() => setOpen(false)}
-          className={cn(
-            "absolute inset-0 bg-bg-primary/70 backdrop-blur-sm",
-            "transition-opacity duration-slow",
-            open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-          )}
-        />
+        <span className="flex h-[14px] w-6 flex-col items-end justify-between">
+          <span
+            className={cn(
+              "block h-px w-full bg-current transition-all duration-300 ease-[var(--ease-out-expo)]",
+              open && "translate-y-[6.5px] rotate-45",
+            )}
+          />
+          <span
+            className={cn(
+              "block h-px bg-current transition-all duration-300",
+              open ? "w-full opacity-0" : "w-4 opacity-100",
+            )}
+          />
+          <span
+            className={cn(
+              "block h-px bg-current transition-all duration-300 ease-[var(--ease-out-expo)]",
+              open ? "w-full -translate-y-[6.5px] -rotate-45" : "w-3/4",
+            )}
+          />
+        </span>
+      </button>
 
-        {/* Drawer */}
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Мобильное меню"
-          className={cn(
-            "absolute inset-y-0 right-0 z-10 flex w-72 flex-col bg-bg-secondary px-6 py-6",
-            "transition-transform duration-slow ease-[var(--ease-out-expo)]",
-            open ? "translate-x-0" : "translate-x-full",
-          )}
-        >
-          <nav aria-label="Мобильная навигация" className="mt-12 flex flex-col">
-            {navItems.map(({ href, label }) => (
-              <NextLink
-                key={href}
-                href={href}
-                className="border-b border-border-default py-4 font-sans text-h4 text-fg-primary transition-colors duration-base hover:text-fg-muted"
-              >
-                {label}
-              </NextLink>
-            ))}
-          </nav>
+      {/* Full-screen overlay */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Мобильное меню"
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.5, ease }}
+            className="fixed inset-0 z-40 flex flex-col bg-bg-primary px-6 pb-8 pt-20"
+          >
+            {/* Nav links */}
+            <nav aria-label="Мобильная навигация" className="flex flex-col">
+              {navItems.map(({ href, label }, i) => (
+                <motion.div
+                  key={href}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease, delay: 0.1 + i * 0.06 }}
+                >
+                  <NextLink
+                    href={href}
+                    className={cn(
+                      "block border-b border-border-default py-5",
+                      "font-display text-[2rem] font-normal leading-none text-fg-primary",
+                      "transition-colors duration-base hover:text-fg-muted",
+                    )}
+                  >
+                    {label}
+                  </NextLink>
+                </motion.div>
+              ))}
+            </nav>
 
-          <div className="mt-auto space-y-4 pb-4">
-            <a
-              href={phone.href}
-              className="flex min-h-[44px] items-center font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
+            {/* Bottom info block */}
+            <motion.div
+              className="mt-auto flex flex-col gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, ease, delay: 0.45 }}
             >
-              {phone.display}
-            </a>
-            <Button variant="primary" size="md" className="w-full">
-              Записаться
-            </Button>
-          </div>
-        </div>
-      </div>
+              <div className="flex flex-col gap-1">
+                <a
+                  href={phone.href}
+                  className="font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                >
+                  {phone.display}
+                </a>
+                <p className="font-mono text-caption text-fg-subtle">
+                  Шаляпина, 26 · Казань · 10:00–21:00
+                </p>
+              </div>
+              <button
+                data-yclients-open
+                className={cn(
+                  "min-h-[52px] w-full bg-accent",
+                  "font-mono text-[13px] uppercase tracking-[0.12em] text-accent-fg",
+                  "transition-opacity duration-base active:opacity-80",
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-primary",
+                )}
+              >
+                Записаться
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -19,7 +19,7 @@ export default function PrivacyPage() {
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         <div className="mx-auto max-w-[720px]">
           <h1
-            className="mb-10 font-display font-normal text-fg-primary"
+            className="mb-7 font-display font-normal text-fg-primary"
             style={{
               fontSize: "clamp(2rem, 4vw, 3rem)",
               lineHeight: 1.1,

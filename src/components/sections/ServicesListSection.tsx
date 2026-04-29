@@ -142,7 +142,7 @@ export function ServicesListSection() {
         transition={{ duration: 0.6, ease, delay: 0.2 }}
         role="tablist"
         aria-label="Фильтр по категориям"
-        className="mb-12 flex flex-wrap gap-2 md:mb-16 md:gap-3"
+        className="mb-7 flex flex-wrap gap-2 md:mb-16 md:gap-3"
       >
         {TABS.map((tab) => (
           <button
@@ -178,7 +178,7 @@ export function ServicesListSection() {
                 Ничего не найдено. Попробуйте другой запрос.
               </p>
             ) : (
-              <div className="flex flex-col gap-12 md:gap-16">
+              <div className="flex flex-col gap-7 md:gap-8">
                 {groupedServices.map((group) => (
                   <section key={group.id} aria-labelledby={`cat-${group.id}`}>
                     {/* Category heading */}

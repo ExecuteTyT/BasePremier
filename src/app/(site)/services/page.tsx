@@ -56,8 +56,8 @@ export default function ServicesPage() {
               Услуги
             </CharReveal>
             <p className="mt-6 font-sans text-body leading-relaxed text-fg-muted md:max-w-lg">
-              Двадцать семь процедур в трёх категориях. Средний чек — 2 400 ₽. Прозрачные цены, один
-              мастер от начала до конца.
+              Двадцать семь процедур в трёх категориях. Средний чек — 2{" "}400{" "}₽. Прозрачные
+              цены, один мастер от начала до конца.
             </p>
           </div>
         </section>

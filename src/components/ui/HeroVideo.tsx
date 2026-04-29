@@ -36,7 +36,7 @@ export function HeroVideo({ src, poster, mobilePoster, className }: Props) {
   }, [src]);
 
   return (
-    <div className={cn("relative overflow-hidden", className)} aria-hidden="true">
+    <div className={cn("overflow-hidden", className)} aria-hidden="true">
       {/* Poster shown immediately and on mobile (video src never set on coarse pointer) */}
       <Image
         src={mobilePoster ?? poster}

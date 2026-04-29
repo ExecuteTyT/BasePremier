@@ -210,10 +210,10 @@ export default function AboutPage() {
         {/* Values — 4 principles */}
         <section className="border-t border-border-default bg-bg-secondary py-20 md:py-28">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
-            <p className="mb-12 font-mono text-[13px] uppercase tracking-[0.2em] text-fg-muted">
+            <p className="mb-7 font-mono text-[13px] uppercase tracking-[0.2em] text-fg-muted">
               Стандарты
             </p>
-            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-7 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
               {VALUES.map((v) => (
                 <div key={v.num}>
                   <p

@@ -54,7 +54,7 @@ export function JournalGridSection({ articles }: { articles: SanityArticle[] }) 
         transition={{ duration: 0.6, ease, delay: 0.1 }}
         role="tablist"
         aria-label="Фильтр по категории"
-        className="mb-12 flex flex-wrap gap-2 md:mb-16 md:gap-3"
+        className="mb-7 flex flex-wrap gap-2 md:mb-16 md:gap-3"
       >
         <button
           role="tab"

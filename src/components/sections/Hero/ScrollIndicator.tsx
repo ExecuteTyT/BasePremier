@@ -12,7 +12,7 @@ export function ScrollIndicator({ className }: { className?: string }) {
       )}
       aria-hidden="true"
     >
-      <div className="relative h-10 w-px overflow-hidden bg-fg-muted/20">
+      <div className="relative h-7 w-px overflow-hidden bg-fg-muted/20">
         <div className="scroll-line absolute inset-x-0 top-0 bg-fg-muted" />
       </div>
       <span className="origin-center rotate-90 font-mono text-[10px] uppercase tracking-widest text-fg-muted/60">

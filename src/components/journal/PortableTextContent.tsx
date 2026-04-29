@@ -7,7 +7,7 @@ const components = {
       <p className="font-sans text-[1.125rem] leading-[1.7] text-fg-muted">{children}</p>
     ),
     h2: ({ children }: { children?: ReactNode }) => (
-      <h2 className="mt-10 font-display font-normal text-[1.375rem] leading-tight text-fg-primary">
+      <h2 className="mt-6 font-display font-normal text-[1.375rem] leading-tight text-fg-primary">
         {children}
       </h2>
     ),

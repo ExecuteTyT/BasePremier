@@ -87,7 +87,7 @@ export const BARBERS: Barber[] = [
   {
     slug: "murat",
     name: "Мурат",
-    role: "Мужской парикмахер",
+    role: "Младший мастер",
     reviews: 15,
     tags: ["barber"],
     techniques: ["Fade", "Стрижка машинкой"],

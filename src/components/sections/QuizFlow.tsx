@@ -182,7 +182,7 @@ export function QuizFlow() {
 
               {/* Question */}
               <h1
-                className="mb-10 font-display font-normal text-fg-primary"
+                className="mb-7 font-display font-normal text-fg-primary"
                 style={{
                   fontSize: "clamp(1.75rem, 4vw, 3rem)",
                   lineHeight: 1.1,
@@ -245,7 +245,7 @@ export function QuizFlow() {
                 Ваша рекомендация
               </p>
 
-              <div className="mb-10 border border-border-strong bg-bg-secondary p-8">
+              <div className="mb-7 border border-border-strong bg-bg-secondary p-8">
                 <div className="mb-6 flex items-start justify-between gap-6">
                   {/* Master initial placeholder */}
                   <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center bg-bg-primary">

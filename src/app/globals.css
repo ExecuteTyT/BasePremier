@@ -79,6 +79,14 @@ html.custom-cursor * {
   }
 }
 
+/* Remove 300ms tap delay on all interactive elements */
+button,
+a,
+[role="button"],
+[role="tab"] {
+  touch-action: manipulation;
+}
+
 /* prefers-reduced-motion: disable all transitions and animations */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -65,7 +65,7 @@ export default async function BarberPage({ params }: { params: Promise<{ slug: s
         <section className="bg-bg-primary pt-32 md:pt-40">
           <div className="mx-auto max-w-screen-xl px-6 md:px-8">
             {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mb-10">
+            <nav aria-label="Breadcrumb" className="mb-6">
               <ol className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.15em] text-fg-muted">
                 <li>
                   <NextLink href="/" className="transition-opacity hover:opacity-70">
@@ -87,7 +87,7 @@ export default async function BarberPage({ params }: { params: Promise<{ slug: s
               </ol>
             </nav>
 
-            <div className="grid gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <div className="grid gap-7 md:grid-cols-2 md:gap-16 lg:gap-24">
               {/* Photo column */}
               <div className="relative aspect-[3/4] overflow-hidden bg-bg-secondary">
                 {barber.imageSrc ? (
@@ -189,7 +189,7 @@ export default async function BarberPage({ params }: { params: Promise<{ slug: s
                 )}
 
                 {/* CTA */}
-                <div className="mt-10">
+                <div className="mt-7">
                   <button
                     data-yclients-open
                     className="inline-flex items-center gap-3 bg-accent px-8 py-4 font-mono text-[13px] uppercase tracking-[0.12em] text-accent-fg transition-opacity duration-base hover:opacity-80"

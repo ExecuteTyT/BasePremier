@@ -34,7 +34,7 @@ export default function NotFound() {
         >
           Здесь пусто.
         </h1>
-        <p className="mx-auto mb-10 max-w-sm font-sans text-body leading-relaxed text-fg-muted">
+        <p className="mx-auto mb-7 max-w-sm font-sans text-body leading-relaxed text-fg-muted">
           Страница, которую вы искали, переехала или никогда не существовала.
         </p>
 

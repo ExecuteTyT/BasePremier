@@ -26,7 +26,7 @@ export function PricingTeaserSection() {
     <section className="bg-bg-secondary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header */}
-        <div className="mb-12 flex items-end justify-between md:mb-16">
+        <div className="mb-7 flex items-end justify-between md:mb-16">
           <motion.h2
             className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted"
             initial={{ opacity: 0 }}
@@ -69,7 +69,7 @@ export function PricingTeaserSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-5% 0px" }}
               transition={{ duration: 0.5, ease, delay: i * 0.05 }}
-              className="flex items-center justify-between gap-4 py-5"
+              className="flex min-h-[52px] items-center justify-between gap-4 py-3"
             >
               <span className="font-display font-normal text-[1rem] leading-snug text-fg-primary md:text-[1.125rem]">
                 {item.name}

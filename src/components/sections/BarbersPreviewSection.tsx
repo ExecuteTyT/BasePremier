@@ -25,7 +25,7 @@ export function BarbersPreviewSection() {
     <section className="bg-bg-secondary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header */}
-        <div className="mb-12 flex items-end justify-between md:mb-16">
+        <div className="mb-7 flex items-end justify-between md:mb-16">
           <CharReveal
             as="h2"
             className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted"
@@ -141,7 +141,7 @@ function AvatarCard({ barber, isHovered }: AvatarCardProps) {
         >
           {barber.name}
         </span>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-fg-muted">
+        <span className="font-mono text-[11px] uppercase tracking-widest text-fg-muted">
           {barber.reviews}+ отзывов
         </span>
       </div>

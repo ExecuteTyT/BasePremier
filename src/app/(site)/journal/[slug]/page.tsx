@@ -92,7 +92,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Hero */}
           <header className="bg-bg-primary pt-32 md:pt-40">
             <div className="mx-auto max-w-screen-xl px-6 md:px-8">
-              <nav aria-label="Breadcrumb" className="mb-10">
+              <nav aria-label="Breadcrumb" className="mb-6">
                 <ol className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.15em] text-fg-muted">
                   <li>
                     <NextLink href="/" className="transition-opacity hover:opacity-70">
@@ -136,7 +136,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </header>
 
           {/* Cover placeholder */}
-          <div className="bg-bg-primary py-10 md:py-14">
+          <div className="bg-bg-primary py-7 md:py-14">
             <div className="mx-auto max-w-screen-xl px-6 md:px-8">
               <div className="mx-auto aspect-[16/9] max-w-[720px] overflow-hidden bg-bg-secondary">
                 <div className="flex h-full items-center justify-center">

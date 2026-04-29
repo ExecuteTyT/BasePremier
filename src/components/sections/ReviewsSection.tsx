@@ -72,7 +72,7 @@ export function ReviewsSection() {
     <section className="bg-bg-primary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header */}
-        <div className="mb-12 flex flex-col gap-4 md:mb-16">
+        <div className="mb-7 flex flex-col gap-4 md:mb-16">
           <h2 className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted">Отзывы</h2>
           <div className="flex items-center gap-2">
             <span className="text-fg-primary" aria-label="5 звёзд из 5">
@@ -117,7 +117,7 @@ export function ReviewsSection() {
           }}
         >
           {/* Card */}
-          <div className="overflow-hidden bg-bg-secondary p-8 md:p-16">
+          <div className="overflow-hidden border-l-2 border-accent bg-bg-secondary p-5 md:p-16">
             <AnimatePresence mode="wait" custom={direction}>
               {(() => {
                 const review = REVIEWS[index];
@@ -153,14 +153,15 @@ export function ReviewsSection() {
             </AnimatePresence>
           </div>
 
-          {/* Arrow buttons (desktop) */}
-          <div className="mt-6 hidden items-center justify-between md:flex">
-            <div className="flex gap-3">
+          {/* Navigation row */}
+          <div className="mt-6 flex items-center justify-between">
+            {/* Arrow buttons (desktop only) */}
+            <div className="hidden gap-2 md:flex">
               <button
                 onClick={prev}
                 aria-label="Предыдущий отзыв"
                 className={cn(
-                  "flex h-10 w-10 items-center justify-center",
+                  "flex h-11 w-11 items-center justify-center",
                   "border border-border-default text-fg-muted",
                   "transition-[border-color,color] duration-base",
                   "hover:border-fg-muted/40 hover:text-fg-primary",
@@ -173,7 +174,7 @@ export function ReviewsSection() {
                 onClick={next}
                 aria-label="Следующий отзыв"
                 className={cn(
-                  "flex h-10 w-10 items-center justify-center",
+                  "flex h-11 w-11 items-center justify-center",
                   "border border-border-default text-fg-muted",
                   "transition-[border-color,color] duration-base",
                   "hover:border-fg-muted/40 hover:text-fg-primary",
@@ -184,50 +185,37 @@ export function ReviewsSection() {
               </button>
             </div>
 
-            {/* Dots */}
-            <div
-              className="flex items-center gap-2"
-              role="tablist"
-              aria-label="Переключение отзывов"
-            >
-              {REVIEWS.map((_, i) => (
-                <button
-                  key={i}
-                  role="tab"
-                  aria-selected={i === index}
-                  aria-label={`Отзыв ${i + 1}`}
-                  onClick={() => goTo(i, i > index ? 1 : -1)}
-                  className="flex h-11 w-11 items-center justify-center"
-                >
-                  <span
-                    className={cn(
-                      "block h-1 rounded-none transition-[width,background-color] duration-base",
-                      i === index ? "w-6 bg-fg-primary" : "w-2 bg-fg-muted/30 hover:bg-fg-muted/60",
-                    )}
-                  />
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile dots */}
-          <div className="mt-6 flex items-center justify-center gap-2 md:hidden">
-            {REVIEWS.map((_, i) => (
-              <button
-                key={i}
-                aria-label={`Отзыв ${i + 1}`}
-                aria-current={i === index}
-                onClick={() => goTo(i, i > index ? 1 : -1)}
-                className="flex h-11 w-11 items-center justify-center"
+            {/* Editorial line indicators + counter */}
+            <div className="flex items-center gap-6">
+              <div
+                className="flex items-center gap-3"
+                role="tablist"
+                aria-label="Переключение отзывов"
               >
-                <span
-                  className={cn(
-                    "block h-1 rounded-none transition-[width,background-color] duration-base",
-                    i === index ? "w-6 bg-fg-primary" : "w-2 bg-fg-muted/30",
-                  )}
-                />
-              </button>
-            ))}
+                {REVIEWS.map((_, i) => (
+                  <button
+                    key={i}
+                    role="tab"
+                    aria-selected={i === index}
+                    aria-label={`Отзыв ${i + 1}`}
+                    onClick={() => goTo(i, i > index ? 1 : -1)}
+                    className="group flex min-h-[44px] min-w-[44px] items-center justify-center"
+                  >
+                    <span
+                      className={cn(
+                        "block h-px transition-all duration-500 ease-[var(--ease-out-expo)]",
+                        i === index
+                          ? "w-10 bg-fg-primary"
+                          : "w-5 bg-fg-subtle group-hover:w-7 group-hover:bg-fg-muted",
+                      )}
+                    />
+                  </button>
+                ))}
+              </div>
+              <span className="font-mono text-[11px] uppercase tracking-widest text-fg-subtle">
+                {String(index + 1).padStart(2, "0")} / {String(REVIEWS.length).padStart(2, "0")}
+              </span>
+            </div>
           </div>
         </div>
       </div>
