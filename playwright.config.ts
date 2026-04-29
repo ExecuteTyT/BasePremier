@@ -19,7 +19,6 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    reducedMotion: "reduce",
     // 45 s per test — generous enough for slow browsers (Firefox SSR hydration,
     // WebKit map-iframe negotiation) while still catching real hangs quickly.
     actionTimeout: 15_000,
