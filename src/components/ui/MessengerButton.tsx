@@ -1,11 +1,16 @@
 import { cn } from "@/lib/cn";
 
 const linkClass =
-  "flex h-12 w-12 items-center justify-center border border-border-default bg-bg-secondary text-fg-muted transition-[border-color,color] duration-base hover:border-fg-muted/40 hover:text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary";
+  "flex h-7 w-7 items-center justify-center border border-border-default bg-bg-secondary text-fg-muted transition-[border-color,color] duration-base hover:border-fg-muted/40 hover:text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fg-primary";
 
 export function MessengerButton({ className }: { className?: string }) {
   return (
-    <div className={cn("fixed bottom-6 right-6 z-40 hidden flex-col gap-2 md:flex", className)}>
+    <div
+      className={cn(
+        "fixed bottom-24 right-4 z-40 flex flex-col gap-2 md:bottom-6 md:right-6",
+        className,
+      )}
+    >
       <a
         href="https://wa.me/79179183877"
         target="_blank"

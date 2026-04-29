@@ -23,7 +23,7 @@ export function HeroSection() {
         fill
         priority
         fetchPriority="high"
-        className="object-cover object-[40%_center] md:object-center"
+        className="object-cover object-[40%_center] md:object-[30%_center]"
         aria-hidden="true"
       />
 
@@ -88,6 +88,13 @@ export function HeroSection() {
                 Услуги
               </NextLink>
             </div>
+
+            <p
+              className="font-mono text-[0.65rem] uppercase tracking-overline text-fg-subtle"
+              style={{ animation: slideUp(0.5, 0.95) }}
+            >
+              Ежедневно&nbsp;10:00&nbsp;—&nbsp;21:00
+            </p>
 
             <p
               className="font-mono text-caption text-fg-muted"

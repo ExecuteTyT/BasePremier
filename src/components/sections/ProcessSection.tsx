@@ -76,7 +76,7 @@ export function ProcessSection() {
     <section ref={sectionRef} className="bg-bg-primary py-24 md:py-0">
       {/* Mobile: vertical list */}
       <div className="mx-auto max-w-screen-xl px-6 md:hidden">
-        <h2 className="mb-12 font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted">
+        <h2 className="mb-7 font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted">
           Процесс
         </h2>
         <div className="flex flex-col gap-8">
@@ -91,13 +91,21 @@ export function ProcessSection() {
               <StepCard step={step} />
             </motion.div>
           ))}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.7, ease, delay: STEPS.length * 0.08 }}
+          >
+            <CtaCard />
+          </motion.div>
         </div>
       </div>
 
       {/* Desktop: sticky wrapper + GSAP horizontal scroll */}
       <div className="sticky top-0 hidden h-screen overflow-hidden md:flex md:flex-col md:justify-center">
         {/* Eyebrow */}
-        <div className="px-12 pb-10">
+        <div className="px-7 pb-6">
           <CharReveal
             as="h2"
             className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted"
@@ -107,14 +115,17 @@ export function ProcessSection() {
         </div>
 
         {/* Scrolling cards row */}
-        <div ref={cardsRef} className="flex items-stretch gap-6 pl-12">
+        <div ref={cardsRef} className="flex items-stretch gap-6 pl-7">
           {STEPS.map((step) => (
             <div key={step.index} className="w-[min(880px,85vw)] flex-shrink-0">
               <StepCard step={step} desktop />
             </div>
           ))}
+          <div className="w-[min(560px,70vw)] flex-shrink-0">
+            <CtaCard desktop />
+          </div>
           {/* Right padding sentinel */}
-          <div className="w-12 flex-shrink-0" aria-hidden="true" />
+          <div className="w-7 flex-shrink-0" aria-hidden="true" />
         </div>
       </div>
     </section>
@@ -125,6 +136,43 @@ type StepCardProps = {
   step: (typeof STEPS)[number];
   desktop?: boolean;
 };
+
+function CtaCard({ desktop = false }: { desktop?: boolean }) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col justify-between bg-accent",
+        desktop ? "h-[min(600px,55vh)] p-16" : "p-8",
+      )}
+    >
+      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-fg/50">
+        Убедились?
+      </p>
+      <div className="flex flex-col gap-6">
+        <p
+          className={cn(
+            "font-display font-normal leading-tight text-accent-fg",
+            desktop ? "text-[clamp(2.5rem,4vw,4rem)]" : "text-[2rem]",
+          )}
+        >
+          Запишитесь онлайн — займёт меньше минуты
+        </p>
+        <button
+          data-yclients-open
+          className={cn(
+            "self-start border border-accent-fg/40 px-7 py-3",
+            "font-mono text-[13px] uppercase tracking-[0.12em] text-accent-fg",
+            "transition-[background-color,border-color] duration-base",
+            "hover:border-accent-fg hover:bg-accent-fg/10",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-fg",
+          )}
+        >
+          Записаться
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function StepCard({ step, desktop = false }: StepCardProps) {
   return (

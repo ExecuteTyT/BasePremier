@@ -36,7 +36,7 @@ export function ManifestoSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-bg-primary py-32 md:py-48">
+    <section ref={sectionRef} className="relative overflow-hidden bg-bg-secondary py-32 md:py-48">
       <div ref={contentRef} className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Eyebrow */}
         <motion.p

@@ -11,9 +11,9 @@ const ease = [0.19, 1, 0.22, 1] as const;
 
 // Swap src → real paths when photos arrive; set to null to keep placeholder
 const PHOTOS: { src: string | null; alt: string }[] = [
-  { src: null, alt: "Интерьер BASE Premier — рабочая зона" },
-  { src: null, alt: "Интерьер BASE Premier — зона ожидания" },
-  { src: null, alt: "Интерьер BASE Premier — детали" },
+  { src: "/images/B43A7806.jpg", alt: "Интерьер BASE Premier — лобби с ресепшеном" },
+  { src: "/images/B43A7596.jpg", alt: "Интерьер BASE Premier — барберские кресла и вывеска" },
+  { src: "/images/B43A7735.jpg", alt: "Интерьер BASE Premier — рабочий зал" },
 ];
 
 function PhotoSlot({
@@ -83,7 +83,7 @@ export function InteriorSection() {
     <section ref={sectionRef} className="relative overflow-hidden bg-bg-primary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header */}
-        <div className="mb-12 flex items-end justify-between md:mb-16">
+        <div className="mb-7 flex items-end justify-between md:mb-16">
           <motion.h2
             className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted"
             initial={{ opacity: 0 }}

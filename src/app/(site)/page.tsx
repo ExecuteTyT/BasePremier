@@ -11,6 +11,7 @@ import { PricingTeaserSection } from "@/components/sections/PricingTeaserSection
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ServicesPreviewSection } from "@/components/sections/ServicesPreviewSection";
+import { StatsBand } from "@/components/sections/StatsBand";
 import { faqPageJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
 
 export const dynamic = "force-dynamic";
@@ -48,14 +49,14 @@ const HOME_FAQ = [
       "Час. Это базовая длительность для большинства услуг. Если у вас борода — добавляется 30 минут.",
   },
   {
-    question: "Что значат разные цены на одну услугу — 1 800 и 2 700 ₽?",
+    question: "Сколько стоит стрижка в барбершопе BASE Premier?",
     answer:
-      "Это категории мастеров. У младших — стартовая цена, у старших — финальная. Все прошли одинаковое обучение внутри BASE Premier.",
+      "Мужская стрижка — от 1 800 до 2 700 ₽ в зависимости от категории мастера. Стрижка с бородой — от 3 200 до 4 600 ₽. Все цены за час работы, включая мытьё, моделирование и укладку.",
   },
   {
-    question: "Какие средства используются в BASE Premier?",
+    question: "Как часто нужно стричься мужчине?",
     answer:
-      "Graham Hill, Davines, The London Grooming Co и Solomon's. Профессиональная косметика под тип ваших волос — мастер подбирает индивидуально.",
+      "В среднем раз в 3–4 недели. Если вы работаете с техническими деталями (fade, taper), мастер порекомендует индивидуальный интервал на первом визите.",
   },
   {
     question: "Можно ли совместить стрижку и маникюр?",
@@ -63,9 +64,14 @@ const HOME_FAQ = [
       "Да. Одновременно (4 руки, 1 час, от 2 800 ₽) или последовательно (2 часа, скидка до 15 %). Выбирайте «Комплекс» при записи.",
   },
   {
-    question: "Сколько у вас филиалов в Казани?",
+    question: "Как отменить или перенести запись?",
     answer:
-      "Один. Шаляпина, 26 — в трёхстах метрах от Концертного зала Филармонии. Парковка по периметру.",
+      "Через ссылку в SMS-напоминании (придёт за сутки) или по номеру +7 (917) 918-38-77. Просим предупреждать за 3 часа.",
+  },
+  {
+    question: "Где вы находитесь?",
+    answer:
+      "Казань, ул. Шаляпина, 26, 1 этаж — в 300 м от Концертного зала Филармонии. Ежедневно 10:00–21:00.",
   },
 ];
 
@@ -82,6 +88,7 @@ export default function HomePage() {
       ))}
       <HeroSection />
       <ManifestoSection />
+      <StatsBand />
       <ServicesPreviewSection />
       <BarbersPreviewSection />
       <InteriorSection />

@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-import { useSoundContext } from "@/components/motion/SoundProvider";
 import { cn } from "@/lib/cn";
 
 export function StickyCTA({ className }: { className?: string }) {
   const [visible, setVisible] = useState(false);
-  const { play } = useSoundContext();
 
   useEffect(() => {
     let rafId = 0;
@@ -35,20 +33,18 @@ export function StickyCTA({ className }: { className?: string }) {
         className,
       )}
     >
-      {/* px-4 pt-3 + iOS safe-area at bottom */}
       <div
         style={{
-          padding: "0.75rem 1rem",
-          paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))",
+          padding: "0.75rem 1rem 0.5rem",
+          paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))",
         }}
       >
         <button
           data-yclients-open
           tabIndex={visible ? 0 : -1}
           aria-label="Записаться онлайн"
-          onMouseDown={() => play("click")}
           className={cn(
-            "w-full h-12",
+            "w-full h-7",
             "bg-accent text-accent-fg",
             "font-mono text-[13px] uppercase tracking-[0.12em]",
             "transition-opacity duration-base active:opacity-80",
@@ -57,6 +53,9 @@ export function StickyCTA({ className }: { className?: string }) {
         >
           Записаться
         </button>
+        <p className="mt-1.5 text-center font-mono text-[9px] uppercase tracking-[0.1em] text-fg-subtle">
+          Ежедневно 10:00 — 21:00
+        </p>
       </div>
     </div>
   );

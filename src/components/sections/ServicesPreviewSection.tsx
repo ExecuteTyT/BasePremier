@@ -45,7 +45,7 @@ export function ServicesPreviewSection() {
     <section className="bg-bg-primary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header row */}
-        <div className="mb-12 flex items-end justify-between md:mb-16">
+        <div className="mb-7 flex items-end justify-between md:mb-16">
           <CharReveal
             as="h2"
             className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted"
@@ -145,14 +145,14 @@ function ServiceCard({ index, title, description, from, href }: CardProps) {
         <span className="font-mono text-caption text-fg-muted">{formatPriceFrom(from)}</span>
         <span
           className={cn(
-            "font-sans text-body-sm text-fg-muted",
+            "font-mono text-[11px] uppercase tracking-[0.1em] text-fg-muted",
             "-translate-x-2 opacity-0",
             "transition-[opacity,transform] duration-base",
             "group-hover:translate-x-0 group-hover:opacity-100",
           )}
           aria-hidden="true"
         >
-          →
+          Записаться →
         </span>
       </div>
     </NextLink>
