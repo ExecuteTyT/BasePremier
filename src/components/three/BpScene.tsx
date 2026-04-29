@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Center,
-  Environment,
-  Float,
-  MeshReflectorMaterial,
-  OrbitControls,
-  Text3D,
-} from "@react-three/drei";
+import { Center, Environment, Float, OrbitControls, Text3D } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Bloom, EffectComposer, Vignette } from "@react-three/postprocessing";
 import { useReducedMotion } from "framer-motion";
@@ -50,12 +43,10 @@ function Monogram({ reduced }: { reduced: boolean | null }) {
           onPointerOut={() => setHovered(false)}
         >
           bp
-          <meshPhysicalMaterial
+          <meshStandardMaterial
             color={hovered ? "#F5F5F2" : "#F0EFE8"}
-            metalness={0.75}
-            roughness={0.08}
-            clearcoat={0.8}
-            clearcoatRoughness={0.05}
+            metalness={0.85}
+            roughness={0.1}
             envMapIntensity={2.5}
           />
         </Text3D>
@@ -147,18 +138,7 @@ function Floor() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.8, 0]}>
       <planeGeometry args={[24, 24]} />
-      <MeshReflectorMaterial
-        blur={[200, 50]}
-        resolution={256}
-        mixBlur={1}
-        mixStrength={10}
-        roughness={1}
-        depthScale={1.0}
-        minDepthThreshold={0.4}
-        maxDepthThreshold={1.4}
-        color="#050508"
-        metalness={0.5}
-      />
+      <meshStandardMaterial color="#050508" metalness={0.6} roughness={0.4} envMapIntensity={0.8} />
     </mesh>
   );
 }
@@ -300,7 +280,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
       }}
     >
       <FpsLimiter fps={isMobile ? 30 : 60} />
-      <Environment preset="city" />
+      <Environment preset="studio" />
       <Lights />
       <Floor />
       <Monogram reduced={reduced} />
@@ -322,7 +302,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
           luminanceThreshold={0.45}
           luminanceSmoothing={0.025}
           intensity={0.5}
-          kernelSize={KernelSize.MEDIUM}
+          kernelSize={KernelSize.SMALL}
           blendFunction={BlendFunction.ADD}
         />
         <Vignette eskil={false} offset={0.15} darkness={0.65} />
