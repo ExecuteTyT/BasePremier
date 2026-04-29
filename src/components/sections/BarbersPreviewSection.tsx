@@ -1,11 +1,12 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { CharReveal } from "@/components/motion/CharReveal";
 import { cn } from "@/lib/cn";
+import { gsap } from "@/lib/gsap";
 
 const TOP_BARBERS = [
   { slug: "marat", name: "Марат", role: "Старший мастер", reviews: 300 },
@@ -64,7 +65,6 @@ export function BarbersPreviewSection() {
           )}
         >
           {TOP_BARBERS.map((barber, i) => (
-            // Outer: entrance bounce (fires once on scroll)
             <motion.div
               key={barber.slug}
               className="flex-shrink-0 snap-start"
@@ -73,7 +73,6 @@ export function BarbersPreviewSection() {
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 0.6, ease, delay: i * 0.08 }}
             >
-              {/* Inner: hover dimming (ongoing) */}
               <motion.div
                 animate={{ opacity: hoveredIdx !== null && hoveredIdx !== i ? 0.35 : 1 }}
                 transition={{ duration: 0.2 }}
@@ -111,16 +110,59 @@ type AvatarCardProps = {
 };
 
 function AvatarCard({ barber, isHovered }: AvatarCardProps) {
+  const photoRef = useRef<HTMLDivElement>(null);
+
+  function handleMouseEnter() {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (photoRef.current) gsap.set(photoRef.current, { willChange: "transform" });
+  }
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = photoRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const rx = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
+    const ry = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
+    gsap.to(el, {
+      rotateX: rx,
+      rotateY: ry,
+      scale: 1.03,
+      duration: 0.35,
+      ease: "power2.out",
+      transformStyle: "preserve-3d",
+    });
+  }
+
+  function handleMouseLeave() {
+    const el = photoRef.current;
+    if (!el) return;
+    gsap.to(el, {
+      rotateX: 0,
+      rotateY: 0,
+      scale: 1,
+      duration: 0.7,
+      ease: "elastic.out(1, 0.4)",
+      clearProps: "willChange",
+    });
+  }
+
   return (
     <NextLink href={`/barbers/${barber.slug}`} className="group flex flex-col gap-3">
       {/* Photo area */}
       <div
+        ref={photoRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         className={cn(
           "relative overflow-hidden bg-bg-primary",
           "h-[120px] w-[90px] md:h-[160px] md:w-[120px]",
-          "border transition-[border-color,transform] duration-base ease-[var(--ease-out-quart)]",
-          isHovered ? "border-accent scale-[1.05]" : "border-border-default scale-100",
+          "border transition-[border-color] duration-base ease-[var(--ease-out-quart)]",
+          isHovered ? "border-accent" : "border-border-default",
         )}
+        style={{ perspective: "600px", transformStyle: "preserve-3d" }}
       >
         {/* Placeholder — replaced with NextImage when photos arrive */}
         <div className="flex h-full w-full items-center justify-center">

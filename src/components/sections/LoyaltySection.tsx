@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { cn } from "@/lib/cn";
 
 const ease = [0.19, 1, 0.22, 1] as const;
+const clipEase = [0.76, 0, 0.24, 1] as const;
 
 const BENEFITS = [
   {
@@ -25,6 +26,7 @@ const BENEFITS = [
 ] as const;
 
 export function LoyaltySection() {
+  const reduced = useReducedMotion();
   return (
     <section className="bg-bg-primary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
@@ -44,10 +46,10 @@ export function LoyaltySection() {
           {BENEFITS.map((item, i) => (
             <motion.div
               key={item.index}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduced ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+              whileInView={reduced ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0 0% 0 0)" }}
               viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.7, ease, delay: i * 0.1 }}
+              transition={{ duration: reduced ? 0.3 : 0.85, ease: clipEase, delay: i * 0.15 }}
               className={cn(
                 "flex flex-col gap-6 bg-bg-secondary p-5 md:p-8",
                 "border border-border-default",

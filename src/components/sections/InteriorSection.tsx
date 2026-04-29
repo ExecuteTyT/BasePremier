@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
@@ -8,6 +8,15 @@ import { cn } from "@/lib/cn";
 import { gsap } from "@/lib/gsap";
 
 const ease = [0.19, 1, 0.22, 1] as const;
+const clipEase = [0.76, 0, 0.24, 1] as const;
+
+// Directional clip-path wipes per photo slot
+const CLIP_IN = [
+  "inset(0 0 100% 0)", // 0: curtain drops top→bottom
+  "inset(0 100% 0 0)", // 1: wipe right→left
+  "inset(100% 0 0 0)", // 2: wipe bottom→top
+] as const;
+const CLIP_OUT = "inset(0 0 0% 0)";
 
 // Swap src → real paths when photos arrive; set to null to keep placeholder
 const PHOTOS: { src: string | null; alt: string }[] = [
@@ -25,12 +34,13 @@ function PhotoSlot({
   className?: string;
   index: number;
 }) {
+  const reduced = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduced ? { opacity: 0 } : { opacity: 0, clipPath: CLIP_IN[index] ?? CLIP_IN[0] }}
+      whileInView={reduced ? { opacity: 1 } : { opacity: 1, clipPath: CLIP_OUT }}
       viewport={{ once: true, margin: "-8% 0px" }}
-      transition={{ duration: 0.9, ease, delay: index * 0.12 }}
+      transition={{ duration: reduced ? 0.3 : 1.0, ease: clipEase, delay: index * 0.15 }}
       className={cn("relative overflow-hidden bg-bg-secondary", className)}
     >
       {photo.src ? (

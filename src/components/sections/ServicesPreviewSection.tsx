@@ -1,11 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import NextLink from "next/link";
+import { useRef } from "react";
 
 import { CharReveal } from "@/components/motion/CharReveal";
 import { cn } from "@/lib/cn";
 import { formatPriceFrom } from "@/lib/format";
+import { gsap } from "@/lib/gsap";
 
 const CARDS = [
   {
@@ -39,8 +41,10 @@ const CARDS = [
 ] as const;
 
 const ease = [0.19, 1, 0.22, 1] as const;
+const clipEase = [0.76, 0, 0.24, 1] as const;
 
 export function ServicesPreviewSection() {
+  const reduced = useReducedMotion();
   return (
     <section className="bg-bg-primary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
@@ -87,10 +91,11 @@ export function ServicesPreviewSection() {
             <motion.div
               key={card.index}
               className="w-[240px] flex-shrink-0 snap-start md:w-auto"
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              style={{ perspective: "800px" }}
+              initial={reduced ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+              whileInView={reduced ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0 0 0% 0)" }}
               viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.7, ease, delay: i * 0.1 }}
+              transition={{ duration: reduced ? 0.3 : 0.85, ease: clipEase, delay: i * 0.12 }}
             >
               <ServiceCard {...card} />
             </motion.div>
@@ -110,17 +115,79 @@ type CardProps = {
 };
 
 function ServiceCard({ index, title, description, from, href }: CardProps) {
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  function handleMouseEnter() {
+    if (cardRef.current) gsap.set(cardRef.current, { willChange: "transform" });
+  }
+
+  function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const rx = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
+    const ry = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+    gsap.to(card, {
+      rotateX: rx,
+      rotateY: ry,
+      duration: 0.4,
+      ease: "power2.out",
+      transformStyle: "preserve-3d",
+    });
+    if (overlayRef.current) {
+      overlayRef.current.style.setProperty(
+        "--mx",
+        `${((e.clientX - rect.left) / rect.width) * 100}%`,
+      );
+      overlayRef.current.style.setProperty(
+        "--my",
+        `${((e.clientY - rect.top) / rect.height) * 100}%`,
+      );
+    }
+  }
+
+  function handleMouseLeave() {
+    const card = cardRef.current;
+    if (!card) return;
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.7,
+      ease: "elastic.out(1, 0.4)",
+      clearProps: "willChange",
+    });
+  }
+
   return (
     <NextLink
+      ref={cardRef}
       href={href}
+      onMouseEnter={handleMouseEnter}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={cn(
-        "group flex h-[320px] flex-col justify-between p-8 md:h-[360px]",
+        "group relative flex h-[320px] flex-col justify-between p-8 md:h-[360px]",
         "bg-bg-secondary",
         "border border-border-default",
         "transition-[border-color,box-shadow] duration-slow ease-[var(--ease-out-quart)]",
         "hover:border-accent hover:shadow-[0_32px_64px_rgba(27,42,78,0.2)]",
       )}
+      style={{ transformStyle: "preserve-3d" }}
     >
+      {/* Specular highlight follows cursor */}
+      <div
+        ref={overlayRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(245,245,242,0.06), transparent 70%)",
+        }}
+      />
+
       {/* Top */}
       <div className="flex flex-col gap-4">
         <span

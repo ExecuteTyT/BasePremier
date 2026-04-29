@@ -1,12 +1,13 @@
 ﻿"use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import NextLink from "next/link";
 
 import { cn } from "@/lib/cn";
 import { formatDuration, formatPriceFrom, formatPriceRange } from "@/lib/format";
 
 const ease = [0.19, 1, 0.22, 1] as const;
+const clipEase = [0.76, 0, 0.24, 1] as const;
 
 const FEATURED = [
   { name: "Мужская стрижка", duration: 60, price: [1800, 2700] as [number, number] },
@@ -22,6 +23,7 @@ function priceLabel(price: number | [number, number]): string {
 }
 
 export function PricingTeaserSection() {
+  const reduced = useReducedMotion();
   return (
     <section className="bg-bg-secondary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
@@ -65,10 +67,10 @@ export function PricingTeaserSection() {
             <motion.div
               key={item.name}
               role="listitem"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduced ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+              whileInView={reduced ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0 0 0% 0)" }}
               viewport={{ once: true, margin: "-5% 0px" }}
-              transition={{ duration: 0.5, ease, delay: i * 0.05 }}
+              transition={{ duration: reduced ? 0.2 : 0.4, ease: clipEase, delay: i * 0.04 }}
               className="flex min-h-[52px] items-center justify-between gap-4 py-3"
             >
               <span className="font-display font-normal text-[1rem] leading-snug text-fg-primary md:text-[1.125rem]">
