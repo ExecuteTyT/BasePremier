@@ -21,7 +21,7 @@ export function Footer() {
           <div>
             <Logo variant="wordmark" size="sm" href="/" className="py-2.5" />
             <p className="mt-4 max-w-xs text-body-sm text-fg-muted">
-              Стиль, атмосфера, мастерство — больше, чем просто барбершоп
+              Стиль, атмосфера, мастерство — мужской уход без компромиссов
             </p>
           </div>
 

@@ -23,7 +23,7 @@ test.describe("Hero section", () => {
     });
 
     await page.goto("/");
-    await expect(page.locator("h1").first()).toContainText("Барбершоп BASE Premier");
+    await expect(page.locator("h1").first()).toContainText("Мужской салон BASE Premier");
 
     const realErrors = filterConsoleErrors(consoleErrors);
     expect(realErrors, "Console errors on /").toHaveLength(0);

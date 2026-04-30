@@ -157,9 +157,8 @@ export default function AboutPage() {
             <div className="mx-auto max-w-[640px]">
               <div className="space-y-6 font-sans text-[1.125rem] leading-relaxed text-fg-muted [&_strong]:font-normal [&_strong]:text-fg-primary">
                 <p>
-                  BASE Premier — премиальный барбершоп в Казани. Мы открылись в 2022 году в самом
-                  центре города, на улице Шаляпина, 26 — в трёхстах метрах от Концертного зала
-                  Филармонии.
+                  BASE Premier — мужской салон в Казани. Мы открылись в 2022 году в самом центре
+                  города, на улице Шаляпина, 26 — в трёхстах метрах от Концертного зала Филармонии.
                 </p>
                 <p>
                   <strong>Мы делаем три вещи: стрижём, ухаживаем, заботимся.</strong>

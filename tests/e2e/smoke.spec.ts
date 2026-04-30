@@ -21,7 +21,7 @@ function filterConsoleErrors(errors: string[]): string[] {
 }
 
 const PAGES = [
-  { path: "/", h1: "Барбершоп BASE Premier" },
+  { path: "/", h1: "Мужской салон BASE Premier" },
   { path: "/services", h1: "Услуги" },
   { path: "/barbers", h1: "Команда" },
   { path: "/about", h1: "О нас" },

@@ -104,7 +104,7 @@ export function HeroSection() {
               className="font-display text-[2.6rem] leading-none text-fg-primary md:text-display-xl"
               style={{ animation: slideUp(1.0, 0) }}
             >
-              Барбершоп BASE Premier
+              Мужской салон BASE Premier
             </h1>
 
             <div
