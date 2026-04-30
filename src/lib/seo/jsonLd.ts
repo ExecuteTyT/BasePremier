@@ -1,4 +1,4 @@
-import { SERVICE_CATEGORIES, ServiceCategory } from "@/data/services";
+import { Service, SERVICE_CATEGORIES, ServiceCategory } from "@/data/services";
 import { formatDuration, formatPrice, formatPriceRange } from "@/lib/format";
 
 const SITE_URL = "https://basepremier.ru";
@@ -144,6 +144,45 @@ export function articleJsonLd(article: {
     },
     url: `${SITE_URL}/journal/${article.slug}`,
     timeRequired: `PT${article.readMinutes}M`,
+  };
+}
+
+export function serviceDetailJsonLd(service: Service, description: string) {
+  const minPrice = Array.isArray(service.price) ? service.price[0] : service.price;
+  const maxPrice = Array.isArray(service.price) ? service.price[1] : undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: service.name,
+    description,
+    provider: {
+      "@type": "HairSalon",
+      name: "BASE Premier",
+      url: SITE_URL,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "ул. Шаляпина, 26",
+        addressLocality: "Казань",
+        addressCountry: "RU",
+      },
+    },
+    areaServed: { "@type": "City", name: "Казань" },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "RUB",
+      price: minPrice,
+      ...(maxPrice
+        ? {
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              minPrice,
+              maxPrice,
+              priceCurrency: "RUB",
+            },
+          }
+        : {}),
+    },
   };
 }
 
