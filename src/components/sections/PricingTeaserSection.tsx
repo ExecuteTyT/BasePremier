@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import NextLink from "next/link";
 
+import { MagneticButton } from "@/components/ui/MagneticButton";
 import { cn } from "@/lib/cn";
 import { formatDuration, formatPriceFrom, formatPriceRange } from "@/lib/format";
 
@@ -98,6 +99,18 @@ export function PricingTeaserSection() {
         >
           Средний чек — 2 400 ₽ · Ежедневно 10:00–21:00
         </motion.p>
+
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease, delay: 0.5 }}
+        >
+          <MagneticButton variant="primary" size="md">
+            Записаться на услугу
+          </MagneticButton>
+        </motion.div>
       </div>
     </section>
   );

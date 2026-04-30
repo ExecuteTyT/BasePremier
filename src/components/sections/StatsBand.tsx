@@ -3,7 +3,7 @@
 import { useReducedMotion } from "framer-motion";
 
 const ITEMS = [
-  "★ 5,0 рейтинг",
+  "★★★★★ 5,0 — Яндекс.Карты",
   "394 отзыва",
   "10 мастеров",
   "с 2022 года",
@@ -18,7 +18,7 @@ function Band() {
     <span className="flex shrink-0 items-center" aria-hidden="true">
       {ITEMS.map((item, i) => (
         <span key={i} className="flex items-center">
-          <span className="px-6 font-mono text-[11px] uppercase tracking-[0.14em] text-fg-subtle">
+          <span className="px-6 font-mono text-[11px] uppercase tracking-[0.14em] text-fg-muted">
             {item}
           </span>
           <span className="font-mono text-[11px] text-fg-subtle/40">{SEP}</span>

@@ -4,10 +4,10 @@
      ============================================================ */
 
   /* Фон */
-  --color-bg-primary: #0a0a0b;
-  --color-bg-secondary: #131316;
-  --color-bg-tertiary: #1b1b1e;
-  --color-bg-elevated: #232327;
+  --color-bg-primary: #18181b;
+  --color-bg-secondary: #212124;
+  --color-bg-tertiary: #2a2a2d;
+  --color-bg-elevated: #363639;
 
   /* Текст */
   --color-fg-primary: #f5f5f2;
@@ -18,7 +18,7 @@
 
   /* Акцент — Navy */
   --color-accent: #1b2a4e;
-  --color-accent-hover: #243762;
+  --color-accent-hover: #2a4595;
   --color-accent-active: #142143;
   --color-accent-fg: #f5f5f2;
   --color-accent-glow: rgba(27, 42, 78, 0.4);

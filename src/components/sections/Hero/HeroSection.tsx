@@ -147,19 +147,30 @@ export function HeroSection() {
               </NextLink>
             </div>
 
-            <p
-              className="font-mono text-[0.65rem] uppercase tracking-overline text-fg-subtle"
-              style={{ animation: slideUp(0.5, 0.95) }}
-            >
-              Ежедневно&nbsp;10:00&nbsp;—&nbsp;21:00
-            </p>
-
-            <p
-              className="font-mono text-caption text-fg-muted"
-              style={{ animation: slideUp(0.6, 1.0) }}
-            >
-              от&nbsp;1&nbsp;800&nbsp;₽&nbsp;·&nbsp;★&nbsp;5,0&nbsp;·&nbsp;394&nbsp;отзыва
-            </p>
+            {/* Yandex rating badge + hours */}
+            <div className="flex flex-col gap-2" style={{ animation: slideUp(0.6, 0.95) }}>
+              <a
+                href="https://yandex.ru/maps/org/base_premier/236063126987/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "inline-flex w-fit items-center gap-2",
+                  "border border-border-strong px-3 py-1.5",
+                  "transition-[border-color] duration-base hover:border-accent",
+                )}
+              >
+                <span className="font-mono text-[11px] text-warning">★★★★★</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-fg-secondary">
+                  5,0&nbsp;·&nbsp;394&nbsp;отзыва
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-fg-subtle">
+                  Яндекс.Карты
+                </span>
+              </a>
+              <p className="font-mono text-[0.65rem] uppercase tracking-overline text-fg-subtle">
+                от&nbsp;1&nbsp;800&nbsp;₽&nbsp;·&nbsp;Ежедневно&nbsp;10:00&nbsp;—&nbsp;21:00
+              </p>
+            </div>
           </div>
         </div>
       </div>
