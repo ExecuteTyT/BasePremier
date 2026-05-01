@@ -5,6 +5,7 @@ import NextLink from "next/link";
 import { useRef, useState } from "react";
 
 import { CharReveal } from "@/components/motion/CharReveal";
+import { BarberAvatarPlaceholder } from "@/components/ui/BarberAvatarPlaceholder";
 import { cn } from "@/lib/cn";
 import { gsap } from "@/lib/gsap";
 
@@ -164,12 +165,8 @@ function AvatarCard({ barber, isHovered }: AvatarCardProps) {
         )}
         style={{ perspective: "600px", transformStyle: "preserve-3d" }}
       >
-        {/* Placeholder — replaced with NextImage when photos arrive */}
-        <div className="flex h-full w-full items-center justify-center">
-          <span className="font-display text-[2.5rem] font-normal leading-none text-fg-muted/20 select-none">
-            {barber.name[0]}
-          </span>
-        </div>
+        {/* [BLOCKER] Placeholder — заменить на NextImage после получения фото (Q6/Q8) */}
+        <BarberAvatarPlaceholder name={barber.name} compact />
       </div>
 
       {/* Name */}
@@ -183,7 +180,7 @@ function AvatarCard({ barber, isHovered }: AvatarCardProps) {
         >
           {barber.name}
         </span>
-        <span className="font-mono text-[11px] uppercase tracking-widest text-fg-muted">
+        <span className="font-mono text-overline uppercase tracking-widest text-fg-muted">
           {barber.reviews}+ отзывов
         </span>
       </div>

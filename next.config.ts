@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["three", "@react-three/fiber", "@react-three/drei"],
   devIndicators: false,
   images: {
+    formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

@@ -5,8 +5,6 @@ import { BarbersGridSection } from "@/components/sections/BarbersGridSection";
 import { BARBERS } from "@/data/barbers";
 import { breadcrumbJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
 
-export const dynamic = "force-dynamic";
-
 export const revalidate = 3600;
 
 export const metadata: Metadata = {

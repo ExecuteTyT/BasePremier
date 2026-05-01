@@ -4,8 +4,6 @@ import { CharReveal } from "@/components/motion/CharReveal";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { breadcrumbJsonLd, faqPageJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "О нас — BASE Premier | Премиальный барбершоп, Казань",
   description:

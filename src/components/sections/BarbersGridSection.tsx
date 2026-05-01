@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import NextLink from "next/link";
 import { useMemo, useState } from "react";
 
+import { BarberAvatarPlaceholder } from "@/components/ui/BarberAvatarPlaceholder";
 import { BARBERS, Barber, BarberTag } from "@/data/barbers";
 import { cn } from "@/lib/cn";
 import { reviewWord } from "@/lib/format";
@@ -104,17 +105,9 @@ function BarberGridCard({ barber, index }: { barber: Barber; index: number }) {
       transition={{ duration: 0.6, ease, delay: index * 0.05 }}
     >
       <NextLink href={`/barbers/${barber.slug}`} className="group block">
-        {/* Photo */}
+        {/* Photo — [BLOCKER] заменить BarberAvatarPlaceholder на NextImage после получения фото (Q6/Q8) */}
         <div className="relative mb-4 aspect-[3/4] overflow-hidden bg-bg-secondary">
-          {/* Placeholder (photo replaces later) */}
-          <div className="flex h-full items-center justify-center">
-            <span
-              className="select-none font-display font-normal leading-none text-fg-muted/15"
-              style={{ fontSize: "clamp(4rem, 10vw, 7rem)" }}
-            >
-              {barber.name[0]}
-            </span>
-          </div>
+          <BarberAvatarPlaceholder name={barber.name} />
 
           {/* Hover overlay */}
           <div
@@ -127,7 +120,7 @@ function BarberGridCard({ barber, index }: { barber: Barber; index: number }) {
             <span className="font-display font-normal text-[1.125rem] text-fg-primary">
               {barber.name}
             </span>
-            <span className="font-mono text-[11px] uppercase tracking-widest text-fg-muted">
+            <span className="font-mono text-overline uppercase tracking-widest text-fg-muted">
               {barber.role}
             </span>
           </div>
@@ -156,10 +149,10 @@ function BarberGridCard({ barber, index }: { barber: Barber; index: number }) {
           <h2 className="font-display font-normal text-[1.125rem] leading-tight text-fg-primary transition-opacity duration-base group-hover:opacity-70">
             {barber.name}
           </h2>
-          <p className="font-mono text-[11px] uppercase tracking-wider text-fg-muted">
+          <p className="font-mono text-overline uppercase tracking-wider text-fg-muted">
             {barber.role}
           </p>
-          <p className="font-mono text-[11px] text-fg-muted">
+          <p className="font-mono text-overline text-fg-muted">
             {barber.reviews}&nbsp;{reviewWord(barber.reviews)}
           </p>
         </div>

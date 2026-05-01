@@ -59,36 +59,30 @@ export function StickyCTA({ className }: { className?: string }) {
 
   return (
     <>
-      {/* Mobile — full-width bottom bar */}
+      {/* Mobile — floating button. Container anchored at bottom-0 so y:"100%" hides fully. */}
       <div
         ref={mobileRef}
-        aria-hidden="true"
         className={cn(
           "fixed inset-x-0 bottom-0 z-[100] md:hidden",
-          "border-t border-border-strong bg-bg-secondary/95 backdrop-blur-sm",
+          "flex justify-center",
           className,
         )}
-        style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+        style={{ paddingBottom: "max(1.5rem, env(safe-area-inset-bottom, 1.5rem))" }}
       >
-        <div className="px-4 pt-3 pb-0">
-          <button
-            data-yclients-open
-            tabIndex={0}
-            aria-label="Записаться онлайн"
-            className={cn(
-              "w-full min-h-[44px]",
-              "bg-accent text-accent-fg",
-              "font-mono text-[13px] uppercase tracking-[0.12em]",
-              "transition-opacity duration-base active:opacity-80",
-              "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-primary",
-            )}
-          >
-            Записаться
-          </button>
-          <p className="mt-1.5 mb-2 text-center font-mono text-[9px] uppercase tracking-[0.1em] text-fg-subtle">
-            Ежедневно 10:00 — 21:00
-          </p>
-        </div>
+        <button
+          data-yclients-open
+          aria-label="Записаться онлайн"
+          className={cn(
+            "min-h-[48px] px-10",
+            "bg-accent text-accent-fg",
+            "font-mono text-[13px] uppercase tracking-[0.12em]",
+            "shadow-[0_8px_40px_rgba(0,0,0,0.65)]",
+            "transition-opacity duration-base active:opacity-75",
+            "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-primary",
+          )}
+        >
+          Записаться
+        </button>
       </div>
 
       {/* Desktop — floating pill bottom-right */}

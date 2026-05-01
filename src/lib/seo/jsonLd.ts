@@ -36,7 +36,10 @@ export function hairSalonJsonLd() {
     priceRange: "₽₽",
     currenciesAccepted: "RUB",
     paymentAccepted: "Cash, Credit Card",
-    sameAs: ["https://www.instagram.com/basepremier/", "https://yandex.ru/maps/org/base_premier/"],
+    sameAs: [
+      "https://www.instagram.com/basepremier/",
+      "https://yandex.ru/maps/org/base_premier/236063126987/",
+    ],
   };
 }
 
@@ -125,6 +128,7 @@ export function articleJsonLd(article: {
   title: string;
   excerpt: string;
   date: string;
+  dateModified?: string;
   readMinutes: number;
 }) {
   return {
@@ -133,17 +137,43 @@ export function articleJsonLd(article: {
     headline: article.title,
     description: article.excerpt,
     datePublished: article.date,
+    dateModified: article.dateModified ?? article.date,
     author: {
       "@type": "Organization",
       name: "BASE Premier",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Organization",
       name: "BASE Premier",
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/images/og-default.jpg`,
+      },
     },
     url: `${SITE_URL}/journal/${article.slug}`,
+    image: `${SITE_URL}/images/og-default.jpg`,
     timeRequired: `PT${article.readMinutes}M`,
+  };
+}
+
+export function webSiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "BASE Premier",
+    url: SITE_URL,
+    description: "Премиальный барбершоп в Казани. Мужские стрижки, уход, маникюр.",
+    inLanguage: "ru-RU",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/services?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 

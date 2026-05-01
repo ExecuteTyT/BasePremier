@@ -1,7 +1,11 @@
+"use client";
+
 import NextLink from "next/link";
+import { useEffect, useRef } from "react";
 
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { cn } from "@/lib/cn";
+import { gsap } from "@/lib/gsap";
 
 const FAQ_ITEMS = [
   {
@@ -37,18 +41,43 @@ const FAQ_ITEMS = [
 ] as const;
 
 export function FaqSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(".faq-reveal", {
+        y: 32,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="bg-bg-secondary py-24 md:py-32">
+    <section ref={sectionRef} className="bg-bg-secondary py-24 md:py-32">
       <div className="mx-auto max-w-screen-xl px-6 md:px-8">
         {/* Header */}
         <div className="mb-7 flex items-end justify-between md:mb-16">
-          <h2 className="font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted">
+          <h2 className="faq-reveal font-mono text-[14px] uppercase tracking-[0.2em] text-fg-muted">
             Вопросы и ответы
           </h2>
           <NextLink
             href="/about"
             className={cn(
-              "font-mono text-caption text-fg-muted",
+              "faq-reveal font-mono text-caption text-fg-muted",
               "border-b border-fg-muted/30 pb-px",
               "transition-[border-color,color] duration-base",
               "hover:border-fg-muted/50 hover:text-fg-muted",
@@ -59,7 +88,7 @@ export function FaqSection() {
         </div>
 
         {/* Accordion — first item open by default */}
-        <div className="max-w-3xl">
+        <div className="faq-reveal max-w-3xl">
           <FaqAccordion items={[...FAQ_ITEMS]} defaultOpen={0} />
         </div>
       </div>

@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Политика конфиденциальности — BASE Premier",
   description: "Политика обработки персональных данных ИП Шайхутдинов Айрат Рафаэлевич.",

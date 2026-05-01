@@ -3,8 +3,6 @@ import { Metadata } from "next";
 import { QuizFlow } from "@/components/sections/QuizFlow";
 import { breadcrumbJsonLd } from "@/lib/seo/jsonLd";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Подбор стрижки — BASE Premier | Барбершоп Казань",
   description:

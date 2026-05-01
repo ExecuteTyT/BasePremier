@@ -2,9 +2,7 @@ import { Metadata } from "next";
 
 import { CharReveal } from "@/components/motion/CharReveal";
 import { ServicesListSection } from "@/components/sections/ServicesListSection";
-import { serviceListJsonLd } from "@/lib/seo/jsonLd";
-
-export const dynamic = "force-dynamic";
+import { breadcrumbJsonLd, serviceListJsonLd } from "@/lib/seo/jsonLd";
 
 export const revalidate = 60;
 

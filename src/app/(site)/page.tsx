@@ -8,13 +8,10 @@ import { InteriorSection } from "@/components/sections/InteriorSection";
 import { LoyaltySection } from "@/components/sections/LoyaltySection";
 import { ManifestoSection } from "@/components/sections/ManifestoSection";
 import { PricingTeaserSection } from "@/components/sections/PricingTeaserSection";
-import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ServicesPreviewSection } from "@/components/sections/ServicesPreviewSection";
 import { StatsBand } from "@/components/sections/StatsBand";
-import { faqPageJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
-
-export const dynamic = "force-dynamic";
+import { faqPageJsonLd, hairSalonJsonLd, webSiteJsonLd } from "@/lib/seo/jsonLd";
 
 export const metadata: Metadata = {
   title: "BASE Premier — Премиальный барбершоп в Казани | Шаляпина 26",
@@ -76,7 +73,7 @@ const HOME_FAQ = [
 ];
 
 export default function HomePage() {
-  const jsonLd = [hairSalonJsonLd(), faqPageJsonLd(HOME_FAQ)];
+  const jsonLd = [hairSalonJsonLd(), faqPageJsonLd(HOME_FAQ), webSiteJsonLd()];
   return (
     <>
       {jsonLd.map((ld, i) => (
@@ -92,7 +89,6 @@ export default function HomePage() {
       <ServicesPreviewSection />
       <BarbersPreviewSection />
       <InteriorSection />
-      <ProcessSection />
       <ReviewsSection />
       <PricingTeaserSection />
       <LoyaltySection />

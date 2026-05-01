@@ -7,8 +7,6 @@ import { SERVICE_CATEGORIES } from "@/data/services";
 import { formatDuration, formatPrice, formatPriceFrom, formatPriceRange } from "@/lib/format";
 import { breadcrumbJsonLd, serviceDetailJsonLd } from "@/lib/seo/jsonLd";
 
-export const dynamic = "force-dynamic";
-
 function findService(slug: string) {
   for (const cat of SERVICE_CATEGORIES) {
     for (const svc of cat.services) {

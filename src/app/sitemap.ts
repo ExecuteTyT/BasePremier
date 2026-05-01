@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 
 import { BARBERS } from "@/data/barbers";
+import { SERVICE_CATEGORIES } from "@/data/services";
 import { getAllArticles } from "@/lib/sanity/queries";
 
 const BASE = "https://basepremier.ru";
@@ -42,6 +43,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  const serviceRoutes: MetadataRoute.Sitemap = SERVICE_CATEGORIES.flatMap((cat) =>
+    cat.services.map((svc) => ({
+      url: `${BASE}/services/${svc.id}`,
+      lastModified: new Date("2026-04-26"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  );
+
   const barberRoutes: MetadataRoute.Sitemap = BARBERS.map((b) => ({
     url: `${BASE}/barbers/${b.slug}`,
     lastModified: new Date(),
@@ -57,5 +67,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...barberRoutes, ...articleRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...barberRoutes, ...articleRoutes];
 }

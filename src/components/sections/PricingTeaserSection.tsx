@@ -74,7 +74,7 @@ export function PricingTeaserSection() {
               transition={{ duration: reduced ? 0.2 : 0.4, ease: clipEase, delay: i * 0.04 }}
               className="flex min-h-[52px] items-center justify-between gap-4 py-3"
             >
-              <span className="font-display font-normal text-[1rem] leading-snug text-fg-primary md:text-[1.125rem]">
+              <span className="min-w-0 font-display font-normal text-[1rem] leading-snug text-fg-primary md:text-[1.125rem]">
                 {item.name}
               </span>
               <div className="flex shrink-0 items-center gap-4 md:gap-8">

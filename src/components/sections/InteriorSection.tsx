@@ -44,7 +44,7 @@ function PhotoSlot({
       className={cn("relative overflow-hidden bg-bg-secondary", className)}
     >
       {photo.src ? (
-        <Image src={photo.src} alt={photo.alt} fill className="object-cover" sizes="50vw" />
+        <Image src={photo.src} alt={photo.alt} fill className="object-cover" sizes="(min-width: 768px) 50vw, 80vw" />
       ) : (
         // Placeholder — удалить когда придут фото
         <div className="flex h-full w-full flex-col items-center justify-center gap-3 select-none">
@@ -134,14 +134,27 @@ export function InteriorSection() {
             </div>
           </div>
 
-          {/* Mobile: stacked */}
-          <div className="flex flex-col gap-4 md:hidden">
-            <PhotoSlot photo={PHOTOS[0]!} index={0} className="aspect-[3/4]" />
-            <div className="grid grid-cols-2 gap-4">
-              <PhotoSlot photo={PHOTOS[1]!} index={1} className="aspect-[3/4]" />
-              <PhotoSlot photo={PHOTOS[2]!} index={2} className="aspect-[3/4]" />
+          {/* Mobile: horizontal swipe carousel with CSS scroll-snap */}
+          <div className="md:hidden">
+            <div
+              className={cn(
+                "-mx-6 flex gap-3 overflow-x-auto pl-6",
+                "snap-x snap-mandatory scroll-smooth",
+                "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+              )}
+            >
+              {PHOTOS.map((photo, i) => (
+                <PhotoSlot
+                  key={i}
+                  photo={photo}
+                  index={i}
+                  className="aspect-[3/4] w-[80vw] flex-none snap-start"
+                />
+              ))}
+              {/* Right-edge padding sentinel */}
+              <div className="w-6 flex-none" aria-hidden="true" />
             </div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
               Шаляпина, 26 · 245 м от Концертного зала Филармонии
             </p>
           </div>

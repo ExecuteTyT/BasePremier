@@ -6,7 +6,6 @@ import { PortableTextContent } from "@/components/journal/PortableTextContent";
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/sanity/queries";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/jsonLd";
 
-export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
@@ -72,7 +71,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     breadcrumbJsonLd([
       { name: "Главная", url: "/" },
       { name: "Журнал", url: "/journal" },
-      { name: categoryLabel, url: `/journal` },
       { name: article.title, url: `/journal/${article.slug.current}` },
     ]),
   ];

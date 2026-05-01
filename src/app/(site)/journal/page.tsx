@@ -5,8 +5,6 @@ import { JournalGridSection } from "@/components/sections/JournalGridSection";
 import { getAllArticles } from "@/lib/sanity/queries";
 import { breadcrumbJsonLd, hairSalonJsonLd } from "@/lib/seo/jsonLd";
 
-export const dynamic = "force-dynamic";
-
 export const revalidate = 3600;
 
 export const metadata: Metadata = {

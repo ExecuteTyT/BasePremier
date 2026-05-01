@@ -36,6 +36,7 @@ export default defineConfig({
         "**/home.spec.ts",
         "**/pages.spec.ts",
         "**/axe.spec.ts",
+        "**/qa-visual.spec.ts",
       ],
     },
     {

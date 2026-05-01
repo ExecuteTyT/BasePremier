@@ -1,3 +1,4 @@
+import { BarberAvatarPlaceholder } from "@/components/ui/BarberAvatarPlaceholder";
 import { NextImage } from "@/components/ui/NextImage";
 import { cn } from "@/lib/cn";
 
@@ -40,11 +41,7 @@ export function BarberCard({
             className="object-cover transition-transform duration-slow group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center">
-            <span className="select-none font-display text-display-lg text-fg-muted/20">
-              {name[0]}
-            </span>
-          </div>
+          <BarberAvatarPlaceholder name={name} />
         )}
 
         {isBestEmployee && (
