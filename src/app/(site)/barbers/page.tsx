@@ -22,6 +22,20 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
+    images: [
+      {
+        url: "https://basepremier.ru/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Мастера барбершопа BASE Premier, Казань",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Мастера — BASE Premier | Барбершоп Казань",
+    description: "10 мастеров со своим почерком. Старший Марат (300 отзывов), лучший Сайод. Шаляпина 26.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
   },
 };
 

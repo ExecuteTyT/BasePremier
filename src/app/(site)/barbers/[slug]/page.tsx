@@ -7,6 +7,10 @@ import { BARBERS } from "@/data/barbers";
 import { reviewWord } from "@/lib/format";
 import { breadcrumbJsonLd, hairSalonJsonLd, personJsonLd } from "@/lib/seo/jsonLd";
 
+export function generateStaticParams() {
+  return BARBERS.map((b) => ({ slug: b.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -14,7 +18,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const barber = BARBERS.find((b) => b.slug === slug);
-  if (!barber) return {};
+  if (!barber) return { title: "Мастер не найден — BASE Premier" };
+
+  const ogTitle = `${barber.name} — BASE Premier | Барбершоп Казань`;
+  const ogDescription = `${barber.reviews} ${reviewWord(barber.reviews)} на Яндекс.Картах. ${barber.role}. Запись онлайн.`;
 
   return {
     title: `${barber.name} — ${barber.role} | BASE Premier, Казань`,
@@ -23,12 +30,26 @@ export async function generateMetadata({
       canonical: `https://basepremier.ru/barbers/${barber.slug}`,
     },
     openGraph: {
-      title: `${barber.name} — BASE Premier | Барбершоп Казань`,
-      description: `${barber.reviews} ${reviewWord(barber.reviews)} на Яндекс.Картах. ${barber.role}. Запись онлайн.`,
+      title: ogTitle,
+      description: ogDescription,
       url: `https://basepremier.ru/barbers/${barber.slug}`,
       siteName: "BASE Premier",
       locale: "ru_RU",
-      type: "profile",
+      type: "website",
+      images: [
+        {
+          url: "https://basepremier.ru/images/og-default.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${barber.name} — мастер барбершопа BASE Premier, Казань`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: ogDescription,
+      images: ["https://basepremier.ru/images/og-default.jpg"],
     },
   };
 }

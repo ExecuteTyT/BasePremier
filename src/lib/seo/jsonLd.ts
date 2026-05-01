@@ -7,10 +7,12 @@ export function hairSalonJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "HairSalon",
+    "@id": `${SITE_URL}/#hairsalon`,
     name: "BASE Premier",
     url: SITE_URL,
     telephone: "+79179183877",
     image: `${SITE_URL}/images/og-default.jpg`,
+    hasMap: "https://yandex.ru/maps/org/base_premier/236063126987/",
     address: {
       "@type": "PostalAddress",
       streetAddress: "ул. Шаляпина, 26",
@@ -19,7 +21,11 @@ export function hairSalonJsonLd() {
       postalCode: "420015",
       addressCountry: "RU",
     },
-    // geo: pending Q1 (GPS coordinates from client)
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "55.784178",
+      longitude: "49.105068",
+    },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -130,6 +136,7 @@ export function articleJsonLd(article: {
   date: string;
   dateModified?: string;
   readMinutes: number;
+  authorName?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -139,8 +146,8 @@ export function articleJsonLd(article: {
     datePublished: article.date,
     dateModified: article.dateModified ?? article.date,
     author: {
-      "@type": "Organization",
-      name: "BASE Premier",
+      "@type": "Person",
+      name: article.authorName ?? "Редакция BASE Premier",
       url: SITE_URL,
     },
     publisher: {
@@ -166,11 +173,15 @@ export function webSiteJsonLd() {
     url: SITE_URL,
     description: "Премиальный барбершоп в Казани. Мужские стрижки, уход, маникюр.",
     inLanguage: "ru-RU",
+    sameAs: [
+      "https://www.instagram.com/basepremier/",
+      "https://yandex.ru/maps/org/base_premier/236063126987/",
+    ],
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/services?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}/journal?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -197,6 +208,7 @@ export function serviceDetailJsonLd(service: Service, description: string) {
         addressCountry: "RU",
       },
     },
+    url: `${SITE_URL}/services/${service.id}`,
     areaServed: { "@type": "City", name: "Казань" },
     offers: {
       "@type": "Offer",

@@ -19,6 +19,21 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
+    images: [
+      {
+        url: "https://basepremier.ru/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "BASE Premier — барбершоп на Шаляпина 26, Казань",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "О нас — BASE Premier | Барбершоп Казань",
+    description:
+      "Барбершоп BASE Premier открылся в 2022 году. 10 мастеров, профессиональная косметика, тишина и высокие стандарты. Шаляпина 26.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
   },
 };
 

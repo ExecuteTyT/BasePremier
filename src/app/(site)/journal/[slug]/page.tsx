@@ -20,22 +20,38 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
-  if (!article) return {};
+  if (!article) return { title: "Статья не найдена — BASE Premier" };
+
+  const ogTitle = `${article.title} | BASE Premier`;
 
   return {
-    title: `${article.title} | BASE Premier`,
+    title: ogTitle,
     description: article.excerpt,
     alternates: {
       canonical: `https://basepremier.ru/journal/${article.slug.current}`,
     },
     openGraph: {
-      title: `${article.title} | BASE Premier`,
+      title: ogTitle,
       description: article.excerpt,
       url: `https://basepremier.ru/journal/${article.slug.current}`,
       siteName: "BASE Premier",
       locale: "ru_RU",
       type: "article",
       publishedTime: article.publishedAt,
+      images: [
+        {
+          url: "https://basepremier.ru/images/og-default.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${article.title} — BASE Premier`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: ogTitle,
+      description: article.excerpt,
+      images: ["https://basepremier.ru/images/og-default.jpg"],
     },
   };
 }

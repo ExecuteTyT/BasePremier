@@ -7,6 +7,10 @@ import { SERVICE_CATEGORIES } from "@/data/services";
 import { formatDuration, formatPrice, formatPriceFrom, formatPriceRange } from "@/lib/format";
 import { breadcrumbJsonLd, serviceDetailJsonLd } from "@/lib/seo/jsonLd";
 
+export function generateStaticParams() {
+  return SERVICE_CATEGORIES.flatMap((cat) => cat.services.map((svc) => ({ slug: svc.id })));
+}
+
 function findService(slug: string) {
   for (const cat of SERVICE_CATEGORIES) {
     for (const svc of cat.services) {
@@ -30,7 +34,7 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const found = findService(slug);
-  if (!found) return {};
+  if (!found) return { title: "Услуга не найдена — BASE Premier" };
 
   const { service, category } = found;
   const price = priceText(service);
@@ -50,7 +54,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "BASE Premier",
       locale: "ru_RU",
       type: "website",
-      images: [{ url: "https://basepremier.ru/images/og-default.jpg", width: 1200, height: 630 }],
+      images: [
+        {
+          url: "https://basepremier.ru/images/og-default.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${service.name} в барбершопе BASE Premier, Казань`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["https://basepremier.ru/images/og-default.jpg"],
     },
   };
 }

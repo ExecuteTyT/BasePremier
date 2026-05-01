@@ -37,6 +37,13 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "BASE Premier — Премиальный барбершоп, Казань",
+    description:
+      "Мужские стрижки от 1 800 ₽. 10 мастеров, час работы, профкосметика. Рейтинг 5,0 · 394 отзыва. Шаляпина 26, ежедневно 10–21.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
+  },
 };
 
 const HOME_FAQ = [

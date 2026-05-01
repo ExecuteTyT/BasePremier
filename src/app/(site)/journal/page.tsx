@@ -21,6 +21,20 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
+    images: [
+      {
+        url: "https://basepremier.ru/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Журнал BASE Premier — гайды и советы барбершопа",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Журнал — BASE Premier | Барбершоп Казань",
+    description: "Гайды, разборы и советы от мастеров BASE Premier.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
   },
 };
 

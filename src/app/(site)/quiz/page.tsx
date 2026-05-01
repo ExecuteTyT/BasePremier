@@ -17,6 +17,20 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
+    images: [
+      {
+        url: "https://basepremier.ru/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Подбор стрижки в BASE Premier — барбершоп Казань",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Подбор стрижки — BASE Premier",
+    description: "Четыре вопроса — и мы подберём мастера и услугу именно для вас.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
   },
 };
 

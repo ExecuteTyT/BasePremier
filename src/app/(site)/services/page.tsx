@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { CharReveal } from "@/components/motion/CharReveal";
 import { ServicesListSection } from "@/components/sections/ServicesListSection";
-import { breadcrumbJsonLd, serviceListJsonLd } from "@/lib/seo/jsonLd";
+import { breadcrumbJsonLd, faqPageJsonLd, serviceListJsonLd } from "@/lib/seo/jsonLd";
 
 export const revalidate = 60;
 
@@ -21,19 +21,75 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
-    images: [{ url: "https://basepremier.ru/images/og-default.jpg", width: 1200, height: 630 }],
+    images: [
+      {
+        url: "https://basepremier.ru/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Услуги барбершопа BASE Premier, Казань",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Услуги — BASE Premier | Барбершоп Казань",
+    description:
+      "27 процедур: стрижки, бритьё, уход за лицом, ногтевой сервис. Три категории, прозрачные цены. Шаляпина 26, ежедневно 10–21.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
   },
 };
 
+const SERVICES_FAQ = [
+  {
+    question: "Сколько стоит мужская стрижка в BASE Premier?",
+    answer:
+      "Мужская стрижка — от 1 800 до 2 700 ₽ в зависимости от категории мастера. Стрижка с бородой — от 3 200 до 4 600 ₽. Каждая стрижка занимает час.",
+  },
+  {
+    question: "Сколько длится стрижка?",
+    answer:
+      "Час. Это базовая длительность для большинства услуг. Если у вас борода — добавляется 30 минут. Точная длительность каждой услуги указана в прайсе.",
+  },
+  {
+    question: "Есть ли комплексные услуги — стрижка и маникюр?",
+    answer:
+      "Да. Стрижка + Экспресс маникюр — от 2 800 ₽ (одновременно, 4 руки, 1 час). Стрижка + Маникюр — от 3 100 ₽ (последовательно, скидка до 15%).",
+  },
+  {
+    question: "Можно ли получить детскую стрижку?",
+    answer: "Да, для детей от 5 до 10 лет. Длительность — 1 час, цена — 1 600–2 400 ₽.",
+  },
+  {
+    question: "Что входит в услугу «Премиальное моделирование SOLOMON'S»?",
+    answer:
+      "Моделирование бороды с использованием профессиональной косметики Solomon's: разогревающий крем, чёрное мыло, горячее и холодное полотенце, масло для бороды. Длительность — 1 час, цена — 3 000 ₽.",
+  },
+  {
+    question: "Принимаете ли вы по программе лояльности?",
+    answer:
+      "Да, накопительная программа активируется автоматически после первого визита через YClients. Скидки на 5-й, 10-й и 15-й визит.",
+  },
+];
+
 export default function ServicesPage() {
-  const jsonLd = serviceListJsonLd();
+  const jsonLd = [
+    serviceListJsonLd(),
+    faqPageJsonLd(SERVICES_FAQ),
+    breadcrumbJsonLd([
+      { name: "Главная", url: "/" },
+      { name: "Услуги", url: "/services" },
+    ]),
+  ];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {jsonLd.map((ld, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+        />
+      ))}
 
       <main id="main">
         {/* Hero */}

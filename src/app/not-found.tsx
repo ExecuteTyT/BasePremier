@@ -1,6 +1,13 @@
+import { Metadata } from "next";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Страница не найдена — BASE Premier",
+  description: "Запрошенная страница не существует. Вернитесь на главную или выберите раздел сайта.",
+  robots: { index: false, follow: false },
+};
 
 export default function RootNotFound() {
   return (
@@ -8,7 +15,7 @@ export default function RootNotFound() {
       <body
         style={{
           margin: 0,
-          background: "#0A0A0B",
+          background: "#18181b",
           color: "#F5F5F2",
           fontFamily: "sans-serif",
           display: "flex",

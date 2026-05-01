@@ -18,6 +18,20 @@ export const metadata: Metadata = {
     siteName: "BASE Premier",
     locale: "ru_RU",
     type: "website",
+    images: [
+      {
+        url: "https://basepremier.ru/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "BASE Premier — барбершоп на Шаляпина 26, Казань",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Контакты — BASE Premier | Барбершоп Казань",
+    description: "Шаляпина 26, 1 этаж. Ежедневно 10–21. +7 (917) 918-38-77. От метро Площадь Тукая 8 минут пешком.",
+    images: ["https://basepremier.ru/images/og-default.jpg"],
   },
 };
 
