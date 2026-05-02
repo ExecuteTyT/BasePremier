@@ -14,9 +14,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "px-5 py-2 text-sm",
-  md: "px-6 py-3.5 text-body",
-  lg: "px-7 py-4 text-body-lg",
+  sm: "px-5 py-2 text-sm min-h-[44px]",
+  md: "px-6 py-3.5 text-body min-h-[44px]",
+  lg: "px-7 py-4 text-body-lg min-h-[44px]",
 };
 
 type Props = {

@@ -32,7 +32,7 @@ export function Footer() {
                 <li key={href}>
                   <NextLink
                     href={href}
-                    className="inline-block py-3 text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
+                    className="inline-flex min-h-[44px] items-center text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary"
                   >
                     {label}
                   </NextLink>
