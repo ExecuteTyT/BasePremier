@@ -80,11 +80,11 @@ export function ServicesPreviewSection() {
         </div>
 
         {/* Cards */}
-        <div className={cn("flex flex-col gap-4", "md:grid md:grid-cols-4 md:gap-6")}>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-6">
           {CARDS.map((card, i) => (
             <motion.div
               key={card.index}
-              className="w-full md:w-auto"
+              className="w-full"
               style={{ perspective: "800px" }}
               initial={reduced ? { opacity: 0 } : { opacity: 0, clipPath: "inset(0 0 100% 0)" }}
               whileInView={reduced ? { opacity: 1 } : { opacity: 1, clipPath: "inset(0 0 0% 0)" }}
@@ -163,7 +163,7 @@ function ServiceCard({ index, title, description, from, href }: CardProps) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "group relative flex min-h-[200px] flex-col justify-between p-6 md:h-[360px] md:p-8",
+        "group relative flex min-h-[280px] flex-col justify-between p-6 md:h-[360px] md:p-8",
         "bg-bg-secondary",
         "border border-border-default",
         "transition-[border-color,box-shadow] duration-slow ease-[var(--ease-out-quart)]",
@@ -187,7 +187,7 @@ function ServiceCard({ index, title, description, from, href }: CardProps) {
         <span
           className={cn(
             "font-display italic font-normal leading-none select-none",
-            "text-[2.5rem] text-fg-primary/20 md:text-[3.5rem]",
+            "text-[2.75rem] text-fg-primary/20 md:text-[3.5rem]",
             "transition-[color] duration-base group-hover:text-accent/30",
           )}
         >
