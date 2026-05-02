@@ -26,8 +26,10 @@ type Props = {
 
 function getInitials(name: string): string {
   const words = name.trim().split(/\s+/);
-  if (words.length >= 2) {
-    return (words[0][0]! + words[1][0]!).toUpperCase();
+  const first = words[0];
+  const second = words[1];
+  if (first && second) {
+    return ((first[0] ?? "") + (second[0] ?? "")).toUpperCase();
   }
   // Одно слово: первые 2 символа (Марат → МА, Джим → ДЖ)
   return name.slice(0, 2).toUpperCase();
@@ -38,15 +40,15 @@ export function BarberAvatarPlaceholder({ name, className, compact = false }: Pr
 
   return (
     <div
-      className={cn("relative flex h-full w-full items-center justify-center bg-bg-secondary", className)}
+      className={cn(
+        "relative flex h-full w-full items-center justify-center bg-bg-secondary",
+        className,
+      )}
       role="img"
       aria-label={`Фото ${name} — ожидается`}
     >
       {/* Navy accent — левая грань */}
-      <div
-        className="absolute left-0 top-0 h-full w-px bg-accent/25"
-        aria-hidden="true"
-      />
+      <div className="absolute left-0 top-0 h-full w-px bg-accent/25" aria-hidden="true" />
 
       {/* Инициалы — editorial placeholder */}
       <span
