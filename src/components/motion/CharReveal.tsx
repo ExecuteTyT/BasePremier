@@ -1,6 +1,6 @@
 "use client";
 
-import { type ComponentPropsWithoutRef, type ElementType, useEffect, useRef } from "react";
+import React, { type ComponentPropsWithoutRef, type ElementType, useEffect, useRef } from "react";
 
 import { cn } from "@/lib/cn";
 import { gsap } from "@/lib/gsap";
@@ -58,12 +58,7 @@ export function CharReveal<T extends ElementType = "div">({
   }, [delay, stagger]);
 
   return (
-    <Tag
-      {...rest}
-      className={cn(className)}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ref={containerRef as any}
-    >
+    <Tag {...rest} className={cn(className)} ref={containerRef as React.Ref<HTMLElement>}>
       {words.map((word, wi) => (
         <span key={wi} className="inline-block whitespace-nowrap">
           {word.split("").map((char, ci) => (

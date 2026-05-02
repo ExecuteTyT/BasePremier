@@ -252,7 +252,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
 
   if (contextLost) {
     return (
-      <div className="flex h-screen w-full items-center justify-center bg-[#0A0A0B]">
+      <div className="flex h-screen w-full items-center justify-center bg-bg-primary">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-muted/30">
           перезагрузите страницу
         </p>
@@ -272,7 +272,7 @@ export default function BpScene({ onIntroComplete }: { onIntroComplete?: () => v
         powerPreference: "high-performance",
         failIfMajorPerformanceCaveat: false,
       }}
-      style={{ background: "#0A0A0B" }}
+      style={{ background: "var(--color-bg-primary)" }}
       onCreated={({ gl }) => {
         gl.domElement.addEventListener("webglcontextlost", () => setContextLost(true));
       }}
