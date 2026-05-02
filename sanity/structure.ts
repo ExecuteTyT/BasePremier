@@ -19,6 +19,11 @@ export const structure = (S: StructureBuilder) =>
         .icon(() => "💰")
         .child(S.documentTypeList("service").title("Услуги")),
 
+      S.listItem()
+        .title("Причёски")
+        .icon(() => "💈")
+        .child(S.documentTypeList("hairstyle").title("Причёски")),
+
       S.divider(),
 
       S.listItem()
