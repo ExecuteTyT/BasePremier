@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "_comment": "BASE Premier · Claude Code config. Solo-founder workflow. Hooks: pre-commit гарантирует чистый TS+lint, post-tool блокирует мусорные паттерны. Permissions — широкие на чтение, осторожные на сеть.",
-
   "permissions": {
     "allow": [
       "Read(*)",
@@ -68,7 +67,27 @@
       "Write(scripts/**)",
       "Write(reports/**)",
       "Write(.claude/**)",
-      "Write(sanity/**)"
+      "Write(sanity/**)",
+      "Bash(BASE=* node *)",
+      "Bash(CHROMIUM_PATH=* node *)",
+      "Bash(* node scripts/*)",
+      "Write(audit/**)",
+      "Edit(audit/**)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_wait_for",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_type",
+      "mcp__plugin_playwright_playwright__browser_press_key",
+      "mcp__playwright__navigate",
+      "mcp__playwright__screenshot",
+      "mcp__playwright__click",
+      "mcp__playwright__evaluate"
     ],
     "deny": [
       "Bash(rm -rf /*)",
@@ -101,7 +120,6 @@
       "Bash(rsync * basepremier@*)"
     ]
   },
-
   "hooks": {
     "PreToolUse": [
       {
@@ -149,21 +167,17 @@
       }
     ]
   },
-
   "model": "claude-sonnet-4-6",
   "outputStyle": "default",
-
   "env": {
     "FORCE_COLOR": "1",
     "NODE_ENV": "development"
   },
-
   "statusLine": {
     "type": "command",
     "command": "node .claude/hooks/statusline.mjs",
     "_comment": "Показывает: текущая ветка, текущий тикет (BS-XX), прогресс по ROADMAP, счётчик токенов сессии."
   },
-
   "_notes": {
     "hooks_implementation": "Файлы .claude/hooks/*.mjs нужно создать в первой же сессии Claude Code (тикет BS-03 в ROADMAP.md). До этого блокирующие хуки можно временно отключить, закомментировав или удалив соответствующий блок.",
     "permissions_strategy": "Стратегия — широкий allow для пр работы (Read, pnpm, git), узкий ask для опасного (push --force, ssh), полный deny для секретов (.env*) и системных операций (sudo, rm -rf /).",
