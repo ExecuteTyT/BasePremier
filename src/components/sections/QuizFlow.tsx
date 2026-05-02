@@ -1,10 +1,20 @@
-﻿"use client";
+"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import NextLink from "next/link";
 import { useState } from "react";
 
+import { BarberAvatarPlaceholder } from "@/components/ui/BarberAvatarPlaceholder";
+import { BARBERS } from "@/data/barbers";
+import { SERVICE_CATEGORIES } from "@/data/services";
 import { cn } from "@/lib/cn";
+import {
+  formatDuration,
+  formatPrice,
+  formatPriceFrom,
+  formatPriceRange,
+  reviewWord,
+} from "@/lib/format";
 
 const ease = [0.19, 1, 0.22, 1] as const;
 
@@ -64,57 +74,41 @@ type Answers = Record<string, string>;
 
 type Result = {
   masterSlug: string;
-  masterName: string;
-  service: string;
-  priceRange: string;
+  serviceId: string;
 };
 
 function getResult(answers: Answers): Result {
   const { goal, beard } = answers;
 
-  if (goal === "nails") {
-    return {
-      masterSlug: "arina",
-      masterName: "Арина",
-      service: "Мужской маникюр",
-      priceRange: "1 900 ₽",
-    };
-  }
-
-  if (goal === "combo") {
-    return {
-      masterSlug: "sayod",
-      masterName: "Сайод",
-      service: "Стрижка + Экспресс маникюр",
-      priceRange: "2 800 – 3 700 ₽",
-    };
-  }
-
-  if (goal === "care") {
-    return {
-      masterSlug: "marat",
-      masterName: "Марат",
-      service: "Премиальный уход за лицом London Grooming",
-      priceRange: "2 150 ₽",
-    };
-  }
-
-  if (beard === "yes") {
-    return {
-      masterSlug: "vyacheslav",
-      masterName: "Вячеслав",
-      service: "Мужская стрижка с бородой",
-      priceRange: "3 200 – 4 600 ₽",
-    };
-  }
-
-  return {
-    masterSlug: "marat",
-    masterName: "Марат",
-    service: "Мужская стрижка",
-    priceRange: "1 800 – 2 700 ₽",
-  };
+  if (goal === "nails") return { masterSlug: "arina", serviceId: "manicure" };
+  if (goal === "combo") return { masterSlug: "sayod", serviceId: "combo-express" };
+  if (goal === "care") return { masterSlug: "marat", serviceId: "face-london" };
+  if (beard === "yes") return { masterSlug: "vyacheslav", serviceId: "haircut-beard" };
+  return { masterSlug: "marat", serviceId: "haircut" };
 }
+
+const MASTER_DATIVE: Record<string, string> = {
+  marat: "Марату",
+  vyacheslav: "Вячеславу",
+  sayod: "Сайоду",
+  aleksey: "Алексею",
+  timerlan: "Тимерлану",
+  nikolay: "Николаю",
+  dzhim: "Джиму",
+  arina: "Арине",
+  murat: "Мурату",
+  diana: "Диане",
+};
+
+function findServiceById(id: string) {
+  for (const cat of SERVICE_CATEGORIES) {
+    const svc = cat.services.find((s) => s.id === id);
+    if (svc) return svc;
+  }
+  return null;
+}
+
+const RESULT_DELAYS = [0, 0.08, 0.18, 0.28, 0.38] as const;
 
 export function QuizFlow() {
   const [step, setStep] = useState(0);
@@ -128,7 +122,6 @@ export function QuizFlow() {
   function handleAnswer(value: string) {
     const newAnswers = { ...answers, [currentStep!.id]: value };
     setAnswers(newAnswers);
-
     if (step < STEPS.length - 1) {
       setDirection(1);
       setStep(step + 1);
@@ -152,6 +145,19 @@ export function QuizFlow() {
   }
 
   const result = done ? getResult(answers) : null;
+  const barber = result ? (BARBERS.find((b) => b.slug === result.masterSlug) ?? null) : null;
+  const service = result ? findServiceById(result.serviceId) : null;
+
+  let priceStr = "";
+  if (service) {
+    if (Array.isArray(service.price)) {
+      priceStr = formatPriceRange(service.price[0], service.price[1]);
+    } else if (service.from) {
+      priceStr = formatPriceFrom(service.price);
+    } else {
+      priceStr = formatPrice(service.price);
+    }
+  }
 
   return (
     <section className="relative flex min-h-screen flex-col bg-bg-primary">
@@ -175,12 +181,10 @@ export function QuizFlow() {
               exit={{ opacity: 0, x: direction * -60 }}
               transition={{ duration: 0.45, ease }}
             >
-              {/* Step label */}
               <p className="mb-6 font-mono text-[12px] uppercase tracking-[0.2em] text-fg-muted">
                 Шаг {step + 1} из {STEPS.length}
               </p>
 
-              {/* Question */}
               <h1
                 className="mb-7 font-display font-normal text-fg-primary"
                 style={{
@@ -192,7 +196,6 @@ export function QuizFlow() {
                 {currentStep!.question}
               </h1>
 
-              {/* Answers */}
               <div className="flex flex-col gap-3">
                 {currentStep!.answers.map((answer) => (
                   <motion.button
@@ -223,7 +226,6 @@ export function QuizFlow() {
                 ))}
               </div>
 
-              {/* Back button */}
               {step > 0 && (
                 <button
                   onClick={handleBack}
@@ -236,62 +238,129 @@ export function QuizFlow() {
           ) : (
             <motion.div
               key="result"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.35, ease }}
             >
-              {/* Result */}
-              <p className="mb-8 font-mono text-[12px] uppercase tracking-[0.2em] text-fg-muted">
+              {/* Overline */}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease, delay: RESULT_DELAYS[0] }}
+                className="mb-8 font-mono text-[12px] uppercase tracking-[0.2em] text-fg-muted"
+              >
                 Ваша рекомендация
-              </p>
+              </motion.p>
 
-              <div className="mb-7 border border-border-strong bg-bg-secondary p-8">
-                <div className="mb-6 flex items-start justify-between gap-6">
-                  {/* Master initial placeholder */}
-                  <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center bg-bg-primary">
-                    <span
-                      className="select-none font-display font-normal text-fg-muted/30"
-                      style={{ fontSize: "2rem" }}
-                    >
-                      {result!.masterName[0]}
-                    </span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="mb-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
-                      Мастер
-                    </p>
-                    <p className="font-display font-normal text-[1.5rem] text-fg-primary">
-                      {result!.masterName}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-mono text-[1.125rem] text-fg-primary">
-                      {result!.priceRange}
-                    </p>
-                  </div>
-                </div>
+              {/* Master card */}
+              {barber && (
+                <motion.div
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, ease, delay: RESULT_DELAYS[1] }}
+                  className="mb-3 border border-border-strong bg-bg-secondary"
+                >
+                  <div className="flex gap-5 p-6">
+                    {/* Avatar placeholder */}
+                    <div className="relative h-20 w-20 flex-shrink-0">
+                      <BarberAvatarPlaceholder name={barber.name} compact />
+                    </div>
 
-                <div>
-                  <p className="mb-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
+                    {/* Info */}
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                        <span
+                          className="font-display font-normal text-fg-primary"
+                          style={{ fontSize: "1.375rem", letterSpacing: "-0.02em" }}
+                        >
+                          {barber.name}
+                        </span>
+                        {barber.isBestEmployee && (
+                          <span className="border border-accent/40 bg-accent/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-accent-fg/70">
+                            Лучший сотрудник
+                          </span>
+                        )}
+                        {barber.isSenior && !barber.isBestEmployee && (
+                          <span className="border border-border-default px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-fg-muted">
+                            Старший мастер
+                          </span>
+                        )}
+                      </div>
+
+                      <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.1em] text-fg-muted">
+                        {barber.role}
+                        {" · "}
+                        {barber.reviews}&nbsp;{reviewWord(barber.reviews)}
+                      </p>
+
+                      {barber.techniques && barber.techniques.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {barber.techniques.map((t) => (
+                            <span
+                              key={t}
+                              className="border border-border-default px-2 py-0.5 font-mono text-[10px] text-fg-subtle"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Service card */}
+              {service && (
+                <motion.div
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55, ease, delay: RESULT_DELAYS[2] }}
+                  className="mb-7 border border-border-strong bg-bg-secondary px-6 py-5"
+                >
+                  <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-muted">
                     Услуга
                   </p>
-                  <p className="font-display font-normal text-[1.125rem] text-fg-primary">
-                    {result!.service}
-                  </p>
-                </div>
-              </div>
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p
+                        className="font-display font-normal text-fg-primary"
+                        style={{ fontSize: "1.125rem", letterSpacing: "-0.01em" }}
+                      >
+                        {service.name}
+                      </p>
+                      <p className="mt-1 font-mono text-[11px] uppercase tracking-wider text-fg-muted">
+                        {formatDuration(service.duration)}
+                      </p>
+                    </div>
+                    <p className="flex-shrink-0 font-mono text-[1rem] text-fg-primary">
+                      {priceStr}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
 
-              <div className="flex flex-col gap-3">
+              {/* CTAs */}
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease, delay: RESULT_DELAYS[3] }}
+                className="flex flex-col gap-3"
+              >
                 <button
                   data-yclients-open
-                  className="w-full bg-accent py-4 font-mono text-[13px] uppercase tracking-[0.12em] text-accent-fg transition-opacity hover:opacity-80"
+                  data-yclients-master={barber?.name}
+                  data-yclients-service={service?.name}
+                  className="w-full bg-accent py-4 font-mono text-[13px] uppercase tracking-[0.12em] text-accent-fg transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
-                  Записаться к {result!.masterName === "Арина" ? "Арине" : `${result!.masterName}у`}
+                  Записаться к&nbsp;
+                  {barber ? (MASTER_DATIVE[barber.slug] ?? barber.name) : "мастеру"}
                 </button>
 
                 <button
                   data-yclients-open
-                  className="w-full border border-border-strong py-4 font-mono text-[13px] uppercase tracking-[0.12em] text-fg-muted transition-colors hover:border-fg-muted/40 hover:text-fg-primary"
+                  data-yclients-service={service?.name}
+                  className="w-full border border-border-strong py-4 font-mono text-[13px] uppercase tracking-[0.12em] text-fg-muted transition-colors hover:border-fg-muted/40 hover:text-fg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   Записаться к любому мастеру
                 </button>
@@ -302,16 +371,30 @@ export function QuizFlow() {
                 >
                   Пройти заново
                 </button>
-              </div>
+              </motion.div>
 
-              <div className="mt-8 border-t border-border-default pt-6">
+              {/* Footer links */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, ease, delay: RESULT_DELAYS[4] }}
+                className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-border-default pt-6"
+              >
+                {barber && (
+                  <NextLink
+                    href={`/barbers/${barber.slug}`}
+                    className="font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted transition-opacity hover:opacity-70"
+                  >
+                    Профиль мастера →
+                  </NextLink>
+                )}
                 <NextLink
                   href="/barbers"
                   className="font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted transition-opacity hover:opacity-70"
                 >
-                  ← Посмотреть всех мастеров
+                  ← Все мастера
                 </NextLink>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
