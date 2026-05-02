@@ -242,11 +242,14 @@
 ```yaml
 runtime: Node.js 22 LTS
 package-manager: pnpm 9
-framework: Next.js 15 (App Router, RSC)
-react: 19
-typescript: 5.6+ (strict: true)
+framework: Next.js 16.2.4 (App Router, RSC)
+react: 19.2.4
+typescript: ^5 (strict: true)
 styling: Tailwind CSS v4 (CSS-first config через @theme)
+error-monitoring: Sentry (@sentry/nextjs, withSentryConfig в next.config.ts)
 ```
+
+> Исторически в брифах встречается «Next.js 15» — формулировка устарела. Источник истины — `package.json`. Sentry уже подключён (client/server/edge configs + загрузка sourcemaps с автоудалением); не нужно «настраивать с нуля».
 
 ### 4.2. Animation & 3D
 
@@ -294,6 +297,51 @@ node-process-manager: pm2 или systemd
 - ❌ Web push / Service Workers (кроме PWA-минимума)
 - ❌ Online-bookings on custom UI (используем YClients widget — записи летят в их API без посредников)
 
+### 4.6. Карта репозитория (только то, что не находится grep'ом за секунду)
+
+```
+src/
+├── app/
+│   ├── (site)/                    ← публичные страницы за общим layout/template
+│   │   ├── about | barbers | contacts | journal | quiz | services | privacy | dev
+│   │   ├── layout.tsx             ← shell: Header/Footer/Lenis/Cursor
+│   │   └── template.tsx           ← page transitions (Framer)
+│   ├── bp/                        ← /bp 3D easter egg (R3F-сцена с монограммой)
+│   ├── studio/                    ← Sanity Studio embedded (basepremier.ru/studio)
+│   ├── robots.ts | sitemap.ts     ← SEO-инвариант §6.7 уже реализован
+│   ├── not-found.tsx | global-error.tsx
+│   └── fonts.ts                   ← Fraunces / Inter / JetBrains Mono через next/font
+├── components/
+│   ├── ui/                        ← атомы (Button, Input...) — ИСКАТЬ ЗДЕСЬ ПЕРЕД СОЗДАНИЕМ НОВОГО
+│   ├── layout/                    ← Header, Footer, Cursor, Lenis-провайдер
+│   ├── sections/                  ← секции главной (Hero, Services, Barbers, ...)
+│   ├── motion/                    ← обёртки над Framer/GSAP
+│   ├── three/                     ← R3F-сцены и шейдеры
+│   ├── booking/                   ← YClients widget wrapper
+│   ├── journal/                   ← блог-компоненты (PortableText)
+│   ├── analytics/                 ← Я.Метрика
+│   └── typography/
+├── lib/
+│   ├── format.ts                  ← formatPrice / formatPriceRange / formatDuration (§6.6)
+│   ├── cn.ts                      ← clsx-обёртка
+│   ├── gsap/                      ← инициализация ScrollTrigger, общие хелперы
+│   ├── sanity/                    ← клиент + GROQ-запросы
+│   ├── seo/                       ← билдеры metadata + JSON-LD (HairSalon, Service, ...)
+│   ├── analytics.ts | sentry.ts | sounds.ts
+├── data/                          ← статичные данные (мастера, услуги) до миграции в Sanity
+├── styles/                        ← tokens.css (@theme), globals.css
+└── env.ts                         ← @t3-oss/env-nextjs — типизированные env с zod
+
+sanity/                            ← схемы Studio + seed-скрипт
+tests/
+├── e2e/                           ← smoke / navigation / home / pages / mobile / qa-visual
+├── a11y/                          ← axe.spec.ts
+└── lighthouse-reports/
+infra/nginx-redirects.conf         ← 301-редиректы со старого сайта (§7.1 п.2)
+```
+
+**Playwright-проекты** (см. `playwright.config.ts`): `chromium` гоняет полный набор; `firefox`/`webkit`/`mobile-chrome`/`mobile-safari` — только smoke (+ mobile.spec для mobile-проектов, navigation для webkit). Тайм-ауты расширены до 45 с из-за iframe Я.Карт на `/contacts` и медленной hydration в Firefox.
+
 ---
 
 ## 5. WORKFLOW ДЛЯ CLAUDE CODE
@@ -301,9 +349,10 @@ node-process-manager: pm2 или systemd
 ### 5.1. Принципы
 
 1. **Один тикет = один Pull Request = один git worktree.** Никогда не работаем в нескольких темах в одной ветке.
-2. **TDD-light:** для бизнес-логики (YClients API, форматирование цены, time slots) — Vitest. Для UI — Playwright e2e на критичных путях (открыть hero → кликнуть «Записаться» → виджет YClients).
-3. **Storybook не делаем.** Дешевле и качественнее — `app/dev/` маршрут с галереей компонентов, доступный только в `NODE_ENV=development`. ⚠️ Папки с префиксом `_` (например `_dev`) в Next.js App Router не создают маршруты — Next.js считает их приватными. Используем `app/dev/` без подчёркивания.
-4. **Перед коммитом — всегда:** `pnpm typecheck && pnpm lint && pnpm test`. Это в hooks (см. `.claude/settings.json`).
+2. **Тесты:** только Playwright (`@playwright/test` + `@axe-core/playwright`). Vitest **не установлен** — если для бизнес-логики (форматирование цены, YClients-парсеры) понадобится unit-тестинг, добавляем Vitest отдельным тикетом. До этого — покрываем критичные пути e2e на chromium (smoke / navigation / pages / home / qa-visual / axe).
+3. **Storybook не делаем.** Дешевле и качественнее — `app/dev/` маршрут с галереей компонентов, доступный только в `NODE_ENV=development`. ⚠️ Папки с префиксом `_` (например `_dev`) в Next.js App Router не создают маршруты — Next.js считает их приватными. Используем `src/app/(site)/dev/` без подчёркивания.
+4. **Перед коммитом** husky-хук (`.husky/pre-commit`) запускает `pnpm lint-staged` (eslint --fix + prettier на staged-файлах). Полный прогон `pnpm typecheck && pnpm lint` стоит делать вручную перед push. Скрипта `pnpm test` **нет** — используем `pnpm test:e2e:smoke` для быстрой проверки.
+   > ⚠️ В `.claude/settings.json` объявлены хуки `block-bad-patterns.mjs`, `inject-context.mjs`, `statusline.mjs` — но **самих файлов в `.claude/hooks/` пока нет**. Их нужно создать (тикет BS-03 в ROADMAP) либо временно убрать из settings.json, иначе Claude Code будет ругаться при каждом Edit/Write.
 5. **Новый компонент** — всегда сначала ищем в `src/components/ui/` существующий. Если нет — обсуждаем с собой (через `claude --print`) ДО написания кода.
 
 ### 5.2. Структура тикетов
@@ -520,33 +569,42 @@ formatDuration(90); // "1 ч 30 мин"
 
 ```bash
 # Запуск dev-сервера
-pnpm dev                  # → http://localhost:3000
+pnpm dev                  # → http://localhost:3000 (Sanity Studio embedded на /studio)
 
-# Создать новую секцию с GSAP-каркасом
-claude /init-section <name>
+# Линт / типы / сборка
+pnpm lint                 # ESLint
+pnpm lint:fix             # ESLint с автофиксом
+pnpm typecheck            # tsc --noEmit
+pnpm build                # Прод-сборка (next build)
+pnpm start                # Запуск прод-билда
 
-# Создать новую страницу
-claude /new-page <route>
+# Тесты (только Playwright, нет Vitest)
+pnpm test:e2e             # Все e2e (5 проектов: chromium / firefox / webkit / mobile-chrome / mobile-safari)
+pnpm test:e2e:ui          # Playwright UI mode
+pnpm test:e2e:smoke       # Только smoke.spec.ts — быстрая проверка
+pnpm test:a11y            # axe-core тесты (tests/a11y/)
 
-# Аудиты
-claude /audit-perf
-claude /audit-a11y
+# Запуск одного теста или одного браузера:
+pnpm exec playwright test tests/e2e/home.spec.ts --project=chromium
+pnpm exec playwright test tests/e2e/smoke.spec.ts --headed --debug
 
-# Тесты
-pnpm test                 # Vitest
-pnpm test:e2e             # Playwright
+# Sanity
+pnpm seed:articles        # tsx sanity/seed/articles.ts — посеять статьи блога
+# (Sanity Studio открывается на http://localhost:3000/studio когда запущен pnpm dev)
 
-# Сборка
-pnpm build                # Прод-сборка
-pnpm build:analyze        # С bundle analyzer
+# Slash-команды Claude Code (см. .claude/commands/)
+/init-section <name>      # Новая секция главной с GSAP-каркасом
+/new-page <route>         # Новая страница с metadata + JSON-LD boilerplate
+/audit-perf               # Lighthouse-прогон → /reports/
+/audit-a11y               # axe-core → /reports/
+/check-seo <url>          # SEO-аудит meta + JSON-LD + OG
+/yc-test <method>         # YClients API через прокси
 
-# Деплой
-git push origin main      # Авто-деплой через GitHub Actions
-
-# Sanity Studio
-pnpm sanity dev           # → http://localhost:3333
-pnpm sanity deploy        # Деплой студии на cdn.sanity.studio
+# Деплой (см. infra/nginx-redirects.conf для 301-редиректов со старого сайта)
+git push origin main      # Авто-деплой через GitHub Actions → VPS (rsync + pm2)
 ```
+
+> **Нет в скриптах:** `pnpm test` (только `:e2e` и `:a11y`), `pnpm build:analyze`, `pnpm sanity dev/deploy` (Studio embedded в `src/app/studio`), `pnpm format` (форматирование живёт в `lint-staged` через prettier).
 
 ---
 
@@ -556,6 +614,7 @@ pnpm sanity deploy        # Деплой студии на cdn.sanity.studio
 | ---------- | ------------------------------------------------------------------------------------- |
 | 2026-04-26 | Первая версия. Зафиксированы все решения после ответов заказчика.                     |
 | 2026-04-26 | §5.1: уточнение про `app/dev/` — папки `_*` в Next.js App Router не создают маршруты. |
+| 2026-05-02 | Сверка с реальной кодовой базой: §4.1 Next.js 15→16.2.4, react 19.2.4, добавлен Sentry. §5.1 убрана Vitest (не установлена), уточнён pre-commit (`.husky/pre-commit` → `pnpm lint-staged`), отмечено отсутствие `.claude/hooks/*.mjs`. §10 переписаны быстрые команды под фактический `package.json`. Добавлена §4.6 «Карта репозитория». |
 
 ---
 
