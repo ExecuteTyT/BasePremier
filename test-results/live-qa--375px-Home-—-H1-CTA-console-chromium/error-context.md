@@ -7,7 +7,7 @@
 # Test info
 
 - Name: live-qa.spec.ts >> @375px >> Home / — H1 + CTA + console
-- Location: tests/e2e/live-qa.spec.ts:44:11
+- Location: tests/e2e/live-qa.spec.ts:34:11
 
 # Error details
 
@@ -432,135 +432,133 @@ Received: false
   3   |  * Checks: H1, CTA clickability, console errors, cookie banner, tel: link
   4   |  * Breakpoints: 375 / 768 / 1440 px
   5   |  */
-  6   | import { test, expect, type Page } from "@playwright/test";
-  7   | import * as fs from "fs";
-  8   | import * as path from "path";
-  9   |
-  10  | const BASE = "https://base-premier.vercel.app";
-  11  | const VIEWPORTS = [
-  12  |   { name: "375", width: 375, height: 812 },
-  13  |   { name: "768", width: 768, height: 1024 },
-  14  |   { name: "1440", width: 1440, height: 900 },
-  15  | ];
-  16  | const PAGES = [
-  17  |   { route: "/", label: "Home" },
-  18  |   { route: "/services", label: "Services" },
-  19  |   { route: "/barbers", label: "Barbers" },
-  20  |   { route: "/about", label: "About" },
-  21  |   { route: "/contacts", label: "Contacts" },
-  22  |   { route: "/journal", label: "Journal" },
-  23  | ];
-  24  |
-  25  | const screenshotDir = path.join(process.cwd(), "tests", "screenshots", "live-qa");
-  26  | fs.mkdirSync(screenshotDir, { recursive: true });
-  27  |
-  28  | async function dismissCookieBanner(page: Page) {
-  29  |   const cookieBtn = page.locator(
-  30  |     "button:has-text('Принять'), button:has-text('Согласен'), button:has-text('OK'), button:has-text('Принять всё'), [data-testid='cookie-accept']"
-  31  |   );
-  32  |   try {
-  33  |     await cookieBtn.first().click({ timeout: 3000 });
-  34  |   } catch {
-  35  |     // no banner shown
-  36  |   }
-  37  | }
-  38  |
-  39  | for (const vp of VIEWPORTS) {
-  40  |   test.describe(`@${vp.name}px`, () => {
-  41  |     test.use({ viewport: { width: vp.width, height: vp.height } });
-  42  |
-  43  |     for (const pg of PAGES) {
-  44  |       test(`${pg.label} ${pg.route} — H1 + CTA + console`, async ({ page }) => {
-  45  |         const errors: string[] = [];
-  46  |         page.on("console", (msg) => {
-  47  |           if (msg.type() === "error") errors.push(msg.text());
-  48  |         });
-  49  |         page.on("pageerror", (err) => errors.push(err.message));
+  6   | import * as fs from "fs";
+  7   | import * as path from "path";
+  8   |
+  9   | import { test, expect } from "@playwright/test";
+  10  |
+  11  | const BASE = "https://base-premier.vercel.app";
+  12  | const VIEWPORTS = [
+  13  |   { name: "375", width: 375, height: 812 },
+  14  |   { name: "768", width: 768, height: 1024 },
+  15  |   { name: "1440", width: 1440, height: 900 },
+  16  | ];
+  17  | const PAGES = [
+  18  |   { route: "/", label: "Home" },
+  19  |   { route: "/services", label: "Services" },
+  20  |   { route: "/barbers", label: "Barbers" },
+  21  |   { route: "/about", label: "About" },
+  22  |   { route: "/contacts", label: "Contacts" },
+  23  |   { route: "/journal", label: "Journal" },
+  24  | ];
+  25  |
+  26  | const screenshotDir = path.join(process.cwd(), "tests", "screenshots", "live-qa");
+  27  | fs.mkdirSync(screenshotDir, { recursive: true });
+  28  |
+  29  | for (const vp of VIEWPORTS) {
+  30  |   test.describe(`@${vp.name}px`, () => {
+  31  |     test.use({ viewport: { width: vp.width, height: vp.height } });
+  32  |
+  33  |     for (const pg of PAGES) {
+  34  |       test(`${pg.label} ${pg.route} — H1 + CTA + console`, async ({ page }) => {
+  35  |         const errors: string[] = [];
+  36  |         page.on("console", (msg) => {
+  37  |           if (msg.type() === "error") errors.push(msg.text());
+  38  |         });
+  39  |         page.on("pageerror", (err) => errors.push(err.message));
+  40  |
+  41  |         await page.goto(`${BASE}${pg.route}`, { waitUntil: "domcontentloaded" });
+  42  |         await page.waitForLoadState("networkidle").catch(() => {});
+  43  |
+  44  |         // Screenshot — full page
+  45  |         const filename = `${pg.label.toLowerCase()}-${vp.name}.png`;
+  46  |         await page.screenshot({
+  47  |           path: path.join(screenshotDir, filename),
+  48  |           fullPage: true,
+  49  |         });
   50  |
-  51  |         await page.goto(`${BASE}${pg.route}`, { waitUntil: "domcontentloaded" });
-  52  |         await page.waitForLoadState("networkidle").catch(() => {});
-  53  |
-  54  |         // Screenshot — full page
-  55  |         const filename = `${pg.label.toLowerCase()}-${vp.name}.png`;
-  56  |         await page.screenshot({
-  57  |           path: path.join(screenshotDir, filename),
-  58  |           fullPage: true,
-  59  |         });
-  60  |
-  61  |         // 1. H1 exists and is non-empty
-  62  |         const h1 = page.locator("h1").first();
-  63  |         await expect(h1, `H1 must exist on ${pg.route}`).toBeVisible({ timeout: 10000 });
-  64  |         const h1Text = (await h1.textContent()) ?? "";
-  65  |         expect(h1Text.trim().length, `H1 must have text on ${pg.route}`).toBeGreaterThan(0);
-  66  |         console.log(`  H1 [${vp.name}px] ${pg.route}: "${h1Text.trim()}"`);
-  67  |
-  68  |         // 2. Cookie banner check — must not obscure primary CTA
-  69  |         //    Find booking CTA buttons
-  70  |         const cta = page.locator(
-  71  |           "a[href*='yclients'], button:has-text('Записаться'), a:has-text('Записаться')"
-  72  |         );
-  73  |         const ctaCount = await cta.count();
-  74  |         if (ctaCount > 0) {
-  75  |           const firstCta = cta.first();
-  76  |           const isVisible = await firstCta.isVisible();
-  77  |           console.log(`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`);
-> 78  |           expect(isVisible, `Primary CTA visible on ${pg.route} @ ${vp.name}px`).toBeTruthy();
+  51  |         // 1. H1 exists and is non-empty
+  52  |         const h1 = page.locator("h1").first();
+  53  |         await expect(h1, `H1 must exist on ${pg.route}`).toBeVisible({ timeout: 10000 });
+  54  |         const h1Text = (await h1.textContent()) ?? "";
+  55  |         expect(h1Text.trim().length, `H1 must have text on ${pg.route}`).toBeGreaterThan(0);
+  56  |         console.warn(`  H1 [${vp.name}px] ${pg.route}: "${h1Text.trim()}"`);
+  57  |
+  58  |         // 2. Cookie banner check — must not obscure primary CTA
+  59  |         //    Find booking CTA buttons
+  60  |         const cta = page.locator(
+  61  |           "a[href*='yclients'], button:has-text('Записаться'), a:has-text('Записаться')",
+  62  |         );
+  63  |         const ctaCount = await cta.count();
+  64  |         if (ctaCount > 0) {
+  65  |           const firstCta = cta.first();
+  66  |           const isVisible = await firstCta.isVisible();
+  67  |           console.warn(`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`);
+> 68  |           expect(isVisible, `Primary CTA visible on ${pg.route} @ ${vp.name}px`).toBeTruthy();
       |                                                                                  ^ Error: Primary CTA visible on / @ 375px
-  79  |         } else {
-  80  |           console.log(`  CTA not found [${vp.name}px] ${pg.route}`);
-  81  |         }
-  82  |
-  83  |         // 3. Console errors
-  84  |         if (errors.length > 0) {
-  85  |           console.warn(`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`, errors);
-  86  |         }
-  87  |         expect(errors.filter((e) => !e.includes("favicon")), `No console errors on ${pg.route}`).toHaveLength(0);
-  88  |       });
-  89  |     }
-  90  |
-  91  |     // tel: link test — only once per viewport on homepage
-  92  |     test(`tel: link on Home @ ${vp.name}px`, async ({ page }) => {
-  93  |       await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
-  94  |       await page.waitForLoadState("networkidle").catch(() => {});
+  69  |         } else {
+  70  |           console.warn(`  CTA not found [${vp.name}px] ${pg.route}`);
+  71  |         }
+  72  |
+  73  |         // 3. Console errors
+  74  |         if (errors.length > 0) {
+  75  |           console.warn(`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`, errors);
+  76  |         }
+  77  |         expect(
+  78  |           errors.filter((e) => !e.includes("favicon")),
+  79  |           `No console errors on ${pg.route}`,
+  80  |         ).toHaveLength(0);
+  81  |       });
+  82  |     }
+  83  |
+  84  |     // tel: link test — only once per viewport on homepage
+  85  |     test(`tel: link on Home @ ${vp.name}px`, async ({ page }) => {
+  86  |       await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
+  87  |       await page.waitForLoadState("networkidle").catch(() => {});
+  88  |
+  89  |       const telLink = page.locator('a[href^="tel:"]').first();
+  90  |       await expect(telLink, "tel: link must exist").toBeVisible({ timeout: 8000 });
+  91  |       const href = await telLink.getAttribute("href");
+  92  |       expect(href, "tel: href must include phone number").toMatch(/tel:\+7/);
+  93  |       console.warn(`  tel: link [${vp.name}px]: ${href}`);
+  94  |     });
   95  |
-  96  |       const telLink = page.locator('a[href^="tel:"]').first();
-  97  |       await expect(telLink, "tel: link must exist").toBeVisible({ timeout: 8000 });
-  98  |       const href = await telLink.getAttribute("href");
-  99  |       expect(href, "tel: href must include phone number").toMatch(/tel:\+7/);
-  100 |       console.log(`  tel: link [${vp.name}px]: ${href}`);
-  101 |     });
-  102 |
-  103 |     // Cookie banner overlay test on Home
-  104 |     test(`Cookie banner does not block H1 CTA @ ${vp.name}px`, async ({ page }) => {
-  105 |       await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
-  106 |       await page.waitForLoadState("networkidle").catch(() => {});
-  107 |
-  108 |       // Check if cookie banner is present
-  109 |       const banner = page.locator(
-  110 |         "[data-testid='cookie-banner'], .cookie-banner, [class*='cookie'], [id*='cookie']"
-  111 |       );
-  112 |       const bannerVisible = await banner.first().isVisible().catch(() => false);
-  113 |       console.log(`  Cookie banner visible [${vp.name}px]: ${bannerVisible}`);
-  114 |
-  115 |       // Hero CTA must still be interactive even if banner present
-  116 |       const heroSection = page.locator("section").first();
-  117 |       const heroCta = heroSection.locator(
-  118 |         "button:has-text('Записаться'), a:has-text('Записаться'), a[href*='yclients']"
-  119 |       ).first();
-  120 |
-  121 |       const heroCtaExists = await heroCta.count() > 0;
-  122 |       if (heroCtaExists) {
-  123 |         // Check it's not fully obscured (clickable)
-  124 |         const box = await heroCta.boundingBox();
-  125 |         if (box) {
-  126 |           // Element in viewport?
-  127 |           const viewportHeight = vp.height;
-  128 |           const inViewport = box.y < viewportHeight;
-  129 |           console.log(`  Hero CTA in viewport [${vp.name}px]: ${inViewport}, y=${Math.round(box.y)}`);
-  130 |         }
-  131 |       }
-  132 |     });
-  133 |   });
-  134 | }
-  135 |
+  96  |     // Cookie banner overlay test on Home
+  97  |     test(`Cookie banner does not block H1 CTA @ ${vp.name}px`, async ({ page }) => {
+  98  |       await page.goto(`${BASE}/`, { waitUntil: "domcontentloaded" });
+  99  |       await page.waitForLoadState("networkidle").catch(() => {});
+  100 |
+  101 |       // Check if cookie banner is present
+  102 |       const banner = page.locator(
+  103 |         "[data-testid='cookie-banner'], .cookie-banner, [class*='cookie'], [id*='cookie']",
+  104 |       );
+  105 |       const bannerVisible = await banner
+  106 |         .first()
+  107 |         .isVisible()
+  108 |         .catch(() => false);
+  109 |       console.warn(`  Cookie banner visible [${vp.name}px]: ${bannerVisible}`);
+  110 |
+  111 |       // Hero CTA must still be interactive even if banner present
+  112 |       const heroSection = page.locator("section").first();
+  113 |       const heroCta = heroSection
+  114 |         .locator("button:has-text('Записаться'), a:has-text('Записаться'), a[href*='yclients']")
+  115 |         .first();
+  116 |
+  117 |       const heroCtaExists = (await heroCta.count()) > 0;
+  118 |       if (heroCtaExists) {
+  119 |         // Check it's not fully obscured (clickable)
+  120 |         const box = await heroCta.boundingBox();
+  121 |         if (box) {
+  122 |           // Element in viewport?
+  123 |           const viewportHeight = vp.height;
+  124 |           const inViewport = box.y < viewportHeight;
+  125 |           console.warn(
+  126 |             `  Hero CTA in viewport [${vp.name}px]: ${inViewport}, y=${Math.round(box.y)}`,
+  127 |           );
+  128 |         }
+  129 |       }
+  130 |     });
+  131 |   });
+  132 | }
+  133 |
 ```

@@ -57,9 +57,9 @@ for (const vp of VIEWPORTS) {
 
         // 2. Cookie banner check — must not obscure primary CTA
         //    Find booking CTA buttons
-        const cta = page.locator(
-          "a[href*='yclients'], button:has-text('Записаться'), a:has-text('Записаться')",
-        );
+        const cta = page
+          .locator("a[href*='yclients'], button:has-text('Записаться'), a:has-text('Записаться')")
+          .filter({ visible: true });
         const ctaCount = await cta.count();
         if (ctaCount > 0) {
           const firstCta = cta.first();
