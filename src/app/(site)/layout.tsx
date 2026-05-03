@@ -1,4 +1,6 @@
+import { BookingProvider } from "@/components/booking/BookingContext";
 import { BookingHandler } from "@/components/booking/BookingHandler";
+import { BookingModal } from "@/components/booking/BookingModal";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { CustomCursor } from "@/components/motion/CustomCursor";
@@ -12,17 +14,20 @@ import { StickyCTA } from "@/components/ui/StickyCTA";
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <SoundProvider>
-      <PageTransitionOverlay />
-      <BookingHandler />
-      <CustomCursor />
-      <Header />
-      <SmoothScrollProvider>
-        <main className="flex-1">{children}</main>
-      </SmoothScrollProvider>
-      <Footer />
-      <StickyCTA />
-      <MessengerButton />
-      <CookieBanner />
+      <BookingProvider>
+        <PageTransitionOverlay />
+        <BookingHandler />
+        <BookingModal />
+        <CustomCursor />
+        <Header />
+        <SmoothScrollProvider>
+          <main className="flex-1">{children}</main>
+        </SmoothScrollProvider>
+        <Footer />
+        <StickyCTA />
+        <MessengerButton />
+        <CookieBanner />
+      </BookingProvider>
     </SoundProvider>
   );
 }

@@ -2,6 +2,10 @@
 
 import { useEffect } from "react";
 
+import { useBooking } from "@/components/booking/BookingContext";
+
+const COMPANY_ID = process.env.NEXT_PUBLIC_YCLIENTS_COMPANY_ID;
+
 const WA_BASE = "https://wa.me/79179183877";
 const WA_DEFAULT = "Здравствуйте, хочу записаться в BASE Premier";
 
@@ -19,25 +23,45 @@ function buildWhatsAppUrl(masterName?: string | null, serviceName?: string | nul
 
 /**
  * Intercepts all [data-yclients-open] clicks site-wide.
- * Reads optional data-yclients-master (display name) and data-yclients-service
- * to pre-fill the WhatsApp message.
- * When YClients company_id + form_id arrive (Q4), replace buildWhatsAppUrl()
- * with the actual widget trigger: yclients.openForm(...)
+ *
+ * When NEXT_PUBLIC_YCLIENTS_COMPANY_ID is set:
+ *   opens BookingModal with optional pre-fill via
+ *   data-yclients-service-id (YClients service ID) and
+ *   data-yclients-staff-id (YClients staff ID).
+ *
+ * When NEXT_PUBLIC_YCLIENTS_COMPANY_ID is NOT set:
+ *   falls back to WhatsApp using
+ *   data-yclients-service (display name) and
+ *   data-yclients-master (display name).
  */
 export function BookingHandler() {
+  const { openBooking } = useBooking();
+
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const el = (e.target as Element).closest("[data-yclients-open]") as HTMLElement | null;
       if (!el) return;
       e.preventDefault();
-      const masterName = el.dataset["yclientsMaster"] ?? null;
-      const serviceName = el.dataset["yclientsService"] ?? null;
-      window.open(buildWhatsAppUrl(masterName, serviceName), "_blank", "noopener,noreferrer");
+
+      const serviceId = el.dataset["yclientsServiceId"] ?? undefined;
+      const staffId = el.dataset["yclientsStaffId"] ?? undefined;
+      const masterName = el.dataset["yclientsMaster"] ?? undefined;
+      const serviceName = el.dataset["yclientsService"] ?? undefined;
+
+      if (COMPANY_ID) {
+        openBooking({ serviceId, staffId, masterName, serviceName });
+      } else {
+        window.open(
+          buildWhatsAppUrl(masterName ?? null, serviceName ?? null),
+          "_blank",
+          "noopener,noreferrer",
+        );
+      }
     };
 
     document.addEventListener("click", handler);
     return () => document.removeEventListener("click", handler);
-  }, []);
+  }, [openBooking]);
 
   return null;
 }
