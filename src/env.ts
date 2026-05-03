@@ -18,6 +18,9 @@ export const env = createEnv({
     // Telegram notifications
     TELEGRAM_BOT_TOKEN: z.string().optional(),
     TELEGRAM_CHAT_ID: z.string().optional(),
+
+    // Gemini AI
+    GEMINI_API_KEY: z.string().optional(),
   },
 
   client: {
@@ -50,6 +53,7 @@ export const env = createEnv({
     SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID,
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY,
 
     // Client
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,

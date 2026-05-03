@@ -1,0 +1,1868 @@
+{
+  "config": {
+    "configFile": "/root/projects/base-premier/playwright-live.config.ts",
+    "rootDir": "/root/projects/base-premier/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/root/projects/base-premier/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/root/projects/base-premier/tests/e2e",
+        "testIgnore": [],
+        "testMatch": ["**/live-qa.spec.ts"],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      ["list", null],
+      [
+        "json",
+        {
+          "outputFile": "tests/screenshots/live-qa/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.59.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "live-qa.spec.ts",
+      "file": "live-qa.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@375px",
+          "file": "live-qa.spec.ts",
+          "line": 40,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Home / — H1 + CTA + console",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3555,
+                      "error": {
+                        "message": "Error: Primary CTA visible on / @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on / @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 80 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 81 |\u001b[39m         }\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on / @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 80 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 81 |\u001b[39m         }\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /: \"Мужской салон красоты BASE Premier\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:44:41.719Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Home-—-H1-CTA-console-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Home-—-H1-CTA-console-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2954,
+                      "error": {
+                        "message": "Error: Primary CTA visible on / @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on / @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on / @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /: \"Мужской салон красоты BASE Premier\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:44:47.472Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Home-—-H1-CTA-console-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Home-—-H1-CTA-console-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-e24e5e778cc1d76bb212",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Services /services — H1 + CTA + console",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2423,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /services @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /services @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /services @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /services: \"Услуги\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /services: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:44:53.802Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Services-services-—-H1-CTA-console-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Services-services-—-H1-CTA-console-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    },
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2753,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /services @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /services @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /services @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /services: \"Услуги\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /services: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:44:59.695Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Services-services-—-H1-CTA-console-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Services-services-—-H1-CTA-console-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-1ae4045609a34d801ade",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Barbers /barbers — H1 + CTA + console",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2763,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /barbers @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /barbers @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /barbers @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /barbers: \"Команда\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /barbers: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:45:05.078Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Barbers-barbers-—-H1-CTA-console-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Barbers-barbers-—-H1-CTA-console-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    },
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2115,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /barbers @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /barbers @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /barbers @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /barbers: \"Команда\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /barbers: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:45:09.520Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Barbers-barbers-—-H1-CTA-console-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Barbers-barbers-—-H1-CTA-console-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-ae8518f271d62ad10458",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "About /about — H1 + CTA + console",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2029,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /about @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /about @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /about @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           \u001b[36mconst\u001b[39m firstCta \u001b[33m=\u001b[39m cta\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m           \u001b[36mconst\u001b[39m isVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m firstCta\u001b[33m.\u001b[39misVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA visible [${vp.name}px] ${pg.route}: ${isVisible}`\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m           expect(isVisible\u001b[33m,\u001b[39m \u001b[32m`Primary CTA visible on ${pg.route} @ ${vp.name}px`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m         } \u001b[36melse\u001b[39m {\n \u001b[90m 81 |\u001b[39m           console\u001b[33m.\u001b[39mlog(\u001b[32m`  CTA not found [${vp.name}px] ${pg.route}`\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /about: \"О нас\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /about: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:45:12.651Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-About-about-—-H1-CTA-console-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-About-about-—-H1-CTA-console-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    },
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1803,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /about @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /about @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /about @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /about: \"О нас\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /about: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:45:15.496Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-About-about-—-H1-CTA-console-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-About-about-—-H1-CTA-console-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-7386e30690205daa7643",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Contacts /contacts — H1 + CTA + console",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3988,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /contacts @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /contacts @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /contacts @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /contacts: \"Контакты\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /contacts: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:45:19.026Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Contacts-contacts-—-H1-CTA-console-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Contacts-contacts-—-H1-CTA-console-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    },
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3189,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /contacts @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /contacts @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /contacts @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /contacts: \"Контакты\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /contacts: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:45:25.153Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Contacts-contacts-—-H1-CTA-console-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Contacts-contacts-—-H1-CTA-console-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-48a8e290b130c4701500",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Journal /journal — H1 + CTA + console",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 10,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 2072,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /journal @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /journal @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /journal @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /journal: \"Журнал\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /journal: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:45:30.070Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Journal-journal-—-H1-CTA-console-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Journal-journal-—-H1-CTA-console-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    },
+                    {
+                      "workerIndex": 11,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1502,
+                      "error": {
+                        "message": "Error: Primary CTA visible on /journal @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Primary CTA visible on /journal @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 82,
+                          "line": 78
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 82,
+                            "line": 78
+                          },
+                          "message": "Error: Primary CTA visible on /journal @ 375px\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n\u001b[0m \u001b[90m 76 |\u001b[39m           console\u001b[33m.\u001b[39mwarn(\u001b[32m`  CONSOLE ERRORS [${vp.name}px] ${pg.route}:`\u001b[39m\u001b[33m,\u001b[39m errors)\u001b[33m;\u001b[39m\n \u001b[90m 77 |\u001b[39m         }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 78 |\u001b[39m         expect(errors\u001b[33m.\u001b[39mfilter((e) \u001b[33m=>\u001b[39m \u001b[33m!\u001b[39me\u001b[33m.\u001b[39mincludes(\u001b[32m\"favicon\"\u001b[39m))\u001b[33m,\u001b[39m \u001b[32m`No console errors on ${pg.route}`\u001b[39m)\u001b[33m.\u001b[39mtoHaveLength(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 79 |\u001b[39m       })\u001b[33m;\u001b[39m\n \u001b[90m 80 |\u001b[39m     }\n \u001b[90m 81 |\u001b[39m\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:78:82\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "  H1 [375px] /journal: \"Журнал\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [375px] /journal: false\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:45:33.683Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Journal-journal-—-H1-CTA-console-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Journal-journal-—-H1-CTA-console-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 82,
+                        "line": 78
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-75235208c586d62a2a5c",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "tel: link on Home @ 375px",
+              "ok": false,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 12,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9451,
+                      "error": {
+                        "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 53,
+                          "line": 97
+                        },
+                        "snippet": "\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 53,
+                            "line": 97
+                          },
+                          "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n\n\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:45:36.123Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-tel-link-on-Home-375px-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-tel-link-on-Home-375px-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 53,
+                        "line": 97
+                      }
+                    },
+                    {
+                      "workerIndex": 13,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9789,
+                      "error": {
+                        "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 53,
+                          "line": 97
+                        },
+                        "snippet": "\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 53,
+                            "line": 97
+                          },
+                          "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n\n\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:45:47.562Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-tel-link-on-Home-375px-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-tel-link-on-Home-375px-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 53,
+                        "line": 97
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-8d6a2b21d764949c68c3",
+              "file": "live-qa.spec.ts",
+              "line": 92,
+              "column": 9
+            },
+            {
+              "title": "Cookie banner does not block H1 CTA @ 375px",
+              "ok": true,
+              "tags": ["375px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1982,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  Cookie banner visible [375px]: false\n"
+                        },
+                        {
+                          "text": "  Hero CTA in viewport [375px]: true, y=618\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:45:58.770Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--375px-Cookie-banner-does-not-block-H1-CTA-375px-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-8e60f1495bce7baf2534",
+              "file": "live-qa.spec.ts",
+              "line": 104,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "@768px",
+          "file": "live-qa.spec.ts",
+          "line": 40,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Home / — H1 + CTA + console",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3440,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [768px] /: \"Мужской салон красоты BASE Premier\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [768px] /: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:00.972Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-Home-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-150db819edd5c7396b9d",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Services /services — H1 + CTA + console",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2414,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [768px] /services: \"Услуги\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [768px] /services: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:04.484Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-Services-services-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-31c0c73955e44c4f2b9d",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Barbers /barbers — H1 + CTA + console",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2621,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [768px] /barbers: \"Команда\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [768px] /barbers: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:06.932Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-Barbers-barbers-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-792a70a5dc3a21b7b8b8",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "About /about — H1 + CTA + console",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1343,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [768px] /about: \"О нас\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [768px] /about: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:09.582Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-About-about-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-60038d566e10adbb0a39",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Contacts /contacts — H1 + CTA + console",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1995,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [768px] /contacts: \"Контакты\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [768px] /contacts: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:10.947Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-Contacts-contacts-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-4ca7a736b35925600eb2",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Journal /journal — H1 + CTA + console",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1124,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [768px] /journal: \"Журнал\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [768px] /journal: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:12.963Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-Journal-journal-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-2788db4bbba65014a3bc",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "tel: link on Home @ 768px",
+              "ok": false,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 14,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9354,
+                      "error": {
+                        "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 53,
+                          "line": 97
+                        },
+                        "snippet": "\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 53,
+                            "line": 97
+                          },
+                          "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    12 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n\n\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:14.108Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-tel-link-on-Home-768px-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-tel-link-on-Home-768px-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 53,
+                        "line": 97
+                      }
+                    },
+                    {
+                      "workerIndex": 15,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9799,
+                      "error": {
+                        "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    11 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+                        "stack": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    11 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53",
+                        "location": {
+                          "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                          "column": 53,
+                          "line": 97
+                        },
+                        "snippet": "\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                            "column": 53,
+                            "line": 97
+                          },
+                          "message": "Error: tel: link must exist\n\n\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('a[href^=\"tel:\"]').first()\nExpected: visible\nReceived: hidden\nTimeout:  8000ms\n\nCall log:\n\u001b[2m  - tel: link must exist with timeout 8000ms\u001b[22m\n\u001b[2m  - waiting for locator('a[href^=\"tel:\"]').first()\u001b[22m\n\u001b[2m    11 × locator resolved to <a href=\"tel:+79179183877\" class=\"hidden font-mono text-body-sm text-fg-muted transition-colors duration-base hover:text-fg-primary lg:block\">+7 (917) 918-38-77</a>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n\n\u001b[0m \u001b[90m  95 |\u001b[39m     test(\u001b[32m`Cookie banner does not block H1 CTA @ ${vp.name}px`\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\n \u001b[90m  96 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m`${BASE}/`\u001b[39m\u001b[33m,\u001b[39m { waitUntil\u001b[33m:\u001b[39m \u001b[32m\"domcontentloaded\"\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  97 |\u001b[39m       \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mwaitForLoadState(\u001b[32m\"networkidle\"\u001b[39m)\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(() \u001b[33m=>\u001b[39m {})\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m  98 |\u001b[39m\n \u001b[90m  99 |\u001b[39m       \u001b[90m// Check if cookie banner is present\u001b[39m\n \u001b[90m 100 |\u001b[39m       \u001b[36mconst\u001b[39m banner \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[0m\n\u001b[2m    at /root/projects/base-premier/tests/e2e/live-qa.spec.ts:97:53\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-05-02T20:46:24.178Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-tel-link-on-Home-768px-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-tel-link-on-Home-768px-chromium-retry1/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/root/projects/base-premier/tests/e2e/live-qa.spec.ts",
+                        "column": 53,
+                        "line": 97
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-5e6b872018932249ea6e",
+              "file": "live-qa.spec.ts",
+              "line": 92,
+              "column": 9
+            },
+            {
+              "title": "Cookie banner does not block H1 CTA @ 768px",
+              "ok": true,
+              "tags": ["768px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2217,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  Cookie banner visible [768px]: false\n"
+                        },
+                        {
+                          "text": "  Hero CTA in viewport [768px]: true, y=776\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:35.478Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--768px-Cookie-banner-does-not-block-H1-CTA-768px-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-11ec42fba0a16d53a1cf",
+              "file": "live-qa.spec.ts",
+              "line": 104,
+              "column": 9
+            }
+          ]
+        },
+        {
+          "title": "@1440px",
+          "file": "live-qa.spec.ts",
+          "line": 40,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Home / — H1 + CTA + console",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4015,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [1440px] /: \"Мужской салон красоты BASE Premier\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [1440px] /: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:37.902Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-Home-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-90d204d9617bf1e6b167",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Services /services — H1 + CTA + console",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2256,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [1440px] /services: \"Услуги\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [1440px] /services: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:42.004Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-Services-services-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-05c9b76365ba5abae638",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Barbers /barbers — H1 + CTA + console",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1784,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [1440px] /barbers: \"Команда\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [1440px] /barbers: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:44.316Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-Barbers-barbers-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-6b425723045732a21097",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "About /about — H1 + CTA + console",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2440,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [1440px] /about: \"О нас\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [1440px] /about: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:46.128Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-About-about-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-fb4d339ad8bb81e7a32c",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Contacts /contacts — H1 + CTA + console",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2630,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [1440px] /contacts: \"Контакты\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [1440px] /contacts: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:48.605Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-Contacts-contacts-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-1b0c055b6ba49df36c4b",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "Journal /journal — H1 + CTA + console",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1323,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  H1 [1440px] /journal: \"Журнал\"\n"
+                        },
+                        {
+                          "text": "  CTA visible [1440px] /journal: true\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:51.265Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-Journal-journal-—-H1-CTA-console-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-08990fbf2cd358b78a17",
+              "file": "live-qa.spec.ts",
+              "line": 44,
+              "column": 11
+            },
+            {
+              "title": "tel: link on Home @ 1440px",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1656,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  tel: link [1440px]: tel:+79179183877\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:52.600Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-tel-link-on-Home-1440px-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-fc48beddda5efc46b5c3",
+              "file": "live-qa.spec.ts",
+              "line": 92,
+              "column": 9
+            },
+            {
+              "title": "Cookie banner does not block H1 CTA @ 1440px",
+              "ok": true,
+              "tags": ["1440px"],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 16,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1719,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "  Cookie banner visible [1440px]: false\n"
+                        },
+                        {
+                          "text": "  Hero CTA in viewport [1440px]: true, y=766\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-02T20:46:54.276Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/root/projects/base-premier/test-results/live-qa--1440px-Cookie-banner-does-not-block-H1-CTA-1440px-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3b11df2b91a0165796c3-6033fd77040bef7dd27e",
+              "file": "live-qa.spec.ts",
+              "line": 104,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-05-02T20:44:39.707Z",
+    "duration": 136399.44,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}
