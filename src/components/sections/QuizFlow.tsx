@@ -110,11 +110,17 @@ function findServiceById(id: string) {
 
 const RESULT_DELAYS = [0, 0.08, 0.18, 0.28, 0.38] as const;
 
-export function QuizFlow() {
+type QuizFlowProps = {
+  variant?: "full" | "inline";
+};
+
+export function QuizFlow({ variant = "full" }: QuizFlowProps) {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<Answers>({});
   const [done, setDone] = useState(false);
+
+  const isInline = variant === "inline";
 
   const currentStep = STEPS[step];
   const progress = (step / STEPS.length) * 100;
@@ -160,17 +166,29 @@ export function QuizFlow() {
   }
 
   return (
-    <section className="relative flex min-h-screen flex-col bg-bg-primary">
-      {/* Progress bar */}
-      <div className="fixed left-0 right-0 top-0 z-50 h-0.5 bg-bg-secondary">
-        <motion.div
-          className="h-full bg-accent"
-          animate={{ width: done ? "100%" : `${progress}%` }}
-          transition={{ duration: 0.5, ease }}
-        />
-      </div>
+    <div
+      className={cn(
+        "relative flex flex-col",
+        isInline ? "bg-transparent" : "min-h-screen bg-bg-primary",
+      )}
+    >
+      {/* Progress bar — full mode only (fixed viewport bar) */}
+      {!isInline && (
+        <div className="fixed left-0 right-0 top-0 z-50 h-0.5 bg-bg-secondary">
+          <motion.div
+            className="h-full bg-accent"
+            animate={{ width: done ? "100%" : `${progress}%` }}
+            transition={{ duration: 0.5, ease }}
+          />
+        </div>
+      )}
 
-      <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-6 py-32 md:px-8">
+      <div
+        className={cn(
+          "mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-6 md:px-8",
+          isInline ? "py-0" : "py-32",
+        )}
+      >
         <AnimatePresence mode="wait" custom={direction}>
           {!done ? (
             <motion.div
@@ -185,16 +203,29 @@ export function QuizFlow() {
                 Шаг {step + 1} из {STEPS.length}
               </p>
 
-              <h1
-                className="mb-7 font-display font-normal text-fg-primary"
-                style={{
-                  fontSize: "clamp(1.75rem, 4vw, 3rem)",
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {currentStep!.question}
-              </h1>
+              {isInline ? (
+                <h3
+                  className="mb-7 font-display font-normal text-fg-primary"
+                  style={{
+                    fontSize: "clamp(1.75rem, 4vw, 3rem)",
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {currentStep!.question}
+                </h3>
+              ) : (
+                <h1
+                  className="mb-7 font-display font-normal text-fg-primary"
+                  style={{
+                    fontSize: "clamp(1.75rem, 4vw, 3rem)",
+                    lineHeight: 1.1,
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {currentStep!.question}
+                </h1>
+              )}
 
               <div className="flex flex-col gap-3">
                 {currentStep!.answers.map((answer) => (
@@ -388,17 +419,26 @@ export function QuizFlow() {
                     Профиль мастера →
                   </NextLink>
                 )}
-                <NextLink
-                  href="/barbers"
-                  className="font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted transition-opacity hover:opacity-70"
-                >
-                  ← Все мастера
-                </NextLink>
+                {isInline ? (
+                  <NextLink
+                    href="/quiz"
+                    className="font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted transition-opacity hover:opacity-70"
+                  >
+                    Подобрать подробнее →
+                  </NextLink>
+                ) : (
+                  <NextLink
+                    href="/barbers"
+                    className="font-mono text-[12px] uppercase tracking-[0.12em] text-fg-muted transition-opacity hover:opacity-70"
+                  >
+                    ← Все мастера
+                  </NextLink>
+                )}
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </div>
   );
 }

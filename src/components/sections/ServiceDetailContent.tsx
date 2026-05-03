@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import NextLink from "next/link";
 
 import { BARBERS_BY_CATEGORY, ServiceDetail } from "@/data/service-details";
@@ -47,8 +48,36 @@ export function ServiceDetailContent({ service, category, detail }: Props) {
 
   return (
     <>
+      {/* ── Hero image ── */}
+      {detail.heroImage && (
+        <motion.div
+          className="relative h-[60vh] min-h-[360px] w-full overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease }}
+        >
+          <Image
+            src={detail.heroImage}
+            alt=""
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          {/* Dark overlay — harmonises bright daylight photos with the dark theme */}
+          <div className="absolute inset-0 bg-bg-primary/65" />
+          {/* Bottom gradient to seamlessly join the content section */}
+          <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-bg-primary to-transparent" />
+        </motion.div>
+      )}
+
       {/* ── Main section ── */}
-      <section className="bg-bg-primary pt-20 pb-16 md:pt-32 md:pb-24">
+      <section
+        className={cn(
+          "bg-bg-primary pb-16 md:pb-24",
+          detail.heroImage ? "pt-10 md:pt-16" : "pt-20 md:pt-32",
+        )}
+      >
         <div className="mx-auto max-w-screen-xl px-6 md:px-8">
           {/* Breadcrumb */}
           <motion.nav

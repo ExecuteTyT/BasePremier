@@ -8,6 +8,7 @@ import { InteriorSection } from "@/components/sections/InteriorSection";
 import { LoyaltySection } from "@/components/sections/LoyaltySection";
 import { ManifestoSection } from "@/components/sections/ManifestoSection";
 import { PricingTeaserSection } from "@/components/sections/PricingTeaserSection";
+import { QuizSection } from "@/components/sections/QuizSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ServicesPreviewSection } from "@/components/sections/ServicesPreviewSection";
 import { StatsBand } from "@/components/sections/StatsBand";
@@ -95,6 +96,7 @@ export default function HomePage() {
       <StatsBand />
       <ServicesPreviewSection />
       <BarbersPreviewSection />
+      <QuizSection />
       <InteriorSection />
       <ReviewsSection />
       <PricingTeaserSection />

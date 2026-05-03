@@ -47,7 +47,7 @@ export default function QuizPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main id="main">
-        <QuizFlow />
+        <QuizFlow variant="full" />
       </main>
     </>
   );
